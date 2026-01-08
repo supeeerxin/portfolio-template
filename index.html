@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="John Doe – Frontend Developer & Designer portfolio" />
+  <title>John Doe | Portfolio</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<input type="checkbox" id="theme-toggle" hidden>
+
+<header class="header">
+  <div class="container nav">
+    <span class="logo">JD.</span>
+
+    <nav>
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <label for="theme-toggle" class="theme-switch" aria-label="Toggle dark mode">
+      ◐
+    </label>
+  </div>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero container">
+    <div class="hero-text">
+      <h1>
+        Crafting digital experiences<br />
+        with clarity & purpose.
+      </h1>
+      <p>
+        I’m John Doe, a frontend developer and designer focused on building
+        elegant, accessible, and high-performance websites.
+      </p>
+      <div class="hero-actions">
+        <a href="#work" class="btn">View Work</a>
+        <a href="#contact" class="btn ghost">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section container">
+    <h2>About</h2>
+    <p>
+      I specialize in creating clean, minimal interfaces that prioritize user
+      experience, performance, and accessibility. My approach blends design
+      thinking with solid frontend engineering.
+    </p>
+
+    <ul class="skills">
+      <li>HTML & CSS</li>
+      <li>Responsive Design</li>
+      <li>Accessibility (WCAG)</li>
+      <li>Design Systems</li>
+      <li>Performance Optimization</li>
+    </ul>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="section container">
+    <h2>Selected Work</h2>
+
+    <div class="work-grid">
+      <article class="work-card">
+        <h3>Minimal Portfolio</h3>
+        <p>Personal portfolio focused on typography and clarity.</p>
+        <span>HTML • CSS</span>
+      </article>
+
+      <article class="work-card">
+        <h3>SaaS Landing Page</h3>
+        <p>Conversion-focused landing page with responsive layout.</p>
+        <span>UI • UX</span>
+      </article>
+
+      <article class="work-card">
+        <h3>Design System</h3>
+        <p>Reusable components for scalable products.</p>
+        <span>Design • Documentation</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section container">
+    <h2>Contact</h2>
+    <p>
+      Interested in working together or just want to say hi?
+      <br />
+      <a class="email" href="mailto:hello@example.com">hello@example.com</a>
+    </p>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© 2026 John Doe — Built with HTML & CSS</p>
+</footer>
+
+</body>
+</html>
