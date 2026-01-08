@@ -1,286 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Xinia Campang | Portfolio</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Xinia Campang | Portfolio</title>
 
-  <style>
-    :root {
-      --primary: #2563eb;
-      --dark: #0f172a;
-      --light: #f8fafc;
-      --gray: #64748b;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Segoe UI", Tahoma, sans-serif;
-    }
+<style>
+:root {
+  --primary: #2563eb;
+  --secondary: #1e40af;
+  --accent: #38bdf8;
+  --dark: #0f172a;
+  --light: #f8fafc;
+  --gray: #64748b;
+}
 
-    body {
-      background: var(--light);
-      color: var(--dark);
-      line-height: 1.6;
-    }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
 
-    header {
-      background: linear-gradient(135deg, var(--primary), #1e40af);
-      color: white;
-      padding: 4rem 1.5rem;
-      text-align: center;
-    }
+body {
+  background: linear-gradient(180deg, #f8fafc, #eef2ff);
+  color: var(--dark);
+  line-height: 1.7;
+}
 
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
+/* HERO */
+header {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  padding: 5rem 1.5rem;
+  text-align: center;
+  position: relative;
+}
 
-    header p {
-      font-size: 1.1rem;
-      max-width: 700px;
-      margin: auto;
-      opacity: 0.95;
-    }
+header::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, #f8fafc);
+}
 
-    .btn {
-      display: inline-block;
-      margin-top: 1.5rem;
-      background: white;
-      color: var(--primary);
-      padding: 0.7rem 1.5rem;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: 600;
-    }
+header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
 
-    section {
-      padding: 4rem 1.5rem;
-      max-width: 1100px;
-      margin: auto;
-    }
+header p {
+  max-width: 700px;
+  margin: 0.8rem auto;
+  opacity: 0.95;
+}
 
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      color: var(--primary);
-    }
+header strong {
+  font-weight: 600;
+}
 
-    p {
-      margin-bottom: 1rem;
-      color: var(--gray);
-    }
+.btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.8rem 1.8rem;
+  background: white;
+  color: var(--primary);
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
 
-    .grid {
-      display: grid;
-      gap: 1.5rem;
-    }
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
 
-    .grid-3 {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    }
+/* SECTIONS */
+section {
+  padding: 5rem 1.5rem;
+  max-width: 1150px;
+  margin: auto;
+}
 
-    .card {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    }
+h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  color: var(--dark);
+  position: relative;
+}
 
-    ul {
-      padding-left: 1.2rem;
-    }
+h2::after {
+  content: "";
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  display: block;
+  margin-top: 0.5rem;
+  border-radius: 2px;
+}
 
-    li {
-      margin-bottom: 0.5rem;
-      color: var(--gray);
-    }
+p {
+  color: var(--gray);
+  margin-bottom: 1.2rem;
+}
 
-    .projects .card h3 {
-      margin-bottom: 0.5rem;
-    }
+/* GRID */
+.grid {
+  display: grid;
+  gap: 2rem;
+}
 
-    footer {
-      background: var(--dark);
-      color: white;
-      text-align: center;
-      padding: 3rem 1.5rem;
-    }
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
 
-    footer a {
-      color: #93c5fd;
-      text-decoration: none;
-      margin: 0 0.5rem;
-    }
+/* CARDS */
+.card {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+  transition: all 0.3s ease;
+}
 
-    footer p {
-      color: #cbd5f5;
-    }
-  </style>
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.12);
+}
+
+.card h3 {
+  margin-bottom: 0.8rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+ul {
+  padding-left: 1.2rem;
+}
+
+li {
+  color: var(--gray);
+  margin-bottom: 0.6rem;
+}
+
+/* WORK FOCUS */
+.work-focus ul li {
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+
+/* PROJECTS */
+.projects .card p {
+  font-size: 0.95rem;
+}
+
+/* FOOTER */
+footer {
+  background: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 4rem 1.5rem;
+}
+
+footer h2 {
+  color: white;
+}
+
+footer h2::after {
+  background: var(--accent);
+}
+
+footer p {
+  color: #cbd5f5;
+}
+
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+  margin: 0 0.6rem;
+  font-weight: 500;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- HERO -->
-  <header>
-    <h1>Hello, I am Xin!</h1>
-    <p>
-      I bring a clean, efficient, and multi-disciplinary approach to technology,
-      data, and digital communication.
-    </p>
-    <p><strong>IT Specialist • Data Analyst • Data Privacy Officer</strong></p>
-    <a href="#contact" class="btn">Hire Me</a>
-  </header>
+<!-- HERO -->
+<header>
+  <h1>Hello, I’m Xin</h1>
+  <p>I bring a clean, efficient, and multi-disciplinary approach to technology, data, and digital communication.</p>
+  <p><strong>IT Specialist • Data Analyst • Data Privacy Officer</strong></p>
+  <a href="#contact" class="btn">Hire Me</a>
+</header>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      I am an IT Specialist, Social Media Manager, and Data Privacy Officer with a
-      well-rounded skill set in technology, digital communication, and data protection.
-    </p>
-    <p>
-      I manage and monitor IT systems, ensure system quality, and troubleshoot everyday
-      technical issues. I use advanced Excel skills to build dashboards, generate reports,
-      and analyze large datasets for better decision-making.
-    </p>
-    <p>
-      As a Data Privacy Officer, I ensure secure handling of information in compliance
-      with privacy laws and company policies.
-    </p>
-  </section>
+<!-- ABOUT -->
+<section>
+  <h2>About Me</h2>
+  <p>I am an IT Specialist, Social Media Manager, and Data Privacy Officer with a strong background in technology, data analytics, and digital operations.</p>
+  <p>I manage IT systems, troubleshoot technical issues, and develop data-driven dashboards using advanced Excel and reporting tools.</p>
+  <p>As a Data Privacy Officer, I ensure secure handling of information in compliance with data protection laws and organizational policies.</p>
+</section>
 
-  <!-- SKILLS -->
-  <section>
-    <h2>Skills</h2>
-    <div class="grid grid-3">
-      <div class="card">
-        <h3>Data Management & Analysis</h3>
-        <ul>
-          <li>Data cleaning and validation</li>
-          <li>Dashboards and reporting</li>
-          <li>Automated data workflows</li>
-          <li>Data-driven insights</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Information Technology</h3>
-        <ul>
-          <li>System management & monitoring</li>
-          <li>Technical troubleshooting</li>
-          <li>Process improvement</li>
-          <li>Digital transformation support</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Data Privacy & Compliance</h3>
-        <ul>
-          <li>Data protection policies</li>
-          <li>Secure data handling</li>
-          <li>Privacy law compliance</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Documentation & SOPs</h3>
-        <ul>
-          <li>Workflow & flowchart design</li>
-          <li>SOP creation</li>
-          <li>Process standardization</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Administrative & Encoding</h3>
-        <ul>
-          <li>Accurate data entry</li>
-          <li>Records verification</li>
-          <li>Document management</li>
-        </ul>
-      </div>
-
-      <div class="card">
-        <h3>Digital & Communication</h3>
-        <ul>
-          <li>Content management</li>
-          <li>Performance tracking</li>
-          <li>Clear documentation</li>
-        </ul>
-      </div>
+<!-- SKILLS -->
+<section>
+  <h2>Core Skills</h2>
+  <div class="grid grid-3">
+    <div class="card">
+      <h3>Data Management & Analysis</h3>
+      <ul>
+        <li>Data cleaning & validation</li>
+        <li>Dashboards & reporting</li>
+        <li>Automated workflows</li>
+      </ul>
     </div>
-  </section>
 
-  <!-- WORK FOCUS -->
-  <section>
-    <h2>Work Focus</h2>
-    <ul>
-      <li><strong>Data Management</strong> – Clean, accurate, and reliable information.</li>
-      <li><strong>IT Operations</strong> – System monitoring, troubleshooting, and support.</li>
-      <li><strong>Process & Workflow Development</strong> – SOPs and efficiency improvement.</li>
-    </ul>
-  </section>
-
-  <!-- PROJECTS -->
-  <section class="projects">
-    <h2>Project Gallery</h2>
-    <div class="grid grid-3">
-
-      <div class="card">
-        <h3>Social Media Dashboard</h3>
-        <p>Visualizing social media data into clear, actionable dashboards.</p>
-      </div>
-
-      <div class="card">
-        <h3>Attendance Web App</h3>
-        <p>Monitoring employee attendance through a local web system.</p>
-      </div>
-
-      <div class="card">
-        <h3>Daily Transaction Monitoring</h3>
-        <p>Accurate tracking of daily transactions for operations.</p>
-      </div>
-
-      <div class="card">
-        <h3>Website Creation</h3>
-        <p>Simple and functional websites for internal and public use.</p>
-      </div>
-
-      <div class="card">
-        <h3>Database Management</h3>
-        <p>Organizing, maintaining, and securing business databases.</p>
-      </div>
-
-      <div class="card">
-        <h3>SOP & Workflow Development</h3>
-        <p>Creating standardized processes to improve efficiency.</p>
-      </div>
-
-      <div class="card">
-        <h3>Sales Dashboard</h3>
-        <p>Tracking inventory, delivery receipts, and daily sales.</p>
-      </div>
-
+    <div class="card">
+      <h3>Information Technology</h3>
+      <ul>
+        <li>System monitoring</li>
+        <li>Technical troubleshooting</li>
+        <li>Process optimization</li>
+      </ul>
     </div>
-  </section>
 
-  <!-- CONTACT -->
-  <footer id="contact">
-    <h2>Contact Me</h2>
-    <p>📞 +63 997 465 5518</p>
-    <p>✉️ xinicampang33@gmail.com</p>
+    <div class="card">
+      <h3>Data Privacy & Compliance</h3>
+      <ul>
+        <li>Data protection policies</li>
+        <li>Secure data handling</li>
+        <li>Privacy law compliance</li>
+      </ul>
+    </div>
 
-    <p>
-      <a href="https://www.instagram.com/supeeerxin/" target="_blank">Instagram</a> |
-      <a href="https://www.facebook.com/superxin3/" target="_blank">Facebook</a> |
-      <a href="https://www.linkedin.com/in/xinia-campang-49243b345/" target="_blank">LinkedIn</a>
-    </p>
+    <div class="card">
+      <h3>Documentation & SOPs</h3>
+      <ul>
+        <li>Workflow design</li>
+        <li>SOP creation</li>
+        <li>Process standardization</li>
+      </ul>
+    </div>
 
-    <p style="margin-top:1rem;">© 2026 Xinia Campang</p>
-  </footer>
+    <div class="card">
+      <h3>Administrative & Encoding</h3>
+      <ul>
+        <li>Accurate data entry</li>
+        <li>Records verification</li>
+        <li>Document management</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Digital Communication</h3>
+      <ul>
+        <li>Content management</li>
+        <li>Performance tracking</li>
+        <li>Clear documentation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WORK FOCUS -->
+<section class="work-focus">
+  <h2>Work Focus</h2>
+  <ul>
+    <li><strong>Data Accuracy</strong> – Reliable, clean, and structured information.</li>
+    <li><strong>IT Operations</strong> – Efficient system monitoring and support.</li>
+    <li><strong>Process Improvement</strong> – SOP-driven workflow optimization.</li>
+  </ul>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects">
+  <h2>Project Gallery</h2>
+  <div class="grid grid-3">
+    <div class="card"><h3>Social Media Dashboard</h3><p>Visual analytics for performance tracking.</p></div>
+    <div class="card"><h3>Attendance Web App</h3><p>Employee attendance monitoring system.</p></div>
+    <div class="card"><h3>Transaction Monitoring</h3><p>Daily operational tracking and reporting.</p></div>
+    <div class="card"><h3>Website Development</h3><p>Clean, functional web solutions.</p></div>
+    <div class="card"><h3>Database Management</h3><p>Organized and secure data systems.</p></div>
+    <div class="card"><h3>SOP & Workflow Design</h3><p>Standardized process documentation.</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<footer id="contact">
+  <h2>Contact Me</h2>
+  <p>📞 +63 997 465 5518</p>
+  <p>✉️ xinicampang33@gmail.com</p>
+
+  <p>
+    <a href="https://www.instagram.com/supeeerxin/" target="_blank">Instagram</a> |
+    <a href="https://www.facebook.com/superxin3/" target="_blank">Facebook</a> |
+    <a href="https://www.linkedin.com/in/xinia-campang-49243b345/" target="_blank">LinkedIn</a>
+  </p>
+
+  <p style="margin-top:1.5rem;">© 2026 Xinia Campang</p>
+</footer>
 
 </body>
 </html>
