@@ -1,184 +1,604 @@
-/* CSS RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xinia Campang · IT & Data Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <style>
+    /* CSS RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* THEME VARIABLES */
-:root {
-  --bg: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --accent: #4f46e5;
-  --border: #e5e7eb;
-}
+    /* THEME VARIABLES */
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --text-secondary: #334155;
+      --muted: #64748b;
+      --accent: #4f46e5;
+      --accent-light: #818cf8;
+      --border: #e5e7eb;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+      --radius: 14px;
+      --transition: 0.25s ease;
+    }
 
-#theme-toggle:checked ~ * {
-  --bg: #0b1020;
-  --text: #e5e7eb;
-  --muted: #94a3b8;
-  --accent: #818cf8;
-  --border: #1e293b;
-}
+    body.dark {
+      --bg: #0b1020;
+      --surface: #131b33;
+      --text: #e5e7eb;
+      --text-secondary: #b0c4de;
+      --muted: #94a3b8;
+      --accent: #818cf8;
+      --border: #1e293b;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+    }
 
-body {
-  font-family: "Inter", sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  transition: background 0.3s, color 0.3s;
-}
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      transition: background 0.3s, color 0.3s;
+    }
 
-.container {
-  width: 90%;
-  max-width: 1100px;
-  margin: auto;
-}
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 0 2rem;
+    }
 
-/* HEADER */
-.header {
-  border-bottom: 1px solid var(--border);
-}
+    /* HEADER */
+    .header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
 
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.8rem 0;
-}
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
 
-.logo {
-  font-weight: 800;
-  font-size: 1.4rem;
-}
+    .logo {
+      font-weight: 800;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-nav a {
-  margin-left: 1.5rem;
-  text-decoration: none;
-  color: var(--text);
-  font-weight: 500;
-}
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
 
-nav a:hover {
-  color: var(--accent);
-}
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
 
-.theme-switch {
-  cursor: pointer;
-  font-size: 1.2rem;
-}
+    .nav-links a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
 
-/* HERO */
-.hero {
-  padding: 6rem 0 5rem;
-}
+    .theme-toggle {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 0.3rem 1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+      box-shadow: var(--shadow);
+    }
 
-.hero h1 {
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
-}
+    .theme-toggle:hover {
+      border-color: var(--accent);
+    }
 
-.hero p {
-  max-width: 600px;
-  color: var(--muted);
-  margin-bottom: 2.5rem;
-}
+    /* HERO */
+    .hero {
+      padding: 4rem 0 3.5rem;
+    }
 
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-}
+    .hero-badge {
+      display: inline-block;
+      background: var(--surface);
+      padding: 0.25rem 1rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.3px;
+    }
 
-.btn {
-  background: var(--accent);
-  color: #fff;
-  padding: 0.8rem 1.6rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-}
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
 
-.btn.ghost {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text);
-}
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-/* SECTIONS */
-.section {
-  padding: 4.5rem 0;
-}
+    .hero p {
+      max-width: 600px;
+      color: var(--text-secondary);
+      font-size: 1.15rem;
+      margin-bottom: 2rem;
+    }
 
-.section h2 {
-  font-size: 2.2rem;
-  margin-bottom: 1.5rem;
-}
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
 
-.section p {
-  max-width: 700px;
-  color: var(--muted);
-}
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.75rem 1.8rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 6px 20px rgba(79, 70, 229, 0.2);
+    }
 
-/* SKILLS */
-.skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-top: 1.5rem;
-}
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(79, 70, 229, 0.25);
+      background: var(--accent-light);
+    }
 
-.skills li {
-  list-style: none;
-  border: 1px solid var(--border);
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
-  font-size: 0.9rem;
-}
+    .btn.ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      box-shadow: none;
+    }
 
-/* WORK */
-.work-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-}
+    .btn.ghost:hover {
+      border-color: var(--accent);
+      background: var(--surface);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
 
-.work-card {
-  border: 1px solid var(--border);
-  padding: 1.6rem;
-  border-radius: 12px;
-  transition: transform 0.2s ease, border-color 0.2s;
-}
+    /* SECTIONS */
+    .section {
+      padding: 3.5rem 0;
+    }
 
-.work-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--accent);
-}
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
 
-.work-card h3 {
-  margin-bottom: 0.5rem;
-}
+    .section-sub {
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
 
-.work-card span {
-  font-size: 0.85rem;
-  color: var(--muted);
-}
+    /* SKILLS */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
 
-/* CONTACT */
-.email {
-  display: inline-block;
-  margin-top: 1rem;
-  font-weight: 600;
-  color: var(--accent);
-  text-decoration: none;
-}
+    .skills li {
+      list-style: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.4rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: 0.2s;
+    }
 
-/* FOOTER */
-.footer {
-  border-top: 1px solid var(--border);
-  padding: 2rem 0;
-  text-align: center;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
+    .skills li:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .skills li.highlight {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* WORK GRID */
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .work-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.8rem 1.8rem 2rem;
+      border-radius: var(--radius);
+      transition: 0.25s;
+      box-shadow: var(--shadow);
+    }
+
+    .work-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+    }
+
+    .work-card .card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .work-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .work-card p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.6rem;
+    }
+
+    .work-card span {
+      display: inline-block;
+      background: var(--border);
+      padding: 0.15rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.3px;
+    }
+
+    /* CONTACT */
+    .contact-block {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .contact-item strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .contact-social {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .contact-social a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .contact-social a:hover {
+      color: var(--accent);
+    }
+
+    .email-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .email-link:hover {
+      text-decoration: underline;
+    }
+
+    /* FOOTER */
+    .footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 1.2rem;
+      transition: color 0.2s;
+    }
+
+    .footer a:hover {
+      color: var(--accent);
+    }
+
+    /* scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: all 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* responsive */
+    @media (max-width: 700px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      .contact-block {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <nav class="nav">
+      <div class="logo">Xinia C.</div>
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="toggle dark mode">
+          <span id="themeIcon">🌙</span> <span id="themeLabel">Dark</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero reveal">
+    <div class="hero-badge">✦ IT &amp; Data Specialist</div>
+    <h1>Hello, I’m <span>Xinia Campang</span></h1>
+    <p>IT operations · data analysis · privacy &amp; compliance — I build systems that are secure, insightful, and human-centered.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn">📬 Let’s talk</a>
+      <a href="#work" class="btn ghost">View projects</a>
+    </div>
+  </section>
+
+  <!-- ABOUT + SKILLS -->
+  <section class="section reveal">
+    <h2 class="section-title">About me</h2>
+    <p class="section-sub">I bridge the gap between technology and business goals. With a background in IT support, data analytics, and privacy compliance, I help teams work smarter and stay safe.</p>
+    <ul class="skills">
+      <li class="highlight">📊 Excel Dashboards</li>
+      <li>🔐 Data Privacy</li>
+      <li>🖥️ IT Support</li>
+      <li>📄 SOP &amp; Documentation</li>
+      <li>⚡ Automation</li>
+      <li>📈 Data Analysis</li>
+      <li>🧑‍💻 Admin Systems</li>
+    </ul>
+  </section>
+
+  <!-- SKILLS GRID -->
+  <section id="skills" class="section reveal">
+    <h2 class="section-title">Core competencies</h2>
+    <p class="section-sub">Every project benefits from a blend of technical depth and operational clarity.</p>
+    <div class="work-grid">
+      <div class="work-card">
+        <div class="card-icon">📊</div>
+        <h3>Data Management &amp; Analytics</h3>
+        <p>From raw data to dashboards that drive decisions — I turn numbers into narratives.</p>
+        <span>Data</span>
+      </div>
+      <div class="work-card">
+        <div class="card-icon">🖥️</div>
+        <h3>IT Operations &amp; Support</h3>
+        <p>Reliable infrastructure, troubleshooting, and process optimization for smooth daily operations.</p>
+        <span>IT</span>
+      </div>
+      <div class="work-card">
+        <div class="card-icon">🔐</div>
+        <h3>Privacy &amp; Compliance</h3>
+        <p>Data protection frameworks, GDPR/DPA alignment, and privacy-by-design implementation.</p>
+        <span>Privacy</span>
+      </div>
+      <div class="work-card">
+        <div class="card-icon">📄</div>
+        <h3>SOP &amp; Documentation</h3>
+        <p>Clear, actionable standard operating procedures that teams actually use and follow.</p>
+        <span>Process</span>
+      </div>
+      <div class="work-card">
+        <div class="card-icon">⌨️</div>
+        <h3>Administrative &amp; Encoding</h3>
+        <p>Meticulous data entry, system administration, and back-office efficiency.</p>
+        <span>Admin</span>
+      </div>
+      <div class="work-card">
+        <div class="card-icon">📢</div>
+        <h3>Digital Communication</h3>
+        <p>Internal and external communication strategies that align with technical goals.</p>
+        <span>Comm</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="work" class="section reveal">
+    <h2 class="section-title">Featured projects</h2>
+    <p class="section-sub">Real-world solutions that combine data, design, and operational thinking.</p>
+    <div class="work-grid">
+      <div class="work-card">
+        <div class="card-icon">📱</div>
+        <h3>Social Media Dashboard</h3>
+        <p>Unified analytics dashboard for cross-platform campaign performance and sentiment.</p>
+        <span>Data Viz</span>
+      </div>
+      <div class="work-card">
+        <div class="card-icon">📋</div>
+        <h3>Attendance Web App</h3>
+        <p>Time-tracking and attendance system with real-time reporting and export features.</p>
+        <span>Web App</span>
+      </div>
+      <div class="work-card">
+        <div class="card-icon">📦</div>
+        <h3>Sales &amp; Inventory Dashboard</h3>
+        <p>Interactive inventory management dashboard with predictive restocking alerts.</p>
+        <span>Analytics</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section reveal">
+    <h2 class="section-title">Get in touch</h2>
+    <p class="section-sub">I’m always open to new projects, collaborations, or a conversation about data and tech.</p>
+    <div class="contact-block">
+      <div class="contact-info">
+        <div class="contact-item"><span>📞</span> <strong>+63 997 465 5518</strong></div>
+        <div class="contact-item"><span>✉️</span> <strong>xinicampang33@gmail.com</strong></div>
+        <div class="contact-social">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">LinkedIn</a>
+        </div>
+        <a href="mailto:xinicampang33@gmail.com" class="email-link">✉️ Send me an email</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>© 2026 Xinia Campang · all rights reserved</span>
+    <span>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Imprint</a>
+    </span>
+  </footer>
+
+</div>
+
+<script>
+  (function() {
+    // dark mode toggle
+    const toggle = document.getElementById('themeToggle');
+    const icon = document.getElementById('themeIcon');
+    const label = document.getElementById('themeLabel');
+
+    function setDark(isDark) {
+      document.body.classList.toggle('dark', isDark);
+      localStorage.setItem('darkMode', isDark);
+      if (isDark) {
+        icon.textContent = '☀️';
+        label.textContent = 'Light';
+      } else {
+        icon.textContent = '🌙';
+        label.textContent = 'Dark';
+      }
+    }
+
+    const saved = localStorage.getItem('darkMode') === 'true';
+    setDark(saved);
+
+    toggle.addEventListener('click', () => {
+      setDark(!document.body.classList.contains('dark'));
+    });
+
+    // scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+  })();
+</script>
+
+</body>
+</html>
