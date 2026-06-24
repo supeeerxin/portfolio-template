@@ -1,277 +1,581 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Xinia Campang | Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xinia Campang · IT & Data Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    :root {
+      --bg: #f6f9fc;
+      --surface: #ffffff;
+      --text: #0b1a2f;
+      --text-secondary: #334e68;
+      --muted: #62748e;
+      --accent: #2563eb;
+      --accent-light: #3b82f6;
+      --border: #e2e9f2;
+      --shadow: 0 12px 30px rgba(0, 20, 50, 0.06);
+      --radius: 20px;
+      --transition: 0.25s ease;
+    }
 
-<style>
-:root {
-  --primary: #2563eb;
-  --secondary: #1e40af;
-  --accent: #38bdf8;
-  --bg: #f8fafc;
-  --text: #0f172a;
-  --card: rgba(255,255,255,0.9);
-  --gray: #64748b;
-}
+    body.dark {
+      --bg: #080d1a;
+      --surface: #111b2e;
+      --text: #edf2f7;
+      --text-secondary: #b0c4de;
+      --muted: #859ab3;
+      --accent: #60a5fa;
+      --accent-light: #93bbfc;
+      --border: #26344b;
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
 
-/* DARK MODE */
-body.dark {
-  --bg: #020617;
-  --text: #e5e7eb;
-  --card: rgba(30,41,59,0.85);
-  --gray: #94a3b8;
-}
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+      padding: 0 1.5rem;
+    }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "Inter", sans-serif;
-}
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 0 3rem;
+    }
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  transition: background 0.3s, color 0.3s;
-}
+    /* ---- header / nav ---- */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 0 0.8rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
 
-/* HERO */
-header {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: white;
-  padding: 5rem 1.5rem;
-  text-align: center;
-  position: relative;
-}
+    .logo {
+      font-weight: 700;
+      font-size: 1.7rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-header h1 {
-  font-size: 3rem;
-}
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      align-items: center;
+    }
 
-header p {
-  max-width: 700px;
-  margin: 1rem auto;
-}
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+    }
 
-.btn {
-  display: inline-block;
-  margin-top: 2rem;
-  padding: 0.8rem 1.8rem;
-  background: white;
-  color: var(--primary);
-  border-radius: 999px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: 0.3s;
-}
+    .nav-links a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
 
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
+    .theme-toggle {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+      box-shadow: var(--shadow);
+    }
 
-/* DARK MODE TOGGLE */
-.toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: var(--card);
-  padding: 10px 14px;
-  border-radius: 999px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  z-index: 1000;
-}
+    .theme-toggle:hover {
+      border-color: var(--accent);
+    }
 
-/* SECTIONS */
-section {
-  padding: 5rem 1.5rem;
-  max-width: 1150px;
-  margin: auto;
-}
+    /* ---- hero ---- */
+    .hero {
+      margin: 3.5rem 0 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
 
-h2 {
-  font-size: 2.2rem;
-  margin-bottom: 2rem;
-  position: relative;
-}
+    .hero-badge {
+      display: inline-block;
+      background: var(--surface);
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      width: fit-content;
+      letter-spacing: 0.3px;
+    }
 
-h2::after {
-  content: "";
-  width: 60px;
-  height: 4px;
-  background: var(--primary);
-  display: block;
-  margin-top: 0.5rem;
-}
+    .hero h1 {
+      font-size: clamp(2.8rem, 8vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      max-width: 850px;
+    }
 
-p {
-  color: var(--gray);
-  margin-bottom: 1.2rem;
-}
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-/* GRID */
-.grid {
-  display: grid;
-  gap: 2rem;
-}
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 620px;
+      margin: 0.5rem 0 1.2rem;
+    }
 
-.grid-3 {
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
 
-/* CARD */
-.card {
-  background: var(--card);
-  backdrop-filter: blur(10px);
-  border-radius: 18px;
-  padding: 2rem;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-  transition: 0.3s;
-}
+    .btn {
+      background: var(--accent);
+      color: white;
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.2s;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+    }
 
-.card:hover {
-  transform: translateY(-6px);
-}
+    .btn:hover {
+      background: var(--accent-light);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 28px rgba(37, 99, 235, 0.25);
+    }
 
-/* FLOATING SKILL BADGES */
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 2rem;
-}
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      box-shadow: none;
+      border: 1px solid var(--border);
+    }
 
-.badge {
-  padding: 0.6rem 1.2rem;
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  color: white;
-  font-size: 0.85rem;
-  animation: float 4s ease-in-out infinite;
-}
+    .btn-outline:hover {
+      background: var(--surface);
+      border-color: var(--accent);
+      box-shadow: var(--shadow);
+      transform: translateY(-3px);
+    }
 
-.badge:nth-child(even) {
-  animation-delay: 2s;
-}
+    /* ---- section general ---- */
+    section {
+      margin: 4.5rem 0;
+    }
 
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0); }
-}
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
 
-/* SCROLL ANIMATION */
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
-}
+    .section-sub {
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
 
-.reveal.show {
-  opacity: 1;
-  transform: translateY(0);
-}
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
 
-/* FOOTER */
-footer {
-  background: #020617;
-  color: white;
-  text-align: center;
-  padding: 4rem 1.5rem;
-}
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 1.8rem 1.8rem 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: 0.25s;
+    }
 
-footer a {
-  color: var(--accent);
-  text-decoration: none;
-  margin: 0 0.5rem;
-}
-</style>
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.04);
+    }
+
+    .card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* skills badges (floating) */
+    .skill-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 1.8rem 0 0.5rem;
+    }
+
+    .skill-badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: 0.2s;
+      color: var(--text-secondary);
+      box-shadow: var(--shadow);
+    }
+
+    .skill-badge:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: scale(1.02);
+    }
+
+    .skill-badge.highlight {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    /* project cards */
+    .project-tag {
+      display: inline-block;
+      background: var(--border);
+      padding: 0.2rem 0.9rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      color: var(--text-secondary);
+      margin-top: 0.6rem;
+    }
+
+    /* contact */
+    .contact-block {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 2.5rem 2.5rem 2.8rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .contact-item strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .contact-social a {
+      color: var(--text-secondary);
+      margin-left: 1.4rem;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .contact-social a:hover {
+      color: var(--accent);
+    }
+
+    /* footer */
+    .footer {
+      margin-top: 4.5rem;
+      padding: 2rem 0 1rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 1.2rem;
+      transition: color 0.2s;
+    }
+
+    .footer a:hover {
+      color: var(--accent);
+    }
+
+    /* scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: all 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* responsive */
+    @media (max-width: 700px) {
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 1.2rem;
+      }
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+      .contact-block {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .contact-social {
+        margin-top: 0.5rem;
+      }
+      .contact-social a {
+        margin-left: 0;
+        margin-right: 1.2rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="toggle" onclick="toggleDark()">🌙 Dark</div>
+<div class="container">
 
-<header>
-  <h1>Hello, I’m Xin</h1>
-  <p>IT Specialist • Data Analyst • Data Privacy Officer</p>
-  <a href="#contact" class="btn">Hire Me</a>
-</header>
+  <!-- top navigation -->
+  <header class="top-bar">
+    <div class="logo">Xinia C.</div>
+    <nav class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="toggle dark mode">
+        <span id="themeIcon">🌙</span> <span id="themeLabel">Dark</span>
+      </button>
+    </nav>
+  </header>
 
-<section class="reveal">
-  <h2>About Me</h2>
-  <p>I specialize in IT operations, data analysis, and privacy compliance.</p>
+  <!-- hero -->
+  <section class="hero reveal">
+    <div class="hero-badge">✦ IT &amp; Data Specialist</div>
+    <h1>Hello, I’m <span>Xinia Campang</span></h1>
+    <p>IT operations · data analysis · privacy &amp; compliance — I build systems that are secure, insightful, and human-centered.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn">📬 Let’s talk</a>
+      <a href="#work" class="btn btn-outline">View projects</a>
+    </div>
+  </section>
 
-  <div class="badges">
-    <span class="badge">Excel Dashboards</span>
-    <span class="badge">Data Privacy</span>
-    <span class="badge">IT Support</span>
-    <span class="badge">SOP Creation</span>
-    <span class="badge">Automation</span>
-  </div>
-</section>
+  <!-- about + skill badges -->
+  <section class="reveal">
+    <h2 class="section-title">About me</h2>
+    <p class="section-sub">I bridge the gap between technology and business goals. With a background in IT support, data analytics, and privacy compliance, I help teams work smarter and stay safe.</p>
+    <div class="skill-cloud">
+      <span class="skill-badge highlight">📊 Excel Dashboards</span>
+      <span class="skill-badge">🔐 Data Privacy</span>
+      <span class="skill-badge">🖥️ IT Support</span>
+      <span class="skill-badge">📄 SOP &amp; Documentation</span>
+      <span class="skill-badge">⚡ Automation</span>
+      <span class="skill-badge">📈 Data Analysis</span>
+      <span class="skill-badge">🧑‍💻 Admin Systems</span>
+    </div>
+  </section>
 
-<section class="reveal">
-  <h2>Skills</h2>
-  <div class="grid grid-3">
-    <div class="card">📊 Data Management & Analysis</div>
-    <div class="card">🖥️ IT Operations & Support</div>
-    <div class="card">🔐 Data Privacy Compliance</div>
-    <div class="card">📄 SOP & Documentation</div>
-    <div class="card">⌨️ Administrative & Encoding</div>
-    <div class="card">📢 Digital Communication</div>
-  </div>
-</section>
+  <!-- skills grid -->
+  <section id="skills" class="reveal">
+    <h2 class="section-title">Core competencies</h2>
+    <p class="section-sub">Every project benefits from a blend of technical depth and operational clarity.</p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Data Management &amp; Analytics</h3>
+        <p>From raw data to dashboards that drive decisions — I turn numbers into narratives.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🖥️</div>
+        <h3>IT Operations &amp; Support</h3>
+        <p>Reliable infrastructure, troubleshooting, and process optimization for smooth daily operations.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔐</div>
+        <h3>Privacy &amp; Compliance</h3>
+        <p>Data protection frameworks, GDPR/DPA alignment, and privacy-by-design implementation.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📄</div>
+        <h3>SOP &amp; Documentation</h3>
+        <p>Clear, actionable standard operating procedures that teams actually use and follow.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⌨️</div>
+        <h3>Administrative &amp; Encoding</h3>
+        <p>Meticulous data entry, system administration, and back-office efficiency.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📢</div>
+        <h3>Digital Communication</h3>
+        <p>Internal and external communication strategies that align with technical goals.</p>
+      </div>
+    </div>
+  </section>
 
-<section class="reveal">
-  <h2>Projects</h2>
-  <div class="grid grid-3">
-    <div class="card">Social Media Dashboard</div>
-    <div class="card">Attendance Web App</div>
-    <div class="card">Sales & Inventory Dashboard</div>
-  </div>
-</section>
+  <!-- projects -->
+  <section id="work" class="reveal">
+    <h2 class="section-title">Featured projects</h2>
+    <p class="section-sub">Real-world solutions that combine data, design, and operational thinking.</p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <h3>Social Media Dashboard</h3>
+        <p>Unified analytics dashboard for cross-platform campaign performance and sentiment.</p>
+        <span class="project-tag">Data Viz</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <h3>Attendance Web App</h3>
+        <p>Time-tracking and attendance system with real-time reporting and export features.</p>
+        <span class="project-tag">Web App</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">📦</div>
+        <h3>Sales &amp; Inventory Dashboard</h3>
+        <p>Interactive inventory management dashboard with predictive restocking alerts.</p>
+        <span class="project-tag">Analytics</span>
+      </div>
+    </div>
+  </section>
 
-<footer id="contact">
-  <h2>Contact Me</h2>
-  <p>📞 +63 997 465 5518</p>
-  <p>✉️ xinicampang33@gmail.com</p>
-  <p>
-    <a href="#">Instagram</a> |
-    <a href="#">Facebook</a> |
-    <a href="#">LinkedIn</a>
-  </p>
-  <p style="margin-top:1rem;">© 2026 Xinia Campang</p>
-</footer>
+  <!-- contact -->
+  <section id="contact" class="reveal">
+    <h2 class="section-title">Get in touch</h2>
+    <p class="section-sub">I’m always open to new projects, collaborations, or a conversation about data and tech.</p>
+    <div class="contact-block">
+      <div>
+        <div class="contact-item"><span>📞</span> <strong>+63 997 465 5518</strong></div>
+        <div class="contact-item"><span>✉️</span> <strong>xinicampang33@gmail.com</strong></div>
+      </div>
+      <div class="contact-social">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer class="footer">
+    <span>© 2026 Xinia Campang · all rights reserved</span>
+    <span>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Imprint</a>
+    </span>
+  </footer>
+
+</div>
 
 <script>
-/* SCROLL REVEAL */
-const reveals = document.querySelectorAll('.reveal');
-window.addEventListener('scroll', () => {
-  reveals.forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if (top < window.innerHeight - 100) {
-      el.classList.add('show');
+  (function() {
+    // dark mode toggle
+    const toggle = document.getElementById('themeToggle');
+    const icon = document.getElementById('themeIcon');
+    const label = document.getElementById('themeLabel');
+
+    function setDark(isDark) {
+      document.body.classList.toggle('dark', isDark);
+      localStorage.setItem('darkMode', isDark);
+      if (isDark) {
+        icon.textContent = '☀️';
+        label.textContent = 'Light';
+      } else {
+        icon.textContent = '🌙';
+        label.textContent = 'Dark';
+      }
     }
-  });
-});
 
-/* DARK MODE */
-function toggleDark() {
-  document.body.classList.toggle('dark');
-  localStorage.setItem('darkMode', document.body.classList.contains('dark'));
-}
+    // initial
+    const saved = localStorage.getItem('darkMode') === 'true';
+    setDark(saved);
 
-if (localStorage.getItem('darkMode') === 'true') {
-  document.body.classList.add('dark');
-}
+    toggle.addEventListener('click', () => {
+      setDark(!document.body.classList.contains('dark'));
+    });
+
+    // scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+  })();
 </script>
 
 </body>
