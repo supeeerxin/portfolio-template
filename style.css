@@ -26,6 +26,7 @@
       --shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
       --radius: 14px;
       --transition: 0.25s ease;
+      --modal-overlay: rgba(15, 23, 42, 0.5);
     }
 
     body.dark {
@@ -37,6 +38,7 @@
       --accent: #818cf8;
       --border: #1e293b;
       --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+      --modal-overlay: rgba(0, 0, 0, 0.7);
     }
 
     body {
@@ -45,6 +47,12 @@
       color: var(--text);
       line-height: 1.7;
       transition: background 0.3s, color 0.3s;
+      overflow-x: hidden;
+    }
+
+    /* prevent body scroll when modal is open */
+    body.modal-open {
+      overflow: hidden;
     }
 
     .container {
@@ -347,16 +355,128 @@
       color: var(--accent);
     }
 
-    .email-link {
-      display: inline-block;
-      margin-top: 0.5rem;
-      font-weight: 600;
-      color: var(--accent);
-      text-decoration: none;
+    /* ----- MODAL ----- */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--modal-overlay);
+      backdrop-filter: blur(4px);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
     }
 
-    .email-link:hover {
-      text-decoration: underline;
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 520px;
+      width: 100%;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      position: relative;
+      animation: modalFade 0.3s ease;
+    }
+
+    @keyframes modalFade {
+      from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: 0.2s;
+      line-height: 1;
+    }
+
+    .modal-close:hover {
+      color: var(--text);
+      transform: rotate(90deg);
+    }
+
+    .modal-box h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .modal-box .modal-sub {
+      color: var(--text-secondary);
+      margin-bottom: 1.8rem;
+      font-size: 0.95rem;
+    }
+
+    .modal-box label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 1rem;
+    }
+
+    .modal-box input,
+    .modal-box textarea {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.7rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      transition: 0.2s;
+      width: 100%;
+      resize: vertical;
+    }
+
+    .modal-box input:focus,
+    .modal-box textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    }
+
+    .modal-box .btn {
+      width: 100%;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+
+    .form-status {
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.5rem 0;
+      text-align: center;
+    }
+
+    .form-status.success {
+      color: #16a34a;
+    }
+    .form-status.error {
+      color: #dc2626;
     }
 
     /* FOOTER */
@@ -412,6 +532,9 @@
         flex-direction: column;
         align-items: flex-start;
       }
+      .modal-box {
+        padding: 1.8rem;
+      }
     }
   </style>
 </head>
@@ -440,7 +563,7 @@
     <h1>Hello, I’m <span>Xinia Campang</span></h1>
     <p>IT operations · data analysis · privacy &amp; compliance — I build systems that are secure, insightful, and human-centered.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn">📬 Let’s talk</a>
+      <button class="btn" id="openModalBtn">📬 Let’s talk</button>
       <a href="#work" class="btn ghost">View projects</a>
     </div>
   </section>
@@ -543,7 +666,7 @@
           <a href="#">Facebook</a>
           <a href="#">LinkedIn</a>
         </div>
-        <a href="mailto:xinicampang33@gmail.com" class="email-link">✉️ Send me an email</a>
+        <button class="btn" id="openModalBtn2" style="margin-top:0.5rem;">📨 Send me a message</button>
       </div>
     </div>
   </section>
@@ -560,9 +683,35 @@
 
 </div>
 
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay" id="emailModal">
+  <div class="modal-box">
+    <button class="modal-close" id="closeModalBtn" aria-label="Close modal">✕</button>
+    <h2>📬 Send me a message</h2>
+    <p class="modal-sub">I'll get back to you as soon as possible.</p>
+
+    <form id="modalForm" action="https://formspree.io/f/xpznkkkj" method="POST">
+      <label>
+        Your name
+        <input type="text" name="name" placeholder="e.g. Maria Santos" required />
+      </label>
+      <label>
+        Email address
+        <input type="email" name="email" placeholder="maria@example.com" required />
+      </label>
+      <label>
+        Message
+        <textarea name="message" rows="4" placeholder="Tell me about your project..." required></textarea>
+      </label>
+      <button type="submit" class="btn">📨 Send message</button>
+      <div id="modalStatus" class="form-status"></div>
+    </form>
+  </div>
+</div>
+
 <script>
   (function() {
-    // dark mode toggle
+    // ---- DARK MODE ----
     const toggle = document.getElementById('themeToggle');
     const icon = document.getElementById('themeIcon');
     const label = document.getElementById('themeLabel');
@@ -586,7 +735,7 @@
       setDark(!document.body.classList.contains('dark'));
     });
 
-    // scroll reveal
+    // ---- SCROLL REVEAL ----
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -597,6 +746,80 @@
     }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
 
     reveals.forEach(el => observer.observe(el));
+
+    // ---- MODAL ----
+    const modal = document.getElementById('emailModal');
+    const openBtns = document.querySelectorAll('#openModalBtn, #openModalBtn2');
+    const closeBtn = document.getElementById('closeModalBtn');
+
+    function openModal() {
+      modal.classList.add('active');
+      document.body.classList.add('modal-open');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      document.body.classList.remove('modal-open');
+      // reset form status
+      const status = document.getElementById('modalStatus');
+      status.textContent = '';
+      status.className = 'form-status';
+    }
+
+    openBtns.forEach(btn => {
+      btn.addEventListener('click', openModal);
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+
+    // close on overlay click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // close on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    // ---- FORM SUBMISSION (Formspree) ----
+    const form = document.getElementById('modalForm');
+    const status = document.getElementById('modalStatus');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = 'Sending...';
+      status.className = 'form-status';
+
+      const data = new FormData(form);
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        if (response.ok) {
+          status.textContent = '✅ Message sent! I\'ll get back to you soon.';
+          status.className = 'form-status success';
+          form.reset();
+          // auto-close after 3 seconds
+          setTimeout(closeModal, 3000);
+        } else {
+          const errorData = await response.json();
+          status.textContent = `❌ Oops: ${errorData.error || 'Something went wrong. Please try again.'}`;
+          status.className = 'form-status error';
+        }
+      } catch (error) {
+        status.textContent = '❌ Network error. Please check your connection.';
+        status.className = 'form-status error';
+      }
+    });
   })();
 </script>
 
