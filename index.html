@@ -177,6 +177,7 @@
       align-items: center;
       gap: 6px;
       box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+      cursor: pointer;
     }
 
     .btn:hover {
@@ -298,7 +299,7 @@
       margin-top: 0.6rem;
     }
 
-    /* contact */
+    /* ---- contact form ---- */
     .contact-block {
       background: var(--surface);
       border-radius: var(--radius);
@@ -308,11 +309,18 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      align-items: center;
-      gap: 2rem;
+      align-items: stretch;
+      gap: 2.5rem;
     }
 
-    .contact-item {
+    .contact-info {
+      flex: 1 1 240px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact-info .contact-item {
       display: flex;
       align-items: center;
       gap: 0.8rem;
@@ -320,14 +328,14 @@
       color: var(--text-secondary);
     }
 
-    .contact-item strong {
+    .contact-info .contact-item strong {
       color: var(--text);
       font-weight: 600;
     }
 
     .contact-social a {
       color: var(--text-secondary);
-      margin-left: 1.4rem;
+      margin-right: 1.4rem;
       text-decoration: none;
       font-weight: 500;
       font-size: 0.95rem;
@@ -336,6 +344,114 @@
 
     .contact-social a:hover {
       color: var(--accent);
+    }
+
+    .contact-form {
+      flex: 2 1 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-form label {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.7rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      transition: 0.2s;
+      width: 100%;
+      resize: vertical;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .contact-form .btn {
+      align-self: flex-start;
+      margin-top: 0.3rem;
+    }
+
+    .form-status {
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 0.5rem 0;
+    }
+
+    .form-status.success {
+      color: #16a34a;
+    }
+    .form-status.error {
+      color: #dc2626;
+    }
+
+    /* experience & training cards */
+    .exp-item {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.8rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      margin-bottom: 1.5rem;
+      transition: 0.2s;
+    }
+
+    .exp-item:hover {
+      border-color: var(--accent);
+    }
+
+    .exp-item h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .exp-item .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+
+    .exp-item ul {
+      padding-left: 1.2rem;
+      color: var(--text-secondary);
+    }
+
+    .exp-item ul li {
+      margin-bottom: 0.3rem;
+    }
+
+    .training-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1rem;
+    }
+
+    .training-tag {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      box-shadow: var(--shadow);
     }
 
     /* footer */
@@ -389,14 +505,12 @@
       }
       .contact-block {
         flex-direction: column;
-        align-items: flex-start;
       }
-      .contact-social {
-        margin-top: 0.5rem;
+      .contact-form .btn {
+        align-self: stretch;
       }
       .contact-social a {
-        margin-left: 0;
-        margin-right: 1.2rem;
+        margin-right: 1rem;
       }
     }
   </style>
@@ -411,6 +525,7 @@
     <nav class="nav-links">
       <a href="#work">Work</a>
       <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
       <button class="theme-toggle" id="themeToggle" aria-label="toggle dark mode">
         <span id="themeIcon">🌙</span> <span id="themeLabel">Dark</span>
@@ -429,10 +544,10 @@
     </div>
   </section>
 
-  <!-- about + skill badges -->
+  <!-- about + skill badges (from Canva & CV) -->
   <section class="reveal">
     <h2 class="section-title">About me</h2>
-    <p class="section-sub">I bridge the gap between technology and business goals. With a background in IT support, data analytics, and privacy compliance, I help teams work smarter and stay safe.</p>
+    <p class="section-sub">I bring a clean, efficient, and multi-disciplinary approach to technology, data, and digital communication. I manage IT systems, create dashboards, and ensure data privacy compliance.</p>
     <div class="skill-cloud">
       <span class="skill-badge highlight">📊 Excel Dashboards</span>
       <span class="skill-badge">🔐 Data Privacy</span>
@@ -441,87 +556,196 @@
       <span class="skill-badge">⚡ Automation</span>
       <span class="skill-badge">📈 Data Analysis</span>
       <span class="skill-badge">🧑‍💻 Admin Systems</span>
+      <span class="skill-badge">🌐 Web Development</span>
     </div>
   </section>
 
-  <!-- skills grid -->
+  <!-- skills grid (from Canva) -->
   <section id="skills" class="reveal">
     <h2 class="section-title">Core competencies</h2>
     <p class="section-sub">Every project benefits from a blend of technical depth and operational clarity.</p>
     <div class="grid-3">
       <div class="card">
         <div class="card-icon">📊</div>
-        <h3>Data Management &amp; Analytics</h3>
-        <p>From raw data to dashboards that drive decisions — I turn numbers into narratives.</p>
+        <h3>Data Management &amp; Analysis</h3>
+        <p>Data cleaning, validation, dashboards, automated workflows, and insights for decision-making.</p>
       </div>
       <div class="card">
         <div class="card-icon">🖥️</div>
         <h3>IT Operations &amp; Support</h3>
-        <p>Reliable infrastructure, troubleshooting, and process optimization for smooth daily operations.</p>
+        <p>System management, troubleshooting, monitoring, optimization, and digital transformation.</p>
       </div>
       <div class="card">
         <div class="card-icon">🔐</div>
-        <h3>Privacy &amp; Compliance</h3>
-        <p>Data protection frameworks, GDPR/DPA alignment, and privacy-by-design implementation.</p>
+        <h3>Data Privacy &amp; Compliance</h3>
+        <p>Policy compliance, secure data handling, privacy guidelines, and DPA implementation.</p>
       </div>
       <div class="card">
         <div class="card-icon">📄</div>
-        <h3>SOP &amp; Documentation</h3>
-        <p>Clear, actionable standard operating procedures that teams actually use and follow.</p>
+        <h3>Documentation &amp; Process Design</h3>
+        <p>Workflows, flowcharts, SOPs, process standardization, and efficiency enhancement.</p>
       </div>
       <div class="card">
         <div class="card-icon">⌨️</div>
         <h3>Administrative &amp; Encoding</h3>
-        <p>Meticulous data entry, system administration, and back-office efficiency.</p>
+        <p>Accurate data entry, records verification, document management, and organized systems.</p>
       </div>
       <div class="card">
         <div class="card-icon">📢</div>
-        <h3>Digital Communication</h3>
-        <p>Internal and external communication strategies that align with technical goals.</p>
+        <h3>Digital &amp; Communication</h3>
+        <p>Content creation, platform management, documentation, and reporting.</p>
       </div>
     </div>
   </section>
 
-  <!-- projects -->
+  <!-- work experience (from CV) -->
+  <section id="experience" class="reveal">
+    <h2 class="section-title">Work experience</h2>
+    <p class="section-sub">Proven track record in government, NGO, and private-sector environments.</p>
+
+    <div class="exp-item">
+      <h3>Administrative Assistant (IT Focus)</h3>
+      <div class="meta">City Government of Muntinlupa · 2022 – Present</div>
+      <ul>
+        <li>Data management and analysis, creating dashboards and reports for data-driven decisions.</li>
+        <li>Manage and supervise IT operations, serve as Data Privacy Officer.</li>
+        <li>Developed localhost-based departmental website for data monitoring, leave tracking, and attendance.</li>
+        <li>Create workflows and SOPs to improve departmental efficiency.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <h3>IT Specialist</h3>
+      <div class="meta">Lingkod Muntinlupa Foundation · 2019 – 2022</div>
+      <ul>
+        <li>Managed, maintained, and improved the organization's technology systems.</li>
+        <li>Ensured smooth IT operations, secure data handling, and staff support.</li>
+        <li>Created a localhost-based Paperless HRIS to streamline HR processes and digitize records.</li>
+        <li>Contributed to automation, process improvement, and digital transformation.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <h3>Data Encoder</h3>
+      <div class="meta">BEST Security Agency Inc. · 2019</div>
+      <ul>
+        <li>Accurately input, updated, and managed company data.</li>
+        <li>Ensured records, documents, and transactions were encoded correctly and aligned with standards.</li>
+        <li>Supported daily operations with organized and reliable data for reporting and analysis.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <h3>Data Specialist</h3>
+      <div class="meta">Yngen Datacomcorp. · 2018 – 2019</div>
+      <ul>
+        <li>Managed, organized, analyzed, and protected company data.</li>
+        <li>Ensured data accuracy and supported business decision-making.</li>
+        <li>Built reliable systems for reporting and automation.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- projects (from Canva) -->
   <section id="work" class="reveal">
-    <h2 class="section-title">Featured projects</h2>
+    <h2 class="section-title">Project gallery</h2>
     <p class="section-sub">Real-world solutions that combine data, design, and operational thinking.</p>
     <div class="grid-3">
       <div class="card">
         <div class="card-icon">📱</div>
         <h3>Social Media Dashboard</h3>
-        <p>Unified analytics dashboard for cross-platform campaign performance and sentiment.</p>
+        <p>Turning raw social media data into clear dashboard summaries for easy visualization and tracking.</p>
         <span class="project-tag">Data Viz</span>
       </div>
       <div class="card">
         <div class="card-icon">📋</div>
         <h3>Attendance Web App</h3>
-        <p>Time-tracking and attendance system with real-time reporting and export features.</p>
+        <p>Managing and monitoring attendance web app used by employees on the local network.</p>
         <span class="project-tag">Web App</span>
       </div>
       <div class="card">
         <div class="card-icon">📦</div>
         <h3>Sales &amp; Inventory Dashboard</h3>
-        <p>Interactive inventory management dashboard with predictive restocking alerts.</p>
+        <p>Dashboards that track inventory, delivery receipts, and daily sales totals for better reporting.</p>
         <span class="project-tag">Analytics</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <h3>Website Creation</h3>
+        <p>Building simple functional websites for information sharing, internal use, or public updates.</p>
+        <span class="project-tag">Web Dev</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Daily Transaction Monitoring</h3>
+        <p>Tracking and recording daily transactions to ensure accuracy and smooth operations.</p>
+        <span class="project-tag">Monitoring</span>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧪</div>
+        <h3>UAT Web App Tester</h3>
+        <p>Testing systems in live and UAT environments to ensure functionality and quality before deployment.</p>
+        <span class="project-tag">QA</span>
       </div>
     </div>
   </section>
 
-  <!-- contact -->
+  <!-- trainings & seminars (from CV) -->
+  <section class="reveal">
+    <h2 class="section-title">Trainings &amp; seminars</h2>
+    <p class="section-sub">Continuous learning to stay ahead in IT, data, and compliance.</p>
+    <div class="training-grid">
+      <span class="training-tag">Yellow Belt Lean Six Sigma (2026)</span>
+      <span class="training-tag">Data Analytics Essentials (2025)</span>
+      <span class="training-tag">Navigating NPC Circulars (2025)</span>
+      <span class="training-tag">Workplace Behavioral Issues (2025)</span>
+      <span class="training-tag">Cybercrime & RA 10175 (2025)</span>
+      <span class="training-tag">Advanced Monitoring & Evaluation (2025)</span>
+      <span class="training-tag">Project Monitoring & Evaluation (2024)</span>
+      <span class="training-tag">Data Privacy Act Workshop (2022)</span>
+      <span class="training-tag">Ethical Hacking / Cybersecurity (2022)</span>
+      <span class="training-tag">Data Analysis & Macro Dev (2019)</span>
+      <span class="training-tag">Basic Excel Training (2019)</span>
+      <span class="training-tag">Data Privacy Act Orientation (2019)</span>
+    </div>
+  </section>
+
+  <!-- contact with email form -->
   <section id="contact" class="reveal">
     <h2 class="section-title">Get in touch</h2>
-    <p class="section-sub">I’m always open to new projects, collaborations, or a conversation about data and tech.</p>
+    <p class="section-sub">Reach out if you want to make smarter, smoother processes together.</p>
     <div class="contact-block">
-      <div>
+      <!-- left: contact info -->
+      <div class="contact-info">
         <div class="contact-item"><span>📞</span> <strong>+63 997 465 5518</strong></div>
-        <div class="contact-item"><span>✉️</span> <strong>xinicampang33@gmail.com</strong></div>
+        <div class="contact-item"><span>✉️</span> <strong>xincampang@gmail.com</strong></div>
+        <div class="contact-social">
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">LinkedIn</a>
+        </div>
+        <div style="margin-top:0.8rem; font-size:0.9rem; color:var(--muted);">
+          Or send a message using the form —
+        </div>
       </div>
-      <div class="contact-social">
-        <a href="#">Instagram</a>
-        <a href="#">Facebook</a>
-        <a href="#">LinkedIn</a>
-      </div>
+
+      <!-- right: email form -->
+      <form class="contact-form" id="contactForm" action="https://formspree.io/f/xpznkkkj" method="POST">
+        <label>
+          Your name
+          <input type="text" name="name" placeholder="e.g. Maria Santos" required />
+        </label>
+        <label>
+          Email address
+          <input type="email" name="email" placeholder="maria@example.com" required />
+        </label>
+        <label>
+          Message
+          <textarea name="message" rows="4" placeholder="Tell me about your project..." required></textarea>
+        </label>
+        <button type="submit" class="btn">📨 Send message</button>
+        <div id="formStatus" class="form-status"></div>
+      </form>
     </div>
   </section>
 
@@ -556,7 +780,6 @@
       }
     }
 
-    // initial
     const saved = localStorage.getItem('darkMode') === 'true';
     setDark(saved);
 
@@ -575,6 +798,39 @@
     }, { threshold: 0.15, rootMargin: '0px 0px -20px 0px' });
 
     reveals.forEach(el => observer.observe(el));
+
+    // ----- contact form (Formspree) -----
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = 'Sending...';
+      status.className = 'form-status';
+
+      const data = new FormData(form);
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        if (response.ok) {
+          status.textContent = '✅ Message sent! I’ll get back to you soon.';
+          status.className = 'form-status success';
+          form.reset();
+        } else {
+          const errorData = await response.json();
+          status.textContent = `❌ Oops: ${errorData.error || 'Something went wrong. Please try again.'}`;
+          status.className = 'form-status error';
+        }
+      } catch (error) {
+        status.textContent = '❌ Network error. Please check your connection.';
+        status.className = 'form-status error';
+      }
+    });
   })();
 </script>
 
