@@ -327,7 +327,7 @@
       gap: 4px;
     }
 
-    /* GALLERY - THUMBNAILS ONLY */
+    /* GALLERY - MERGED WITH PROJECTS */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -384,26 +384,6 @@
     .gallery-item .gallery-thumbs img:hover {
       border-color: var(--accent);
       transform: scale(1.05);
-    }
-
-    .gallery-item .click-to-view {
-      display: block;
-      text-align: center;
-      padding: 0.6rem;
-      margin: 0 1.2rem 1.2rem;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: 0.2s;
-    }
-
-    .gallery-item .click-to-view:hover {
-      border-color: var(--accent);
-      background: var(--surface);
     }
 
     /* LIGHTBOX MODAL */
@@ -646,7 +626,6 @@
     <div class="logo">Xinia C.</div>
     <div class="nav-links">
       <a href="#projects">Projects</a>
-      <a href="#gallery">Gallery</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
       <button class="theme-toggle" id="themeToggle">
@@ -663,7 +642,7 @@
       <p>IT operations · data analysis · privacy &amp; compliance — I build systems that are secure, insightful, and human-centered.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn">📬 Let's talk</a>
-        <a href="#gallery" class="btn btn-outline">View gallery</a>
+        <a href="#projects" class="btn btn-outline">View projects</a>
       </div>
     </div>
     <div class="hero-image">
@@ -691,37 +670,37 @@
     <h2 class="section-title">Core competencies</h2>
     <p class="section-sub">Every project benefits from a blend of technical depth and operational clarity.</p>
     <div class="project-grid">
-      <div class="project-card" onclick="location.href='#gallery'">
+      <div class="project-card" onclick="location.href='#projects'">
         <div class="icon">📊</div>
         <h3>Data Management &amp; Analytics</h3>
         <p>From raw data to dashboards that drive decisions — I turn numbers into narratives.</p>
         <span class="tag">Data</span>
       </div>
-      <div class="project-card" onclick="location.href='#gallery'">
+      <div class="project-card" onclick="location.href='#projects'">
         <div class="icon">🖥️</div>
         <h3>IT Operations &amp; Support</h3>
         <p>Reliable infrastructure, troubleshooting, and process optimization for smooth daily operations.</p>
         <span class="tag">IT</span>
       </div>
-      <div class="project-card" onclick="location.href='#gallery'">
+      <div class="project-card" onclick="location.href='#projects'">
         <div class="icon">🔐</div>
         <h3>Privacy &amp; Compliance</h3>
         <p>Data protection frameworks, GDPR/DPA alignment, and privacy-by-design implementation.</p>
         <span class="tag">Privacy</span>
       </div>
-      <div class="project-card" onclick="location.href='#gallery'">
+      <div class="project-card" onclick="location.href='#projects'">
         <div class="icon">📄</div>
         <h3>SOP &amp; Documentation</h3>
         <p>Clear, actionable standard operating procedures that teams actually use and follow.</p>
         <span class="tag">Process</span>
       </div>
-      <div class="project-card" onclick="location.href='#gallery'">
+      <div class="project-card" onclick="location.href='#projects'">
         <div class="icon">⌨️</div>
         <h3>Administrative &amp; Encoding</h3>
         <p>Meticulous data entry, system administration, and back-office efficiency.</p>
         <span class="tag">Admin</span>
       </div>
-      <div class="project-card" onclick="location.href='#gallery'">
+      <div class="project-card" onclick="location.href='#projects'">
         <div class="icon">📢</div>
         <h3>Digital Communication</h3>
         <p>Internal and external communication strategies that align with technical goals.</p>
@@ -730,17 +709,19 @@
     </div>
   </section>
 
-  <!-- FEATURED PROJECTS (clickable cards) -->
+  <!-- FEATURED PROJECTS + GALLERY (MERGED) -->
   <section id="projects" class="section reveal">
     <h2 class="section-title">Featured Projects</h2>
-    <p class="section-sub">Click any project card to view its gallery and screenshots.</p>
-    <div class="project-grid">
+    <p class="section-sub">Click any project card to view its screenshots below. Click any thumbnail to enlarge.</p>
+
+    <!-- Project Cards -->
+    <div class="project-grid" style="margin-bottom: 3rem;">
       <a href="#gallery-webcreation" class="project-card">
         <div class="icon">🌐</div>
         <h3>Web Creation</h3>
         <p>Simple functional websites built for information sharing, internal use, or public updates.</p>
         <span class="tag">Web Dev</span>
-        <span class="click-hint">👆 Click to view</span>
+        <span class="click-hint">👆 Click to view gallery</span>
       </a>
 
       <a href="#gallery-attendance" class="project-card">
@@ -748,7 +729,7 @@
         <h3>Attendance Web App</h3>
         <p>Time-tracking and attendance system with real-time reporting and export features for employees.</p>
         <span class="tag">Web App</span>
-        <span class="click-hint">👆 Click to view</span>
+        <span class="click-hint">👆 Click to view gallery</span>
       </a>
 
       <a href="#gallery-uat" class="project-card">
@@ -756,7 +737,7 @@
         <h3>UAT Web App Tester</h3>
         <p>Testing systems in live and UAT environments to ensure functionality and quality before deployment.</p>
         <span class="tag">QA</span>
-        <span class="click-hint">👆 Click to view</span>
+        <span class="click-hint">👆 Click to view gallery</span>
       </a>
 
       <a href="#gallery-social" class="project-card">
@@ -764,7 +745,7 @@
         <h3>Social Media Dashboard</h3>
         <p>Unified analytics dashboard for cross-platform campaign performance and sentiment tracking.</p>
         <span class="tag">Data Viz</span>
-        <span class="click-hint">👆 Click to view</span>
+        <span class="click-hint">👆 Click to view gallery</span>
       </a>
 
       <a href="#gallery-sales" class="project-card">
@@ -772,7 +753,7 @@
         <h3>Sales &amp; Inventory Dashboard</h3>
         <p>Interactive inventory management dashboard with predictive restocking alerts and sales tracking.</p>
         <span class="tag">Analytics</span>
-        <span class="click-hint">👆 Click to view</span>
+        <span class="click-hint">👆 Click to view gallery</span>
       </a>
 
       <a href="#gallery-transaction" class="project-card">
@@ -780,15 +761,12 @@
         <h3>Daily Transaction Monitoring</h3>
         <p>Tracking and recording daily transactions to ensure accuracy and smooth operations.</p>
         <span class="tag">Monitoring</span>
-        <span class="click-hint">👆 Click to view</span>
+        <span class="click-hint">👆 Click to view gallery</span>
       </a>
     </div>
-  </section>
 
-  <!-- GALLERY SECTION -->
-  <section id="gallery" class="section reveal">
-    <h2 class="section-title">Project Gallery</h2>
-    <p class="section-sub">Click any thumbnail to view it larger.</p>
+    <!-- Gallery Section (directly below) -->
+    <h3 style="font-size:1.3rem; margin-bottom:1rem; color:var(--text-secondary);">📸 Project Screenshots</h3>
 
     <div class="gallery-grid">
       <!-- Web Creation -->
@@ -800,7 +778,6 @@
         <div class="gallery-thumbs">
           <img src="PROJECTS/webcreation/WEBSITE DIRECTORY.png" alt="Web Creation" onclick="openLightboxFromSrc(this)" />
         </div>
-        <a href="#projects" class="click-to-view">⬅ Back to Projects</a>
       </div>
 
       <!-- Attendance App -->
@@ -820,7 +797,6 @@
           <img src="PROJECTS/attendanceapp/TARDINESS REQUEST.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
           <img src="PROJECTS/attendanceapp/TASK MONITORING.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
         </div>
-        <a href="#projects" class="click-to-view">⬅ Back to Projects</a>
       </div>
 
       <!-- UAT Testing -->
@@ -836,7 +812,6 @@
           <img src="PROJECTS/uatwebapptester/HRIS SIDEBAR.png" alt="UAT Testing" onclick="openLightboxFromSrc(this)" />
           <img src="PROJECTS/uatwebapptester/STORE MGMT SIDEBAR.png" alt="UAT Testing" onclick="openLightboxFromSrc(this)" />
         </div>
-        <a href="#projects" class="click-to-view">⬅ Back to Projects</a>
       </div>
 
       <!-- Social Dashboard -->
@@ -848,7 +823,6 @@
         <div class="gallery-thumbs">
           <img src="PROJECTS/socialmediadashboard/SOCMED DASHBOARD SUMMARY.png" alt="Social Dashboard" onclick="openLightboxFromSrc(this)" />
         </div>
-        <a href="#projects" class="click-to-view">⬅ Back to Projects</a>
       </div>
 
       <!-- Sales Dashboard -->
@@ -860,7 +834,6 @@
         <div class="gallery-thumbs">
           <img src="PROJECTS/salesandinventory/SALES MONITORING SAMPLE PER WEEK PER MONTH.png" alt="Sales Dashboard" onclick="openLightboxFromSrc(this)" />
         </div>
-        <a href="#projects" class="click-to-view">⬅ Back to Projects</a>
       </div>
 
       <!-- Transaction Monitoring -->
@@ -872,7 +845,6 @@
         <div class="gallery-thumbs">
           <img src="PROJECTS/dailytransactionmonitoring/DAILY TRANSACTION MONITORING.png" alt="Transaction Monitoring" onclick="openLightboxFromSrc(this)" />
         </div>
-        <a href="#projects" class="click-to-view">⬅ Back to Projects</a>
       </div>
     </div>
   </section>
