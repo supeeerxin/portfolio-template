@@ -388,7 +388,7 @@
       backdrop-filter: blur(4px);
     }
 
-    /* MODAL SLIDER */
+    /* MODAL SLIDER - FIXED */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -417,15 +417,30 @@
       transition: transform 0.4s ease;
       border-radius: 12px;
       overflow: hidden;
+      background: #000;
+      min-height: 300px;
     }
 
-    .modal-content .modal-track img {
-      width: 100%;
+    .modal-content .modal-track .modal-slide {
+      min-width: 100%;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+      background: #000;
+    }
+
+    .modal-content .modal-track .modal-slide img {
+      width: 100%;
       max-height: 80vh;
       object-fit: contain;
-      background: #000;
       display: block;
+    }
+
+    .modal-content .modal-track .modal-slide .loading-text {
+      color: rgba(255,255,255,0.5);
+      font-size: 1rem;
     }
 
     .modal-close {
@@ -867,7 +882,7 @@
 
 </div>
 
-<!-- MODAL SLIDER -->
+<!-- MODAL SLIDER - FIXED -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-content">
     <button class="modal-close" id="modalClose">✕</button>
@@ -920,7 +935,6 @@
     // Build full paths
     imageNames.forEach(name => {
       let fullPath = folder + name;
-      // If folder is empty, use just the name
       fullPaths.push(fullPath);
     });
 
@@ -935,7 +949,6 @@
         const fallbackPath = path.split('/').pop();
         this.src = fallbackPath;
         this.onerror = function() {
-          // If still fails, show placeholder
           this.style.display = 'none';
           const parent = this.parentElement;
           if (parent && !parent.querySelector('.no-image')) {
@@ -975,24 +988,24 @@
       nextBtn.style.display = 'none';
     }
 
-    // CLICK TO OPEN MODAL - pass the full paths
+    // CLICK TO OPEN MODAL
     container.addEventListener('click', () => {
-      // Get all image srcs from the track (including fallbacks)
+      // Get all working image srcs from the track
       const imgs = track.querySelectorAll('img');
       const srcs = Array.from(imgs)
-        .filter(img => img.style.display !== 'none')
+        .filter(img => img.style.display !== 'none' && img.src)
         .map(img => img.src);
       
       // If no images loaded, use the original paths
       if (srcs.length === 0) {
-        openModal(fullPaths, container);
+        openModal(fullPaths);
       } else {
-        openModal(srcs, container);
+        openModal(srcs);
       }
     });
   });
 
-  // ===== MODAL =====
+  // ===== MODAL - COMPLETELY REWRITTEN =====
   const modalOverlay = document.getElementById('modalOverlay');
   const modalTrack = document.getElementById('modalTrack');
   const modalDots = document.getElementById('modalDots');
@@ -1004,26 +1017,38 @@
   let modalImages = [];
   let modalIndex = 0;
 
-  function openModal(images, container) {
+  function openModal(images) {
     modalImages = images;
     modalIndex = 0;
 
-    // Build modal images
+    // Clear track
     modalTrack.innerHTML = '';
-    images.forEach(src => {
+
+    // Create slides
+    images.forEach((src, index) => {
+      const slide = document.createElement('div');
+      slide.className = 'modal-slide';
+      
       const img = document.createElement('img');
       img.src = src;
+      img.alt = `Screenshot ${index + 1}`;
       img.loading = 'lazy';
+      
+      // Handle image loading errors
       img.onerror = function() {
-        // If modal image fails, show placeholder
         this.alt = 'Image not found';
-        this.style.objectFit = 'contain';
-        this.style.padding = '2rem';
+        this.style.display = 'none';
+        const fallbackText = document.createElement('span');
+        fallbackText.className = 'loading-text';
+        fallbackText.textContent = '📷 Image not available';
+        slide.appendChild(fallbackText);
       };
-      modalTrack.appendChild(img);
+      
+      slide.appendChild(img);
+      modalTrack.appendChild(slide);
     });
 
-    // Build modal dots
+    // Build dots
     modalDots.innerHTML = '';
     images.forEach((_, i) => {
       const dot = document.createElement('span');
@@ -1032,9 +1057,10 @@
       modalDots.appendChild(dot);
     });
 
-    updateModal();
+    // Show modal
     modalOverlay.classList.add('active');
     document.body.classList.add('modal-open');
+    updateModal();
 
     // Hide arrows if only 1 image
     modalPrev.style.display = images.length <= 1 ? 'none' : 'flex';
@@ -1049,7 +1075,9 @@
   }
 
   function updateModal() {
-    modalTrack.style.transform = `translateX(-${modalIndex * 100}%)`;
+    const slideWidth = 100;
+    modalTrack.style.transform = `translateX(-${modalIndex * slideWidth}%)`;
+    
     modalDots.querySelectorAll('span').forEach((dot, i) => {
       dot.classList.toggle('active', i === modalIndex);
     });
@@ -1061,9 +1089,19 @@
     document.body.classList.remove('modal-open');
   }
 
-  modalPrev.addEventListener('click', () => goToModal(modalIndex - 1));
-  modalNext.addEventListener('click', () => goToModal(modalIndex + 1));
+  // Event listeners
+  modalPrev.addEventListener('click', (e) => {
+    e.stopPropagation();
+    goToModal(modalIndex - 1);
+  });
+  
+  modalNext.addEventListener('click', (e) => {
+    e.stopPropagation();
+    goToModal(modalIndex + 1);
+  });
+  
   modalClose.addEventListener('click', closeModal);
+  
   modalOverlay.addEventListener('click', (e) => {
     if (e.target === modalOverlay) closeModal();
   });
