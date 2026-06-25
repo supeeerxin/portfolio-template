@@ -23,7 +23,7 @@
       --border: #e5e7eb;
       --shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
       --radius: 16px;
-      --overlay: rgba(15, 23, 42, 0.85);
+      --overlay: rgba(15, 23, 42, 0.92);
     }
 
     body.dark {
@@ -35,7 +35,7 @@
       --accent: #818cf8;
       --border: #1e293b;
       --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-      --overlay: rgba(0, 0, 0, 0.85);
+      --overlay: rgba(0, 0, 0, 0.92);
     }
 
     body {
@@ -45,6 +45,7 @@
       line-height: 1.6;
       transition: background 0.3s, color 0.3s;
     }
+    body.modal-open { overflow: hidden; }
 
     .container {
       max-width: 1100px;
@@ -86,10 +87,7 @@
       font-size: 0.95rem;
       transition: color 0.2s;
     }
-
-    .nav-links a:hover {
-      color: var(--accent);
-    }
+    .nav-links a:hover { color: var(--accent); }
 
     .theme-toggle {
       background: var(--surface);
@@ -105,10 +103,7 @@
       transition: 0.2s;
       box-shadow: var(--shadow);
     }
-
-    .theme-toggle:hover {
-      border-color: var(--accent);
-    }
+    .theme-toggle:hover { border-color: var(--accent); }
 
     /* HERO */
     .hero {
@@ -175,7 +170,6 @@
       gap: 6px;
       box-shadow: 0 6px 20px rgba(79, 70, 229, 0.2);
     }
-
     .btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 10px 28px rgba(79, 70, 229, 0.25);
@@ -188,7 +182,6 @@
       color: var(--text);
       box-shadow: none;
     }
-
     .btn-outline:hover {
       border-color: var(--accent);
       background: var(--surface);
@@ -206,24 +199,19 @@
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
       transition: 0.3s;
     }
-
     .hero-image img:hover {
       transform: scale(1.02);
       border-color: var(--accent);
     }
 
     /* SECTIONS */
-    .section {
-      padding: 3.5rem 0;
-    }
-
+    .section { padding: 3.5rem 0; }
     .section-title {
       font-size: 2rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       margin-bottom: 0.5rem;
     }
-
     .section-sub {
       color: var(--text-secondary);
       max-width: 600px;
@@ -237,7 +225,6 @@
       gap: 0.6rem;
       margin-top: 1.5rem;
     }
-
     .skills li {
       list-style: none;
       background: var(--surface);
@@ -248,12 +235,10 @@
       color: var(--text-secondary);
       transition: 0.2s;
     }
-
     .skills li:hover {
       border-color: var(--accent);
       color: var(--accent);
     }
-
     .skills li.highlight {
       background: var(--accent);
       color: #fff;
@@ -277,30 +262,19 @@
       display: flex;
       flex-direction: column;
     }
-
     .project-card:hover {
       transform: translateY(-6px);
       border-color: var(--accent);
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
     }
 
-    .project-card .icon {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .project-card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 0.3rem;
-      color: var(--text);
-    }
-
+    .project-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .project-card h3 { font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text); }
     .project-card p {
       font-size: 0.95rem;
       color: var(--text-secondary);
       flex: 1;
     }
-
     .project-card .tag {
       display: inline-block;
       background: var(--border);
@@ -322,6 +296,7 @@
       overflow: hidden;
       background: var(--bg);
       border: 1px solid var(--border);
+      cursor: pointer;
     }
 
     .slider-container .slider-track {
@@ -335,6 +310,7 @@
       aspect-ratio: 16/10;
       object-fit: cover;
       display: block;
+      pointer-events: none;
     }
 
     .slider-btn {
@@ -356,20 +332,15 @@
       transition: 0.2s;
       z-index: 5;
       opacity: 0.85;
+      pointer-events: auto;
     }
-
     .slider-btn:hover {
       opacity: 1;
       border-color: var(--accent);
       color: var(--accent);
     }
-
-    .slider-btn.prev {
-      left: 8px;
-    }
-    .slider-btn.next {
-      right: 8px;
-    }
+    .slider-btn.prev { left: 8px; }
+    .slider-btn.next { right: 8px; }
 
     .slider-dots {
       display: flex;
@@ -377,7 +348,6 @@
       gap: 6px;
       padding: 8px 0 4px;
     }
-
     .slider-dots span {
       width: 8px;
       height: 8px;
@@ -386,11 +356,135 @@
       cursor: pointer;
       transition: 0.2s;
     }
-
     .slider-dots span.active {
       background: var(--accent);
       width: 20px;
       border-radius: 4px;
+    }
+
+    .slider-click-hint {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      z-index: 2;
+      pointer-events: none;
+      backdrop-filter: blur(4px);
+    }
+
+    /* MODAL SLIDER */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--overlay);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+      backdrop-filter: blur(8px);
+    }
+    .modal-overlay.active { display: flex; }
+
+    .modal-content {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+    }
+
+    .modal-content .modal-track {
+      display: flex;
+      transition: transform 0.4s ease;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .modal-content .modal-track img {
+      width: 100%;
+      flex-shrink: 0;
+      max-height: 80vh;
+      object-fit: contain;
+      background: #000;
+      display: block;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2.2rem;
+      cursor: pointer;
+      transition: 0.2s;
+      opacity: 0.7;
+      z-index: 10;
+    }
+    .modal-close:hover {
+      opacity: 1;
+      transform: rotate(90deg);
+    }
+
+    .modal-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.8rem;
+      color: #fff;
+      transition: 0.2s;
+      z-index: 10;
+      backdrop-filter: blur(4px);
+    }
+    .modal-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    .modal-btn.prev { left: 10px; }
+    .modal-btn.next { right: 10px; }
+
+    .modal-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 1rem;
+    }
+    .modal-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .modal-dots span.active {
+      background: #fff;
+      width: 28px;
+      border-radius: 5px;
+    }
+
+    .modal-counter {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
     }
 
     /* CONTACT */
@@ -412,35 +506,25 @@
       flex-direction: column;
       gap: 0.8rem;
     }
-
     .contact-item {
       display: flex;
       align-items: center;
       gap: 0.8rem;
       color: var(--text-secondary);
     }
-
-    .contact-item strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
+    .contact-item strong { color: var(--text); font-weight: 600; }
     .contact-item a {
       color: var(--text);
       text-decoration: none;
       transition: color 0.2s;
     }
-
-    .contact-item a:hover {
-      color: var(--accent);
-    }
+    .contact-item a:hover { color: var(--accent); }
 
     .social-links {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
     }
-
     .social-links a {
       display: inline-flex;
       align-items: center;
@@ -455,7 +539,6 @@
       transition: 0.2s;
       background: var(--bg);
     }
-
     .social-links a:hover {
       color: var(--accent);
       border-color: var(--accent);
@@ -474,17 +557,13 @@
       color: var(--muted);
       font-size: 0.9rem;
     }
-
     .footer a {
       color: var(--muted);
       text-decoration: none;
       margin-left: 1.2rem;
       transition: color 0.2s;
     }
-
-    .footer a:hover {
-      color: var(--accent);
-    }
+    .footer a:hover { color: var(--accent); }
 
     /* REVEAL */
     .reveal {
@@ -492,7 +571,6 @@
       transform: translateY(28px);
       transition: all 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
     }
-
     .reveal.show {
       opacity: 1;
       transform: translateY(0);
@@ -506,37 +584,32 @@
         padding: 2rem 0;
         gap: 2rem;
       }
-
-      .hero-content p {
-        max-width: 100%;
-      }
-
-      .hero-actions {
-        justify-content: center;
-      }
-
-      .hero-image img {
-        max-width: 220px;
-      }
-
+      .hero-content p { max-width: 100%; }
+      .hero-actions { justify-content: center; }
+      .hero-image img { max-width: 220px; }
       .header {
         flex-direction: column;
         align-items: flex-start;
       }
-
       .nav-links {
         flex-wrap: wrap;
         gap: 1rem;
       }
-
       .contact-block {
         flex-direction: column;
         align-items: flex-start;
       }
-
-      .social-links {
-        width: 100%;
+      .social-links { width: 100%; }
+      .modal-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
       }
+      .modal-btn.prev { left: 4px; }
+      .modal-btn.next { right: 4px; }
+      .modal-close { top: -44px; font-size: 1.8rem; }
+      .modal-counter { top: -36px; font-size: 0.75rem; }
+      .slider-click-hint { display: none; }
     }
   </style>
 </head>
@@ -632,10 +705,10 @@
     </div>
   </section>
 
-  <!-- FEATURED PROJECTS with SLIDERS -->
+  <!-- FEATURED PROJECTS -->
   <section id="projects" class="section reveal">
     <h2 class="section-title">Featured Projects</h2>
-    <p class="section-sub">Click the arrows on each project to view multiple screenshots.</p>
+    <p class="section-sub">Click any image to view it full-screen. Use arrows to browse through screenshots.</p>
 
     <div class="project-grid">
       <!-- Web Creation -->
@@ -644,13 +717,12 @@
         <h3>Web Creation</h3>
         <p>Simple functional websites built for information sharing, internal use, or public updates.</p>
         <span class="tag">Web Dev</span>
-        <div class="slider-container" data-images='[
-          "PROJECTS/webcreation/WEBSITE DIRECTORY.png"
-        ]'>
+        <div class="slider-container" data-images='["PROJECTS/webcreation/WEBSITE DIRECTORY.png"]'>
           <div class="slider-track"></div>
           <button class="slider-btn prev">‹</button>
           <button class="slider-btn next">›</button>
           <div class="slider-dots"></div>
+          <span class="slider-click-hint">🔍 Click to enlarge</span>
         </div>
       </div>
 
@@ -675,6 +747,7 @@
           <button class="slider-btn prev">‹</button>
           <button class="slider-btn next">›</button>
           <div class="slider-dots"></div>
+          <span class="slider-click-hint">🔍 Click to enlarge</span>
         </div>
       </div>
 
@@ -695,6 +768,7 @@
           <button class="slider-btn prev">‹</button>
           <button class="slider-btn next">›</button>
           <div class="slider-dots"></div>
+          <span class="slider-click-hint">🔍 Click to enlarge</span>
         </div>
       </div>
 
@@ -704,13 +778,12 @@
         <h3>Social Media Dashboard</h3>
         <p>Unified analytics dashboard for cross-platform campaign performance and sentiment tracking.</p>
         <span class="tag">Data Viz</span>
-        <div class="slider-container" data-images='[
-          "PROJECTS/socialmediadashboard/SOCMED DASHBOARD SUMMARY.png"
-        ]'>
+        <div class="slider-container" data-images='["PROJECTS/socialmediadashboard/SOCMED DASHBOARD SUMMARY.png"]'>
           <div class="slider-track"></div>
           <button class="slider-btn prev">‹</button>
           <button class="slider-btn next">›</button>
           <div class="slider-dots"></div>
+          <span class="slider-click-hint">🔍 Click to enlarge</span>
         </div>
       </div>
 
@@ -720,13 +793,12 @@
         <h3>Sales &amp; Inventory Dashboard</h3>
         <p>Interactive inventory management dashboard with predictive restocking alerts and sales tracking.</p>
         <span class="tag">Analytics</span>
-        <div class="slider-container" data-images='[
-          "PROJECTS/salesandinventory/SALES MONITORING SAMPLE PER WEEK PER MONTH.png"
-        ]'>
+        <div class="slider-container" data-images='["PROJECTS/salesandinventory/SALES MONITORING SAMPLE PER WEEK PER MONTH.png"]'>
           <div class="slider-track"></div>
           <button class="slider-btn prev">‹</button>
           <button class="slider-btn next">›</button>
           <div class="slider-dots"></div>
+          <span class="slider-click-hint">🔍 Click to enlarge</span>
         </div>
       </div>
 
@@ -736,13 +808,12 @@
         <h3>Daily Transaction Monitoring</h3>
         <p>Tracking and recording daily transactions to ensure accuracy and smooth operations.</p>
         <span class="tag">Monitoring</span>
-        <div class="slider-container" data-images='[
-          "PROJECTS/dailytransactionmonitoring/DAILY TRANSACTION MONITORING.png"
-        ]'>
+        <div class="slider-container" data-images='["PROJECTS/dailytransactionmonitoring/DAILY TRANSACTION MONITORING.png"]'>
           <div class="slider-track"></div>
           <button class="slider-btn prev">‹</button>
           <button class="slider-btn next">›</button>
           <div class="slider-dots"></div>
+          <span class="slider-click-hint">🔍 Click to enlarge</span>
         </div>
       </div>
     </div>
@@ -762,7 +833,7 @@
         <div class="contact-item">
           <span>✉️</span>
           <strong>Email:</strong>
-          <a href="mailto:xinicampang33@gmail.com">xinicampang33@gmail.com</a>
+          <a href="mailto:xincampang@gmail.com">xincampang@gmail.com</a>
         </div>
       </div>
       <div class="social-links">
@@ -784,6 +855,18 @@
 
 </div>
 
+<!-- MODAL SLIDER -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-content">
+    <button class="modal-close" id="modalClose">✕</button>
+    <span class="modal-counter" id="modalCounter">1 / 1</span>
+    <div class="modal-track" id="modalTrack"></div>
+    <button class="modal-btn prev" id="modalPrev">‹</button>
+    <button class="modal-btn next" id="modalNext">›</button>
+    <div class="modal-dots" id="modalDots"></div>
+  </div>
+</div>
+
 <script>
   (function() {
     // Dark mode
@@ -797,12 +880,8 @@
       icon.textContent = isDark ? '☀️' : '🌙';
       label.textContent = isDark ? 'Light' : 'Dark';
     }
-
     setDark(localStorage.getItem('darkMode') === 'true');
-
-    toggle.addEventListener('click', () => {
-      setDark(!document.body.classList.contains('dark'));
-    });
+    toggle.addEventListener('click', () => setDark(!document.body.classList.contains('dark')));
 
     // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
@@ -811,7 +890,6 @@
         if (entry.isIntersecting) entry.target.classList.add('show');
       });
     }, { threshold: 0.15 });
-
     reveals.forEach(el => observer.observe(el));
   })();
 
@@ -837,7 +915,7 @@
     images.forEach((_, i) => {
       const dot = document.createElement('span');
       dot.classList.toggle('active', i === 0);
-      dot.addEventListener('click', () => goTo(i));
+      dot.addEventListener('click', (e) => { e.stopPropagation(); goTo(i); });
       dots.appendChild(dot);
     });
 
@@ -851,21 +929,93 @@
       });
     }
 
-    prevBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      goTo(currentIndex - 1);
-    });
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); goTo(currentIndex - 1); });
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); goTo(currentIndex + 1); });
 
-    nextBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      goTo(currentIndex + 1);
-    });
-
-    // Hide arrows if only 1 image
     if (images.length <= 1) {
       prevBtn.style.display = 'none';
       nextBtn.style.display = 'none';
     }
+
+    // CLICK TO OPEN MODAL
+    container.addEventListener('click', () => openModal(images, container));
+  });
+
+  // ===== MODAL =====
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalTrack = document.getElementById('modalTrack');
+  const modalDots = document.getElementById('modalDots');
+  const modalPrev = document.getElementById('modalPrev');
+  const modalNext = document.getElementById('modalNext');
+  const modalClose = document.getElementById('modalClose');
+  const modalCounter = document.getElementById('modalCounter');
+
+  let modalImages = [];
+  let modalIndex = 0;
+
+  function openModal(images, container) {
+    modalImages = images;
+    modalIndex = 0;
+
+    // Build modal images
+    modalTrack.innerHTML = '';
+    images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.loading = 'lazy';
+      modalTrack.appendChild(img);
+    });
+
+    // Build modal dots
+    modalDots.innerHTML = '';
+    images.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.classList.toggle('active', i === 0);
+      dot.addEventListener('click', () => goToModal(i));
+      modalDots.appendChild(dot);
+    });
+
+    updateModal();
+    modalOverlay.classList.add('active');
+    document.body.classList.add('modal-open');
+
+    // Hide arrows if only 1 image
+    modalPrev.style.display = images.length <= 1 ? 'none' : 'flex';
+    modalNext.style.display = images.length <= 1 ? 'none' : 'flex';
+  }
+
+  function goToModal(index) {
+    if (index < 0) index = modalImages.length - 1;
+    if (index >= modalImages.length) index = 0;
+    modalIndex = index;
+    updateModal();
+  }
+
+  function updateModal() {
+    modalTrack.style.transform = `translateX(-${modalIndex * 100}%)`;
+    modalDots.querySelectorAll('span').forEach((dot, i) => {
+      dot.classList.toggle('active', i === modalIndex);
+    });
+    modalCounter.textContent = `${modalIndex + 1} / ${modalImages.length}`;
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove('active');
+    document.body.classList.remove('modal-open');
+  }
+
+  modalPrev.addEventListener('click', () => goToModal(modalIndex - 1));
+  modalNext.addEventListener('click', () => goToModal(modalIndex + 1));
+  modalClose.addEventListener('click', closeModal);
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!modalOverlay.classList.contains('active')) return;
+    if (e.key === 'Escape') closeModal();
+    if (e.key === 'ArrowLeft') goToModal(modalIndex - 1);
+    if (e.key === 'ArrowRight') goToModal(modalIndex + 1);
   });
 </script>
 
