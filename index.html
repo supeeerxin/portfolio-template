@@ -260,7 +260,7 @@
       border-color: var(--accent);
     }
 
-    /* PROJECT CARDS - UNIFIED */
+    /* PROJECT CARDS */
     .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -270,15 +270,12 @@
     .project-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 1.8rem;
       border-radius: var(--radius);
+      padding: 1.8rem;
       transition: 0.25s;
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
     }
 
     .project-card:hover {
@@ -317,138 +314,83 @@
       align-self: flex-start;
     }
 
-    .project-card .click-hint {
+    /* IMAGE SLIDER */
+    .slider-container {
       margin-top: 1rem;
-      font-size: 0.8rem;
-      color: var(--accent);
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    /* GALLERY - MERGED WITH PROJECTS */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 1rem;
-    }
-
-    .gallery-item {
-      background: var(--surface);
-      border-radius: var(--radius);
+      position: relative;
+      border-radius: 10px;
       overflow: hidden;
+      background: var(--bg);
       border: 1px solid var(--border);
-      transition: 0.3s;
-      box-shadow: var(--shadow);
     }
 
-    .gallery-item:hover {
-      transform: translateY(-6px);
-      border-color: var(--accent);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-    }
-
-    .gallery-item .gallery-header {
-      padding: 1rem 1.2rem 0.5rem;
-    }
-
-    .gallery-item .gallery-header h4 {
-      font-size: 1.1rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .gallery-item .gallery-header p {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-    }
-
-    .gallery-item .gallery-thumbs {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-      gap: 6px;
-      padding: 0.5rem 1.2rem 1.2rem;
-    }
-
-    .gallery-item .gallery-thumbs img {
-      width: 100%;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      border-radius: 8px;
-      cursor: pointer;
-      border: 2px solid transparent;
-      transition: 0.2s;
-    }
-
-    .gallery-item .gallery-thumbs img:hover {
-      border-color: var(--accent);
-      transform: scale(1.05);
-    }
-
-    /* LIGHTBOX MODAL */
-    .lightbox {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--overlay);
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-      backdrop-filter: blur(8px);
-    }
-
-    .lightbox.active {
+    .slider-container .slider-track {
       display: flex;
+      transition: transform 0.4s ease;
     }
 
-    .lightbox img {
-      max-width: 90%;
-      max-height: 85vh;
-      border-radius: 12px;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-      animation: fadeIn 0.3s ease;
+    .slider-container .slider-track img {
+      width: 100%;
+      flex-shrink: 0;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      display: block;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .lightbox-close {
+    .slider-btn {
       position: absolute;
-      top: 1.5rem;
-      right: 2rem;
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 2.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--text);
+      box-shadow: var(--shadow);
+      transition: 0.2s;
+      z-index: 5;
+      opacity: 0.85;
+    }
+
+    .slider-btn:hover {
+      opacity: 1;
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .slider-btn.prev {
+      left: 8px;
+    }
+    .slider-btn.next {
+      right: 8px;
+    }
+
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 0 4px;
+    }
+
+    .slider-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
       cursor: pointer;
       transition: 0.2s;
-      opacity: 0.7;
     }
 
-    .lightbox-close:hover {
-      opacity: 1;
-      transform: rotate(90deg);
-    }
-
-    .lightbox-caption {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #fff;
-      background: rgba(0,0,0,0.6);
-      padding: 0.5rem 1.5rem;
-      border-radius: 40px;
-      font-size: 0.95rem;
-      text-align: center;
-      max-width: 80%;
+    .slider-dots span.active {
+      background: var(--accent);
+      width: 20px;
+      border-radius: 4px;
     }
 
     /* CONTACT */
@@ -595,25 +537,6 @@
       .social-links {
         width: 100%;
       }
-
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .gallery-item .gallery-thumbs {
-        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-      }
-
-      .lightbox img {
-        max-width: 95%;
-        max-height: 70vh;
-      }
-
-      .lightbox-close {
-        top: 1rem;
-        right: 1rem;
-        font-size: 2rem;
-      }
     }
   </style>
 </head>
@@ -670,37 +593,37 @@
     <h2 class="section-title">Core competencies</h2>
     <p class="section-sub">Every project benefits from a blend of technical depth and operational clarity.</p>
     <div class="project-grid">
-      <div class="project-card" onclick="location.href='#projects'">
+      <div class="project-card">
         <div class="icon">📊</div>
         <h3>Data Management &amp; Analytics</h3>
         <p>From raw data to dashboards that drive decisions — I turn numbers into narratives.</p>
         <span class="tag">Data</span>
       </div>
-      <div class="project-card" onclick="location.href='#projects'">
+      <div class="project-card">
         <div class="icon">🖥️</div>
         <h3>IT Operations &amp; Support</h3>
         <p>Reliable infrastructure, troubleshooting, and process optimization for smooth daily operations.</p>
         <span class="tag">IT</span>
       </div>
-      <div class="project-card" onclick="location.href='#projects'">
+      <div class="project-card">
         <div class="icon">🔐</div>
         <h3>Privacy &amp; Compliance</h3>
         <p>Data protection frameworks, GDPR/DPA alignment, and privacy-by-design implementation.</p>
         <span class="tag">Privacy</span>
       </div>
-      <div class="project-card" onclick="location.href='#projects'">
+      <div class="project-card">
         <div class="icon">📄</div>
         <h3>SOP &amp; Documentation</h3>
         <p>Clear, actionable standard operating procedures that teams actually use and follow.</p>
         <span class="tag">Process</span>
       </div>
-      <div class="project-card" onclick="location.href='#projects'">
+      <div class="project-card">
         <div class="icon">⌨️</div>
         <h3>Administrative &amp; Encoding</h3>
         <p>Meticulous data entry, system administration, and back-office efficiency.</p>
         <span class="tag">Admin</span>
       </div>
-      <div class="project-card" onclick="location.href='#projects'">
+      <div class="project-card">
         <div class="icon">📢</div>
         <h3>Digital Communication</h3>
         <p>Internal and external communication strategies that align with technical goals.</p>
@@ -709,141 +632,117 @@
     </div>
   </section>
 
-  <!-- FEATURED PROJECTS + GALLERY (MERGED) -->
+  <!-- FEATURED PROJECTS with SLIDERS -->
   <section id="projects" class="section reveal">
     <h2 class="section-title">Featured Projects</h2>
-    <p class="section-sub">Click any project card to view its screenshots below. Click any thumbnail to enlarge.</p>
+    <p class="section-sub">Click the arrows on each project to view multiple screenshots.</p>
 
-    <!-- Project Cards -->
-    <div class="project-grid" style="margin-bottom: 3rem;">
-      <a href="#gallery-webcreation" class="project-card">
+    <div class="project-grid">
+      <!-- Web Creation -->
+      <div class="project-card">
         <div class="icon">🌐</div>
         <h3>Web Creation</h3>
         <p>Simple functional websites built for information sharing, internal use, or public updates.</p>
         <span class="tag">Web Dev</span>
-        <span class="click-hint">👆 Click to view gallery</span>
-      </a>
-
-      <a href="#gallery-attendance" class="project-card">
-        <div class="icon">📋</div>
-        <h3>Attendance Web App</h3>
-        <p>Time-tracking and attendance system with real-time reporting and export features for employees.</p>
-        <span class="tag">Web App</span>
-        <span class="click-hint">👆 Click to view gallery</span>
-      </a>
-
-      <a href="#gallery-uat" class="project-card">
-        <div class="icon">🧪</div>
-        <h3>UAT Web App Tester</h3>
-        <p>Testing systems in live and UAT environments to ensure functionality and quality before deployment.</p>
-        <span class="tag">QA</span>
-        <span class="click-hint">👆 Click to view gallery</span>
-      </a>
-
-      <a href="#gallery-social" class="project-card">
-        <div class="icon">📱</div>
-        <h3>Social Media Dashboard</h3>
-        <p>Unified analytics dashboard for cross-platform campaign performance and sentiment tracking.</p>
-        <span class="tag">Data Viz</span>
-        <span class="click-hint">👆 Click to view gallery</span>
-      </a>
-
-      <a href="#gallery-sales" class="project-card">
-        <div class="icon">📦</div>
-        <h3>Sales &amp; Inventory Dashboard</h3>
-        <p>Interactive inventory management dashboard with predictive restocking alerts and sales tracking.</p>
-        <span class="tag">Analytics</span>
-        <span class="click-hint">👆 Click to view gallery</span>
-      </a>
-
-      <a href="#gallery-transaction" class="project-card">
-        <div class="icon">📊</div>
-        <h3>Daily Transaction Monitoring</h3>
-        <p>Tracking and recording daily transactions to ensure accuracy and smooth operations.</p>
-        <span class="tag">Monitoring</span>
-        <span class="click-hint">👆 Click to view gallery</span>
-      </a>
-    </div>
-
-    <!-- Gallery Section (directly below) -->
-    <h3 style="font-size:1.3rem; margin-bottom:1rem; color:var(--text-secondary);">📸 Project Screenshots</h3>
-
-    <div class="gallery-grid">
-      <!-- Web Creation -->
-      <div class="gallery-item" id="gallery-webcreation">
-        <div class="gallery-header">
-          <h4>🌐 Web Creation</h4>
-          <p>Functional websites for internal &amp; public use</p>
-        </div>
-        <div class="gallery-thumbs">
-          <img src="PROJECTS/webcreation/WEBSITE DIRECTORY.png" alt="Web Creation" onclick="openLightboxFromSrc(this)" />
+        <div class="slider-container" data-images='[
+          "PROJECTS/webcreation/WEBSITE DIRECTORY.png"
+        ]'>
+          <div class="slider-track"></div>
+          <button class="slider-btn prev">‹</button>
+          <button class="slider-btn next">›</button>
+          <div class="slider-dots"></div>
         </div>
       </div>
 
       <!-- Attendance App -->
-      <div class="gallery-item" id="gallery-attendance">
-        <div class="gallery-header">
-          <h4>📋 Attendance Web App</h4>
-          <p>Real-time time-tracking &amp; reporting system</p>
-        </div>
-        <div class="gallery-thumbs">
-          <img src="PROJECTS/attendanceapp/ADMIN NAVBAR.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/attendanceapp/ATTENDANCE LOG.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/attendanceapp/ENCODERS TASK MONITORING.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/attendanceapp/LEAVE REQUEST.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/attendanceapp/NAVBAR.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/attendanceapp/OVERTIME REQUEST.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/attendanceapp/SCHED REQUEST.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/attendanceapp/TARDINESS REQUEST.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/attendanceapp/TASK MONITORING.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
+      <div class="project-card">
+        <div class="icon">📋</div>
+        <h3>Attendance Web App</h3>
+        <p>Time-tracking and attendance system with real-time reporting and export features for employees.</p>
+        <span class="tag">Web App</span>
+        <div class="slider-container" data-images='[
+          "PROJECTS/attendanceapp/ADMIN NAVBAR.png",
+          "PROJECTS/attendanceapp/ATTENDANCE LOG.png",
+          "PROJECTS/attendanceapp/ENCODERS TASK MONITORING.png",
+          "PROJECTS/attendanceapp/LEAVE REQUEST.png",
+          "PROJECTS/attendanceapp/NAVBAR.png",
+          "PROJECTS/attendanceapp/OVERTIME REQUEST.png",
+          "PROJECTS/attendanceapp/SCHED REQUEST.png",
+          "PROJECTS/attendanceapp/TARDINESS REQUEST.png",
+          "PROJECTS/attendanceapp/TASK MONITORING.png"
+        ]'>
+          <div class="slider-track"></div>
+          <button class="slider-btn prev">‹</button>
+          <button class="slider-btn next">›</button>
+          <div class="slider-dots"></div>
         </div>
       </div>
 
       <!-- UAT Testing -->
-      <div class="gallery-item" id="gallery-uat">
-        <div class="gallery-header">
-          <h4>🧪 UAT Web App Tester</h4>
-          <p>QA testing in live &amp; UAT environments</p>
-        </div>
-        <div class="gallery-thumbs">
-          <img src="PROJECTS/uatwebapptester/ADMIN DASHBOARD.png" alt="UAT Testing" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/uatwebapptester/ADMIN SETTINGS.png" alt="UAT Testing" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/uatwebapptester/EMPLOYEE DASHBOARD.png" alt="UAT Testing" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/uatwebapptester/HRIS SIDEBAR.png" alt="UAT Testing" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/uatwebapptester/STORE MGMT SIDEBAR.png" alt="UAT Testing" onclick="openLightboxFromSrc(this)" />
+      <div class="project-card">
+        <div class="icon">🧪</div>
+        <h3>UAT Web App Tester</h3>
+        <p>Testing systems in live and UAT environments to ensure functionality and quality before deployment.</p>
+        <span class="tag">QA</span>
+        <div class="slider-container" data-images='[
+          "PROJECTS/uatwebapptester/ADMIN DASHBOARD.png",
+          "PROJECTS/uatwebapptester/ADMIN SETTINGS.png",
+          "PROJECTS/uatwebapptester/EMPLOYEE DASHBOARD.png",
+          "PROJECTS/uatwebapptester/HRIS SIDEBAR.png",
+          "PROJECTS/uatwebapptester/STORE MGMT SIDEBAR.png"
+        ]'>
+          <div class="slider-track"></div>
+          <button class="slider-btn prev">‹</button>
+          <button class="slider-btn next">›</button>
+          <div class="slider-dots"></div>
         </div>
       </div>
 
       <!-- Social Dashboard -->
-      <div class="gallery-item" id="gallery-social">
-        <div class="gallery-header">
-          <h4>📱 Social Media Dashboard</h4>
-          <p>Cross-platform analytics &amp; sentiment tracking</p>
-        </div>
-        <div class="gallery-thumbs">
-          <img src="PROJECTS/socialmediadashboard/SOCMED DASHBOARD SUMMARY.png" alt="Social Dashboard" onclick="openLightboxFromSrc(this)" />
+      <div class="project-card">
+        <div class="icon">📱</div>
+        <h3>Social Media Dashboard</h3>
+        <p>Unified analytics dashboard for cross-platform campaign performance and sentiment tracking.</p>
+        <span class="tag">Data Viz</span>
+        <div class="slider-container" data-images='[
+          "PROJECTS/socialmediadashboard/SOCMED DASHBOARD SUMMARY.png"
+        ]'>
+          <div class="slider-track"></div>
+          <button class="slider-btn prev">‹</button>
+          <button class="slider-btn next">›</button>
+          <div class="slider-dots"></div>
         </div>
       </div>
 
       <!-- Sales Dashboard -->
-      <div class="gallery-item" id="gallery-sales">
-        <div class="gallery-header">
-          <h4>📦 Sales &amp; Inventory Dashboard</h4>
-          <p>Predictive restocking &amp; sales analytics</p>
-        </div>
-        <div class="gallery-thumbs">
-          <img src="PROJECTS/salesandinventory/SALES MONITORING SAMPLE PER WEEK PER MONTH.png" alt="Sales Dashboard" onclick="openLightboxFromSrc(this)" />
+      <div class="project-card">
+        <div class="icon">📦</div>
+        <h3>Sales &amp; Inventory Dashboard</h3>
+        <p>Interactive inventory management dashboard with predictive restocking alerts and sales tracking.</p>
+        <span class="tag">Analytics</span>
+        <div class="slider-container" data-images='[
+          "PROJECTS/salesandinventory/SALES MONITORING SAMPLE PER WEEK PER MONTH.png"
+        ]'>
+          <div class="slider-track"></div>
+          <button class="slider-btn prev">‹</button>
+          <button class="slider-btn next">›</button>
+          <div class="slider-dots"></div>
         </div>
       </div>
 
       <!-- Transaction Monitoring -->
-      <div class="gallery-item" id="gallery-transaction">
-        <div class="gallery-header">
-          <h4>📊 Daily Transaction Monitoring</h4>
-          <p>Tracking daily transactions for accuracy</p>
-        </div>
-        <div class="gallery-thumbs">
-          <img src="PROJECTS/dailytransactionmonitoring/DAILY TRANSACTION MONITORING.png" alt="Transaction Monitoring" onclick="openLightboxFromSrc(this)" />
+      <div class="project-card">
+        <div class="icon">📊</div>
+        <h3>Daily Transaction Monitoring</h3>
+        <p>Tracking and recording daily transactions to ensure accuracy and smooth operations.</p>
+        <span class="tag">Monitoring</span>
+        <div class="slider-container" data-images='[
+          "PROJECTS/dailytransactionmonitoring/DAILY TRANSACTION MONITORING.png"
+        ]'>
+          <div class="slider-track"></div>
+          <button class="slider-btn prev">‹</button>
+          <button class="slider-btn next">›</button>
+          <div class="slider-dots"></div>
         </div>
       </div>
     </div>
@@ -885,13 +784,6 @@
 
 </div>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <img id="lightboxImg" src="" alt="Project preview" />
-  <div class="lightbox-caption" id="lightboxCaption"></div>
-</div>
-
 <script>
   (function() {
     // Dark mode
@@ -923,34 +815,57 @@
     reveals.forEach(el => observer.observe(el));
   })();
 
-  // LIGHTBOX
-  function openLightboxFromSrc(imgElement) {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    const lightboxCaption = document.getElementById('lightboxCaption');
+  // ===== SLIDER =====
+  document.querySelectorAll('.slider-container').forEach(container => {
+    const images = JSON.parse(container.dataset.images);
+    const track = container.querySelector('.slider-track');
+    const dots = container.querySelector('.slider-dots');
+    const prevBtn = container.querySelector('.prev');
+    const nextBtn = container.querySelector('.next');
 
-    lightboxImg.src = imgElement.src;
-    lightboxImg.alt = imgElement.alt;
+    let currentIndex = 0;
 
-    const parentItem = imgElement.closest('.gallery-item');
-    const header = parentItem?.querySelector('.gallery-header h4');
-    lightboxCaption.textContent = header ? header.textContent : '';
+    // Build images
+    images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.loading = 'lazy';
+      track.appendChild(img);
+    });
 
-    lightbox.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
+    // Build dots
+    images.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.classList.toggle('active', i === 0);
+      dot.addEventListener('click', () => goTo(i));
+      dots.appendChild(dot);
+    });
 
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
-    document.body.style.overflow = '';
-  }
+    function goTo(index) {
+      if (index < 0) index = images.length - 1;
+      if (index >= images.length) index = 0;
+      currentIndex = index;
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.querySelectorAll('span').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIndex);
+      });
+    }
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeLightbox();
-  });
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goTo(currentIndex - 1);
+    });
 
-  document.getElementById('lightbox').addEventListener('click', function(e) {
-    if (e.target === this) closeLightbox();
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goTo(currentIndex + 1);
+    });
+
+    // Hide arrows if only 1 image
+    if (images.length <= 1) {
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+    }
   });
 </script>
 
