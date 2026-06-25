@@ -194,12 +194,6 @@
       box-shadow: var(--shadow);
     }
 
-    .hero-image {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
     .hero-image img {
       width: 100%;
       max-width: 340px;
@@ -267,7 +261,7 @@
     /* WORK GRID */
     .grid-3 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
     }
 
@@ -278,6 +272,8 @@
       border-radius: var(--radius);
       transition: 0.25s;
       box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
     }
 
     .card:hover {
@@ -299,6 +295,7 @@
     .card p {
       font-size: 0.95rem;
       color: var(--text-secondary);
+      flex: 1;
     }
 
     .card .tag {
@@ -311,6 +308,31 @@
       color: var(--muted);
       margin-top: 0.6rem;
       letter-spacing: 0.3px;
+      align-self: flex-start;
+    }
+
+    .card .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 1rem;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: 0.2s;
+      align-self: flex-start;
+    }
+
+    .card .project-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
     }
 
     /* CONTACT */
@@ -457,6 +479,11 @@
       .social-links {
         width: 100%;
       }
+
+      .card .project-link {
+        align-self: stretch;
+        justify-content: center;
+      }
     }
   </style>
 </head>
@@ -489,8 +516,8 @@
       </div>
     </div>
     <div class="hero-image">
-      <!-- Replace src with your actual photo URL -->
-      <img src="https://drive.google.com/file/d/1tNt3bu0I95KA0VXKpenvNYRAqbzc2oeM/view?usp=drive_link" alt="Xinia Campang" />
+      <!-- Replace with your actual photo URL -->
+      <img src="https://i.pravatar.cc/400?img=32" alt="Xinia Campang" />
     </div>
   </section>
 
@@ -553,28 +580,70 @@
     </div>
   </section>
 
-  <!-- PROJECTS -->
+  <!-- PROJECTS with Google Drive Links -->
   <section id="work" class="section reveal">
     <h2 class="section-title">Featured projects</h2>
-    <p class="section-sub">Real-world solutions that combine data, design, and operational thinking.</p>
+    <p class="section-sub">Real-world solutions that combine data, design, and operational thinking. Click "View Project" to preview files on Google Drive.</p>
     <div class="grid-3">
       <div class="card">
         <div class="icon">📱</div>
         <h3>Social Media Dashboard</h3>
-        <p>Unified analytics dashboard for cross-platform campaign performance and sentiment.</p>
+        <p>Unified analytics dashboard for cross-platform campaign performance and sentiment tracking.</p>
         <span class="tag">Data Viz</span>
+        <!-- REPLACE the href with your actual Google Drive folder/file link -->
+        <a href="https://drive.google.com/file/d/1_Vojge25GQxagPjFhOLAmsoyCRysEha5/view?usp=drive_link">
+          📂 View Project
+        </a>
       </div>
+
       <div class="card">
         <div class="icon">📋</div>
         <h3>Attendance Web App</h3>
-        <p>Time-tracking and attendance system with real-time reporting and export features.</p>
+        <p>Time-tracking and attendance system with real-time reporting and export features for employees.</p>
         <span class="tag">Web App</span>
+        <a href="https://drive.google.com/drive/folders/1z72MtZn6yXbVBJ0sjC1YVi61WonzAHwb?usp=sharing">
+          📂 View Project
+        </a>
       </div>
+
       <div class="card">
         <div class="icon">📦</div>
         <h3>Sales &amp; Inventory Dashboard</h3>
-        <p>Interactive inventory management dashboard with predictive restocking alerts.</p>
+        <p>Interactive inventory management dashboard with predictive restocking alerts and sales tracking.</p>
         <span class="tag">Analytics</span>
+        <a href="https://drive.google.com/drive/folders/1Wja_D6D--jemjp-CZ4P3FuaJIPEcO0-B?usp=sharing">
+          📂 View Project
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="icon">🌐</div>
+        <h3>Website Creation</h3>
+        <p>Simple functional websites built for information sharing, internal use, or public updates.</p>
+        <span class="tag">Web Dev</span>
+        <a href="https://drive.google.com/drive/folders/YOUR_FOLDER_ID" target="_blank" class="project-link">
+          📂 View Project
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="icon">📊</div>
+        <h3>Daily Transaction Monitoring</h3>
+        <p>Tracking and recording daily transactions to ensure accuracy and smooth operations.</p>
+        <span class="tag">Monitoring</span>
+        <a href="https://drive.google.com/drive/folders/YOUR_FOLDER_ID" target="_blank" class="project-link">
+          📂 View Project
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="icon">🧪</div>
+        <h3>UAT Web App Tester</h3>
+        <p>Testing systems in live and UAT environments to ensure functionality and quality before deployment.</p>
+        <span class="tag">QA</span>
+        <a href="https://drive.google.com/drive/folders/1Wja_D6D--jemjp-CZ4P3FuaJIPEcO0-B?usp=sharing">
+          📂 View Project
+        </a>
       </div>
     </div>
   </section>
