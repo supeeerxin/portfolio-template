@@ -260,14 +260,14 @@
       border-color: var(--accent);
     }
 
-    /* WORK GRID */
-    .grid-3 {
+    /* PROJECT CARDS - UNIFIED */
+    .project-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
     }
 
-    .card {
+    .project-card {
       background: var(--surface);
       border: 1px solid var(--border);
       padding: 1.8rem;
@@ -276,31 +276,35 @@
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
     }
 
-    .card:hover {
+    .project-card:hover {
       transform: translateY(-6px);
       border-color: var(--accent);
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
     }
 
-    .card .icon {
+    .project-card .icon {
       font-size: 2rem;
       margin-bottom: 0.5rem;
     }
 
-    .card h3 {
+    .project-card h3 {
       font-size: 1.1rem;
       margin-bottom: 0.3rem;
+      color: var(--text);
     }
 
-    .card p {
+    .project-card p {
       font-size: 0.95rem;
       color: var(--text-secondary);
       flex: 1;
     }
 
-    .card .tag {
+    .project-card .tag {
       display: inline-block;
       background: var(--border);
       padding: 0.15rem 0.8rem;
@@ -313,31 +317,17 @@
       align-self: flex-start;
     }
 
-    .card .project-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+    .project-card .click-hint {
       margin-top: 1rem;
-      padding: 0.4rem 1.2rem;
-      border-radius: 40px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: 0.2s;
-      align-self: flex-start;
-    }
-
-    .card .project-link:hover {
-      border-color: var(--accent);
+      font-size: 0.8rem;
       color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
 
-    /* GALLERY SECTION - UPDATED for multiple images */
+    /* GALLERY - THUMBNAILS ONLY */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -396,7 +386,7 @@
       transform: scale(1.05);
     }
 
-    .gallery-item .view-all-btn {
+    .gallery-item .click-to-view {
       display: block;
       text-align: center;
       padding: 0.6rem;
@@ -404,16 +394,15 @@
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 30px;
-      color: var(--text-secondary);
+      color: var(--accent);
       text-decoration: none;
       font-size: 0.85rem;
       font-weight: 500;
       transition: 0.2s;
     }
 
-    .gallery-item .view-all-btn:hover {
+    .gallery-item .click-to-view:hover {
       border-color: var(--accent);
-      color: var(--accent);
       background: var(--surface);
     }
 
@@ -656,7 +645,7 @@
   <header class="header">
     <div class="logo">Xinia C.</div>
     <div class="nav-links">
-      <a href="#work">Work</a>
+      <a href="#projects">Projects</a>
       <a href="#gallery">Gallery</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
@@ -701,38 +690,38 @@
   <section id="skills" class="section reveal">
     <h2 class="section-title">Core competencies</h2>
     <p class="section-sub">Every project benefits from a blend of technical depth and operational clarity.</p>
-    <div class="grid-3">
-      <div class="card">
+    <div class="project-grid">
+      <div class="project-card" onclick="location.href='#gallery'">
         <div class="icon">📊</div>
         <h3>Data Management &amp; Analytics</h3>
         <p>From raw data to dashboards that drive decisions — I turn numbers into narratives.</p>
         <span class="tag">Data</span>
       </div>
-      <div class="card">
+      <div class="project-card" onclick="location.href='#gallery'">
         <div class="icon">🖥️</div>
         <h3>IT Operations &amp; Support</h3>
         <p>Reliable infrastructure, troubleshooting, and process optimization for smooth daily operations.</p>
         <span class="tag">IT</span>
       </div>
-      <div class="card">
+      <div class="project-card" onclick="location.href='#gallery'">
         <div class="icon">🔐</div>
         <h3>Privacy &amp; Compliance</h3>
         <p>Data protection frameworks, GDPR/DPA alignment, and privacy-by-design implementation.</p>
         <span class="tag">Privacy</span>
       </div>
-      <div class="card">
+      <div class="project-card" onclick="location.href='#gallery'">
         <div class="icon">📄</div>
         <h3>SOP &amp; Documentation</h3>
         <p>Clear, actionable standard operating procedures that teams actually use and follow.</p>
         <span class="tag">Process</span>
       </div>
-      <div class="card">
+      <div class="project-card" onclick="location.href='#gallery'">
         <div class="icon">⌨️</div>
         <h3>Administrative &amp; Encoding</h3>
         <p>Meticulous data entry, system administration, and back-office efficiency.</p>
         <span class="tag">Admin</span>
       </div>
-      <div class="card">
+      <div class="project-card" onclick="location.href='#gallery'">
         <div class="icon">📢</div>
         <h3>Digital Communication</h3>
         <p>Internal and external communication strategies that align with technical goals.</p>
@@ -741,152 +730,149 @@
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section id="work" class="section reveal">
-    <h2 class="section-title">Featured projects</h2>
-    <p class="section-sub">Click "View Project" to see detailed pages with screenshots and documentation.</p>
-    <div class="grid-3">
-      <div class="card">
+  <!-- FEATURED PROJECTS (clickable cards) -->
+  <section id="projects" class="section reveal">
+    <h2 class="section-title">Featured Projects</h2>
+    <p class="section-sub">Click any project card to view its gallery and screenshots.</p>
+    <div class="project-grid">
+      <a href="#gallery-webcreation" class="project-card">
         <div class="icon">🌐</div>
         <h3>Web Creation</h3>
         <p>Simple functional websites built for information sharing, internal use, or public updates.</p>
         <span class="tag">Web Dev</span>
-        <a href="projects/web-creation/" class="project-link">🔗 View Project →</a>
-      </div>
+        <span class="click-hint">👆 Click to view</span>
+      </a>
 
-      <div class="card">
+      <a href="#gallery-attendance" class="project-card">
         <div class="icon">📋</div>
         <h3>Attendance Web App</h3>
         <p>Time-tracking and attendance system with real-time reporting and export features for employees.</p>
         <span class="tag">Web App</span>
-        <a href="projects/attendance-app/" class="project-link">🔗 View Project →</a>
-      </div>
+        <span class="click-hint">👆 Click to view</span>
+      </a>
 
-      <div class="card">
+      <a href="#gallery-uat" class="project-card">
         <div class="icon">🧪</div>
         <h3>UAT Web App Tester</h3>
         <p>Testing systems in live and UAT environments to ensure functionality and quality before deployment.</p>
         <span class="tag">QA</span>
-        <a href="projects/uat-testing/" class="project-link">🔗 View Project →</a>
-      </div>
+        <span class="click-hint">👆 Click to view</span>
+      </a>
 
-      <div class="card">
+      <a href="#gallery-social" class="project-card">
         <div class="icon">📱</div>
         <h3>Social Media Dashboard</h3>
         <p>Unified analytics dashboard for cross-platform campaign performance and sentiment tracking.</p>
         <span class="tag">Data Viz</span>
-        <a href="projects/social-dashboard/" class="project-link">🔗 View Project →</a>
-      </div>
+        <span class="click-hint">👆 Click to view</span>
+      </a>
 
-      <div class="card">
+      <a href="#gallery-sales" class="project-card">
         <div class="icon">📦</div>
         <h3>Sales &amp; Inventory Dashboard</h3>
         <p>Interactive inventory management dashboard with predictive restocking alerts and sales tracking.</p>
         <span class="tag">Analytics</span>
-        <a href="projects/sales-dashboard/" class="project-link">🔗 View Project →</a>
-      </div>
+        <span class="click-hint">👆 Click to view</span>
+      </a>
 
-      <div class="card">
+      <a href="#gallery-transaction" class="project-card">
         <div class="icon">📊</div>
         <h3>Daily Transaction Monitoring</h3>
         <p>Tracking and recording daily transactions to ensure accuracy and smooth operations.</p>
         <span class="tag">Monitoring</span>
-        <a href="projects/transaction-monitoring/" class="project-link">🔗 View Project →</a>
-      </div>
+        <span class="click-hint">👆 Click to view</span>
+      </a>
     </div>
   </section>
 
-  <!-- GALLERY - UPDATED with multiple images per project -->
+  <!-- GALLERY SECTION -->
   <section id="gallery" class="section reveal">
     <h2 class="section-title">Project Gallery</h2>
-    <p class="section-sub">Click any thumbnail to view it larger. Each project has multiple screenshots.</p>
+    <p class="section-sub">Click any thumbnail to view it larger.</p>
 
     <div class="gallery-grid">
-      <!-- Web Creation - 5 screenshots -->
-      <div class="gallery-item">
+      <!-- Web Creation -->
+      <div class="gallery-item" id="gallery-webcreation">
         <div class="gallery-header">
           <h4>🌐 Web Creation</h4>
           <p>Functional websites for internal &amp; public use</p>
         </div>
         <div class="gallery-thumbs">
-          <img src="PROJECTS/webcreation/WEBSITE DIRECTORY.png" alt="Web Creation 1" onclick="openLightboxFromSrc(this)" />
-        
+          <img src="PROJECTS/webcreation/WEBSITE DIRECTORY.png" alt="Web Creation" onclick="openLightboxFromSrc(this)" />
         </div>
-        <a href="projects/web-creation/" class="view-all-btn">📂 View Full Project →</a>
+        <a href="#projects" class="click-to-view">⬅ Back to Projects</a>
       </div>
 
-      <!-- Attendance App - 5 screenshots -->
-      <div class="gallery-item">
+      <!-- Attendance App -->
+      <div class="gallery-item" id="gallery-attendance">
         <div class="gallery-header">
           <h4>📋 Attendance Web App</h4>
           <p>Real-time time-tracking &amp; reporting system</p>
         </div>
         <div class="gallery-thumbs">
-          <img src="PROJECTS/attendanceapp/ADMIN NAVBAR.png" alt="Attendance App 1" onclick="openLightboxFromSrc(this)" /
-          <img src="PROJECTS/attendanceapp/ATTENDANCE LOG.png" alt="Attendance App 1" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/attendanceapp/ENCODERS TASK MONITORING.png" alt="Attendance App 1" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/attendanceapp/LEAVE REQUEST.png" alt="Attendance App 1" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/attendanceapp/NAVBAR.png" alt="Attendance App 1" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/attendanceapp/OVERTIME REQUEST.png" alt="Attendance App 1" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/attendanceapp/SCHED REQUEST.png" alt="Attendance App 1" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/attendanceapp/TARDINESS REQUEST.png" alt="Attendance App 1" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/attendanceapp/TASK MONITORING.png" alt="Attendance App 1" onclick="openLightboxFromSrc(this)" />
+          <img src="PROJECTS/attendanceapp/ADMIN NAVBAR.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
+          <img src="PROJECTS/attendanceapp/ATTENDANCE LOG.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
+          <img src="PROJECTS/attendanceapp/ENCODERS TASK MONITORING.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
+          <img src="PROJECTS/attendanceapp/LEAVE REQUEST.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
+          <img src="PROJECTS/attendanceapp/NAVBAR.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
+          <img src="PROJECTS/attendanceapp/OVERTIME REQUEST.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
+          <img src="PROJECTS/attendanceapp/SCHED REQUEST.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
+          <img src="PROJECTS/attendanceapp/TARDINESS REQUEST.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
+          <img src="PROJECTS/attendanceapp/TASK MONITORING.png" alt="Attendance App" onclick="openLightboxFromSrc(this)" />
         </div>
-        <a href="projects/attendance-app/" class="view-all-btn">📂 View Full Project →</a>
+        <a href="#projects" class="click-to-view">⬅ Back to Projects</a>
       </div>
 
-      <!-- UAT Testing - 5 screenshots -->
-      <div class="gallery-item">
+      <!-- UAT Testing -->
+      <div class="gallery-item" id="gallery-uat">
         <div class="gallery-header">
           <h4>🧪 UAT Web App Tester</h4>
           <p>QA testing in live &amp; UAT environments</p>
         </div>
         <div class="gallery-thumbs">
-          <img src="PROJECTS/uatwebapptester/ADMIN DASHBOARD.png" alt="UAT Testing 1" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/uatwebapptester/ADMIN SETTINGS.png" alt="UAT Testing 2" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/uatwebapptester/EMPLOYEE DASHBOARD.png" alt="UAT Testing 3" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/uatwebapptester/HRIS SIDEBAR.png" alt="UAT Testing 4" onclick="openLightboxFromSrc(this)" />
-          <img src="PROJECTS/uatwebapptester/STORE MGMT SIDEBAR.png" alt="UAT Testing 5" onclick="openLightboxFromSrc(this)" />
+          <img src="PROJECTS/uatwebapptester/ADMIN DASHBOARD.png" alt="UAT Testing" onclick="openLightboxFromSrc(this)" />
+          <img src="PROJECTS/uatwebapptester/ADMIN SETTINGS.png" alt="UAT Testing" onclick="openLightboxFromSrc(this)" />
+          <img src="PROJECTS/uatwebapptester/EMPLOYEE DASHBOARD.png" alt="UAT Testing" onclick="openLightboxFromSrc(this)" />
+          <img src="PROJECTS/uatwebapptester/HRIS SIDEBAR.png" alt="UAT Testing" onclick="openLightboxFromSrc(this)" />
+          <img src="PROJECTS/uatwebapptester/STORE MGMT SIDEBAR.png" alt="UAT Testing" onclick="openLightboxFromSrc(this)" />
         </div>
-        <a href="projects/uat-testing/" class="view-all-btn">📂 View Full Project →</a>
+        <a href="#projects" class="click-to-view">⬅ Back to Projects</a>
       </div>
 
-      <!-- Social Dashboard - 5 screenshots -->
-      <div class="gallery-item">
+      <!-- Social Dashboard -->
+      <div class="gallery-item" id="gallery-social">
         <div class="gallery-header">
           <h4>📱 Social Media Dashboard</h4>
           <p>Cross-platform analytics &amp; sentiment tracking</p>
         </div>
         <div class="gallery-thumbs">
-          <img src="PROJECTS/socialmediadashboard/SOCMED DASHBOARD SUMMARY.png" alt="Social Dashboard 1" onclick="openLightboxFromSrc(this)" />
+          <img src="PROJECTS/socialmediadashboard/SOCMED DASHBOARD SUMMARY.png" alt="Social Dashboard" onclick="openLightboxFromSrc(this)" />
         </div>
-        <a href="projects/social-dashboard/" class="view-all-btn">📂 View Full Project →</a>
+        <a href="#projects" class="click-to-view">⬅ Back to Projects</a>
       </div>
 
-      <!-- Sales Dashboard - 5 screenshots -->
-      <div class="gallery-item">
+      <!-- Sales Dashboard -->
+      <div class="gallery-item" id="gallery-sales">
         <div class="gallery-header">
           <h4>📦 Sales &amp; Inventory Dashboard</h4>
           <p>Predictive restocking &amp; sales analytics</p>
         </div>
         <div class="gallery-thumbs">
-          <img src="PROJECTS/salesandinventory/SALES MONITORING SAMPLE PER WEEK PER MONTH.png" alt="Sales Dashboard 1" onclick="openLightboxFromSrc(this)" />
-
+          <img src="PROJECTS/salesandinventory/SALES MONITORING SAMPLE PER WEEK PER MONTH.png" alt="Sales Dashboard" onclick="openLightboxFromSrc(this)" />
         </div>
-        <a href="projects/sales-dashboard/" class="view-all-btn">📂 View Full Project →</a>
+        <a href="#projects" class="click-to-view">⬅ Back to Projects</a>
       </div>
 
-      <!-- Transaction Monitoring - 5 screenshots -->
-      <div class="gallery-item">
+      <!-- Transaction Monitoring -->
+      <div class="gallery-item" id="gallery-transaction">
         <div class="gallery-header">
           <h4>📊 Daily Transaction Monitoring</h4>
           <p>Tracking daily transactions for accuracy</p>
         </div>
         <div class="gallery-thumbs">
-          <img src="PROJECTS/dailytransactionmonitoring/DAILY TRANSACTION MONITORING.png" alt="Transaction Monitoring 1" onclick="openLightboxFromSrc(this)" />
-        
+          <img src="PROJECTS/dailytransactionmonitoring/DAILY TRANSACTION MONITORING.png" alt="Transaction Monitoring" onclick="openLightboxFromSrc(this)" />
         </div>
-        <a href="projects/transaction-monitoring/" class="view-all-btn">📂 View Full Project →</a>
+        <a href="#projects" class="click-to-view">⬅ Back to Projects</a>
       </div>
     </div>
   </section>
@@ -965,7 +951,7 @@
     reveals.forEach(el => observer.observe(el));
   })();
 
-  // LIGHTBOX - handles both click methods
+  // LIGHTBOX
   function openLightboxFromSrc(imgElement) {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
@@ -974,7 +960,6 @@
     lightboxImg.src = imgElement.src;
     lightboxImg.alt = imgElement.alt;
 
-    // Try to get caption from parent project
     const parentItem = imgElement.closest('.gallery-item');
     const header = parentItem?.querySelector('.gallery-header h4');
     lightboxCaption.textContent = header ? header.textContent : '';
@@ -992,7 +977,6 @@
     if (e.key === 'Escape') closeLightbox();
   });
 
-  // Close lightbox when clicking outside the image
   document.getElementById('lightbox').addEventListener('click', function(e) {
     if (e.target === this) closeLightbox();
   });
