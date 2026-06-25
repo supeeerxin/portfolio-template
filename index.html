@@ -729,7 +729,7 @@
         <h3>Web Creation</h3>
         <p>Simple functional websites built for information sharing, internal use, or public updates.</p>
         <span class="tag">Web Dev</span>
-        <div class="slider-container" data-images='["WEBSITE DIRECTORY.png"]'>
+        <div class="slider-container" data-folder="PROJECTS/webcreation/" data-images='["WEBSITE DIRECTORY.png"]'>
           <div class="slider-track"></div>
           <button class="slider-btn prev">‹</button>
           <button class="slider-btn next">›</button>
@@ -744,7 +744,7 @@
         <h3>Attendance Web App</h3>
         <p>Time-tracking and attendance system with real-time reporting and export features for employees.</p>
         <span class="tag">Web App</span>
-        <div class="slider-container" data-images='[
+        <div class="slider-container" data-folder="PROJECTS/attendanceapp/" data-images='[
           "ADMIN NAVBAR.png",
           "ATTENDANCE LOG.png",
           "ENCODERS TASK MONITORING.png",
@@ -769,7 +769,7 @@
         <h3>UAT Web App Tester</h3>
         <p>Testing systems in live and UAT environments to ensure functionality and quality before deployment.</p>
         <span class="tag">QA</span>
-        <div class="slider-container" data-images='[
+        <div class="slider-container" data-folder="PROJECTS/uatwebapptester/" data-images='[
           "ADMIN DASHBOARD.png",
           "ADMIN SETTINGS.png",
           "EMPLOYEE DASHBOARD.png",
@@ -790,7 +790,7 @@
         <h3>Social Media Dashboard</h3>
         <p>Unified analytics dashboard for cross-platform campaign performance and sentiment tracking.</p>
         <span class="tag">Data Viz</span>
-        <div class="slider-container" data-images='["SOCMED DASHBOARD SUMMARY.png"]'>
+        <div class="slider-container" data-folder="PROJECTS/socialmediadashboard/" data-images='["SOCMED DASHBOARD SUMMARY.png"]'>
           <div class="slider-track"></div>
           <button class="slider-btn prev">‹</button>
           <button class="slider-btn next">›</button>
@@ -805,7 +805,7 @@
         <h3>Sales &amp; Inventory Dashboard</h3>
         <p>Interactive inventory management dashboard with predictive restocking alerts and sales tracking.</p>
         <span class="tag">Analytics</span>
-        <div class="slider-container" data-images='["SALES MONITORING SAMPLE PER WEEK PER MONTH.png"]'>
+        <div class="slider-container" data-folder="PROJECTS/salesandinventory/" data-images='["SALES MONITORING SAMPLE PER WEEK PER MONTH.png"]'>
           <div class="slider-track"></div>
           <button class="slider-btn prev">‹</button>
           <button class="slider-btn next">›</button>
@@ -820,7 +820,7 @@
         <h3>Daily Transaction Monitoring</h3>
         <p>Tracking and recording daily transactions to ensure accuracy and smooth operations.</p>
         <span class="tag">Monitoring</span>
-        <div class="slider-container" data-images='["DAILY TRANSACTION MONITORING.png"]'>
+        <div class="slider-container" data-folder="PROJECTS/dailytransactionmonitoring/" data-images='["DAILY TRANSACTION MONITORING.png"]'>
           <div class="slider-track"></div>
           <button class="slider-btn prev">‹</button>
           <button class="slider-btn next">›</button>
@@ -907,6 +907,7 @@
 
   // ===== SLIDER =====
   document.querySelectorAll('.slider-container').forEach(container => {
+    const folder = container.dataset.folder || '';
     const imageNames = JSON.parse(container.dataset.images);
     const track = container.querySelector('.slider-track');
     const dots = container.querySelector('.slider-dots');
@@ -914,31 +915,25 @@
     const nextBtn = container.querySelector('.next');
 
     let currentIndex = 0;
-    let loadedImages = [];
+    let fullPaths = [];
 
-    // Get the folder path from the container's parent project card
-    const projectCard = container.closest('.project-card');
-    let folderPath = '';
-
-    // Determine folder based on project title
-    const title = projectCard?.querySelector('h3')?.textContent || '';
-    if (title.includes('Web Creation')) folderPath = 'PROJECTS/webcreation/';
-    else if (title.includes('Attendance')) folderPath = 'PROJECTS/attendanceapp/';
-    else if (title.includes('UAT')) folderPath = 'PROJECTS/uatwebapptester/';
-    else if (title.includes('Social Media')) folderPath = 'PROJECTS/socialmediadashboard/';
-    else if (title.includes('Sales')) folderPath = 'PROJECTS/salesandinventory/';
-    else if (title.includes('Transaction')) folderPath = 'PROJECTS/dailytransactionmonitoring/';
-
-    // Build images with full paths
+    // Build full paths
     imageNames.forEach(name => {
+      let fullPath = folder + name;
+      // If folder is empty, use just the name
+      fullPaths.push(fullPath);
+    });
+
+    // Build images
+    fullPaths.forEach(path => {
       const img = document.createElement('img');
-      const fullPath = folderPath + name;
-      img.src = fullPath;
+      img.src = path;
       img.loading = 'lazy';
-      img.alt = name;
+      img.alt = path.split('/').pop();
       img.onerror = function() {
-        // If image fails, try without folder path (root directory)
-        this.src = name;
+        // Try without folder if it fails
+        const fallbackPath = path.split('/').pop();
+        this.src = fallbackPath;
         this.onerror = function() {
           // If still fails, show placeholder
           this.style.display = 'none';
@@ -952,7 +947,6 @@
         };
       };
       track.appendChild(img);
-      loadedImages.push(fullPath);
     });
 
     // Build dots
@@ -981,12 +975,20 @@
       nextBtn.style.display = 'none';
     }
 
-    // CLICK TO OPEN MODAL
+    // CLICK TO OPEN MODAL - pass the full paths
     container.addEventListener('click', () => {
-      // Get all image srcs from the track
+      // Get all image srcs from the track (including fallbacks)
       const imgs = track.querySelectorAll('img');
-      const srcs = Array.from(imgs).map(img => img.src);
-      openModal(srcs, container);
+      const srcs = Array.from(imgs)
+        .filter(img => img.style.display !== 'none')
+        .map(img => img.src);
+      
+      // If no images loaded, use the original paths
+      if (srcs.length === 0) {
+        openModal(fullPaths, container);
+      } else {
+        openModal(srcs, container);
+      }
     });
   });
 
@@ -1012,6 +1014,12 @@
       const img = document.createElement('img');
       img.src = src;
       img.loading = 'lazy';
+      img.onerror = function() {
+        // If modal image fails, show placeholder
+        this.alt = 'Image not found';
+        this.style.objectFit = 'contain';
+        this.style.padding = '2rem';
+      };
       modalTrack.appendChild(img);
     });
 
