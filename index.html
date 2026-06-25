@@ -23,6 +23,7 @@
       --border: #e5e7eb;
       --shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
       --radius: 16px;
+      --overlay: rgba(15, 23, 42, 0.85);
     }
 
     body.dark {
@@ -34,6 +35,7 @@
       --accent: #818cf8;
       --border: #1e293b;
       --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+      --overlay: rgba(0, 0, 0, 0.85);
     }
 
     body {
@@ -311,28 +313,119 @@
       align-self: flex-start;
     }
 
-    .card .project-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+    /* GALLERY SECTION */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
       margin-top: 1rem;
-      padding: 0.4rem 1.2rem;
-      border-radius: 40px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: 0.2s;
-      align-self: flex-start;
     }
 
-    .card .project-link:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-2px);
+    .gallery-item {
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: 0.3s;
       box-shadow: var(--shadow);
+      cursor: pointer;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.03);
+    }
+
+    .gallery-item .gallery-info {
+      padding: 1rem 1.2rem 1.2rem;
+    }
+
+    .gallery-item .gallery-info h4 {
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .gallery-item .gallery-info p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    /* LIGHTBOX MODAL */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--overlay);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 85vh;
+      border-radius: 12px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: 0.2s;
+      opacity: 0.7;
+    }
+
+    .lightbox-close:hover {
+      opacity: 1;
+      transform: rotate(90deg);
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      background: rgba(0,0,0,0.6);
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      text-align: center;
+      max-width: 80%;
     }
 
     /* CONTACT */
@@ -480,9 +573,23 @@
         width: 100%;
       }
 
-      .card .project-link {
-        align-self: stretch;
-        justify-content: center;
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      }
+
+      .gallery-item img {
+        height: 150px;
+      }
+
+      .lightbox img {
+        max-width: 95%;
+        max-height: 70vh;
+      }
+
+      .lightbox-close {
+        top: 1rem;
+        right: 1rem;
+        font-size: 2rem;
       }
     }
   </style>
@@ -496,6 +603,7 @@
     <div class="logo">Xinia C.</div>
     <div class="nav-links">
       <a href="#work">Work</a>
+      <a href="#gallery">Gallery</a>
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
       <button class="theme-toggle" id="themeToggle">
@@ -512,7 +620,7 @@
       <p>IT operations · data analysis · privacy &amp; compliance — I build systems that are secure, insightful, and human-centered.</p>
       <div class="hero-actions">
         <a href="#contact" class="btn">📬 Let's talk</a>
-        <a href="#work" class="btn btn-outline">View projects</a>
+        <a href="#gallery" class="btn btn-outline">View gallery</a>
       </div>
     </div>
     <div class="hero-image">
@@ -580,70 +688,63 @@
     </div>
   </section>
 
-  <!-- PROJECTS with Google Drive Links -->
-  <section id="work" class="section reveal">
-    <h2 class="section-title">Featured projects</h2>
-    <p class="section-sub">Real-world solutions that combine data, design, and operational thinking. Click "View Project" to preview files on Google Drive.</p>
-    <div class="grid-3">
-      <div class="card">
-        <div class="icon">📱</div>
-        <h3>Social Media Dashboard</h3>
-        <p>Unified analytics dashboard for cross-platform campaign performance and sentiment tracking.</p>
-        <span class="tag">Data Viz</span>
-        <!-- REPLACE the href with your actual Google Drive folder/file link -->
-        <a href="https://drive.google.com/file/d/1_Vojge25GQxagPjFhOLAmsoyCRysEha5/view?usp=drive_link">
-          📂 View Project
-        </a>
+  <!-- PROJECT GALLERY (from GitHub folder) -->
+  <section id="gallery" class="section reveal">
+    <h2 class="section-title">Project Gallery</h2>
+    <p class="section-sub">Here are some of the projects I worked on — click any image to view it larger.</p>
+
+    <div class="gallery-grid">
+      <!-- ============================================ -->
+      <!-- REPLACE src URLs with your GitHub image URLs -->
+      <!-- Format: https://raw.githubusercontent.com/USERNAME/REPO/main/folder/filename.jpg -->
+      <!-- ============================================ -->
+
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/projects/social-media-dashboard.jpg" alt="Social Media Dashboard" loading="lazy" />
+        <div class="gallery-info">
+          <h4>📱 Social Media Dashboard</h4>
+          <p>Cross-platform analytics &amp; sentiment tracking</p>
+        </div>
       </div>
 
-      <div class="card">
-        <div class="icon">📋</div>
-        <h3>Attendance Web App</h3>
-        <p>Time-tracking and attendance system with real-time reporting and export features for employees.</p>
-        <span class="tag">Web App</span>
-        <a href="https://drive.google.com/drive/folders/1z72MtZn6yXbVBJ0sjC1YVi61WonzAHwb?usp=sharing">
-          📂 View Project
-        </a>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/projects/attendance-web-app.jpg" alt="Attendance Web App" loading="lazy" />
+        <div class="gallery-info">
+          <h4>📋 Attendance Web App</h4>
+          <p>Real-time time-tracking &amp; reporting system</p>
+        </div>
       </div>
 
-      <div class="card">
-        <div class="icon">📦</div>
-        <h3>Sales &amp; Inventory Dashboard</h3>
-        <p>Interactive inventory management dashboard with predictive restocking alerts and sales tracking.</p>
-        <span class="tag">Analytics</span>
-        <a href="https://drive.google.com/drive/folders/1Wja_D6D--jemjp-CZ4P3FuaJIPEcO0-B?usp=sharing">
-          📂 View Project
-        </a>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/projects/sales-dashboard.jpg" alt="Sales & Inventory Dashboard" loading="lazy" />
+        <div class="gallery-info">
+          <h4>📦 Sales &amp; Inventory Dashboard</h4>
+          <p>Predictive restocking &amp; sales analytics</p>
+        </div>
       </div>
 
-      <div class="card">
-        <div class="icon">🌐</div>
-        <h3>Website Creation</h3>
-        <p>Simple functional websites built for information sharing, internal use, or public updates.</p>
-        <span class="tag">Web Dev</span>
-        <a href="https://drive.google.com/drive/folders/YOUR_FOLDER_ID" target="_blank" class="project-link">
-          📂 View Project
-        </a>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/projects/website-creation.jpg" alt="Website Creation" loading="lazy" />
+        <div class="gallery-info">
+          <h4>🌐 Website Creation</h4>
+          <p>Functional sites for internal &amp; public use</p>
+        </div>
       </div>
 
-      <div class="card">
-        <div class="icon">📊</div>
-        <h3>Daily Transaction Monitoring</h3>
-        <p>Tracking and recording daily transactions to ensure accuracy and smooth operations.</p>
-        <span class="tag">Monitoring</span>
-        <a href="https://drive.google.com/drive/folders/YOUR_FOLDER_ID" target="_blank" class="project-link">
-          📂 View Project
-        </a>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/projects/daily-transaction.jpg" alt="Daily Transaction Monitoring" loading="lazy" />
+        <div class="gallery-info">
+          <h4>📊 Daily Transaction Monitoring</h4>
+          <p>Tracking daily transactions for accuracy</p>
+        </div>
       </div>
 
-      <div class="card">
-        <div class="icon">🧪</div>
-        <h3>UAT Web App Tester</h3>
-        <p>Testing systems in live and UAT environments to ensure functionality and quality before deployment.</p>
-        <span class="tag">QA</span>
-        <a href="https://drive.google.com/drive/folders/1Wja_D6D--jemjp-CZ4P3FuaJIPEcO0-B?usp=sharing">
-          📂 View Project
-        </a>
+      <div class="gallery-item" onclick="openLightbox(this)">
+        <img src="https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/projects/uat-testing.jpg" alt="UAT Web App Testing" loading="lazy" />
+        <div class="gallery-info">
+          <h4>🧪 UAT Web App Tester</h4>
+          <p>QA testing in live &amp; UAT environments</p>
+        </div>
       </div>
     </div>
   </section>
@@ -684,6 +785,13 @@
 
 </div>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightboxImg" src="" alt="Project preview" />
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
 <script>
   (function() {
     // Dark mode
@@ -714,6 +822,31 @@
 
     reveals.forEach(el => observer.observe(el));
   })();
+
+  // LIGHTBOX
+  function openLightbox(element) {
+    const img = element.querySelector('img');
+    const caption = element.querySelector('.gallery-info h4')?.textContent || '';
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    lightboxCaption.textContent = caption;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Close lightbox with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
 </script>
 
 </body>
