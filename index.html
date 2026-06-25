@@ -337,11 +337,11 @@
       box-shadow: var(--shadow);
     }
 
-    /* GALLERY SECTION */
+    /* GALLERY SECTION - UPDATED for multiple images */
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
       margin-top: 1rem;
     }
 
@@ -352,7 +352,6 @@
       border: 1px solid var(--border);
       transition: 0.3s;
       box-shadow: var(--shadow);
-      cursor: pointer;
     }
 
     .gallery-item:hover {
@@ -361,30 +360,61 @@
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
     }
 
-    .gallery-item img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      display: block;
-      transition: 0.3s;
+    .gallery-item .gallery-header {
+      padding: 1rem 1.2rem 0.5rem;
     }
 
-    .gallery-item:hover img {
-      transform: scale(1.03);
-    }
-
-    .gallery-item .gallery-info {
-      padding: 1rem 1.2rem 1.2rem;
-    }
-
-    .gallery-item .gallery-info h4 {
-      font-size: 1rem;
+    .gallery-item .gallery-header h4 {
+      font-size: 1.1rem;
       margin-bottom: 0.2rem;
     }
 
-    .gallery-item .gallery-info p {
+    .gallery-item .gallery-header p {
       font-size: 0.85rem;
       color: var(--text-secondary);
+    }
+
+    .gallery-item .gallery-thumbs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 6px;
+      padding: 0.5rem 1.2rem 1.2rem;
+    }
+
+    .gallery-item .gallery-thumbs img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: 0.2s;
+    }
+
+    .gallery-item .gallery-thumbs img:hover {
+      border-color: var(--accent);
+      transform: scale(1.05);
+    }
+
+    .gallery-item .view-all-btn {
+      display: block;
+      text-align: center;
+      padding: 0.6rem;
+      margin: 0 1.2rem 1.2rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .gallery-item .view-all-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--surface);
     }
 
     /* LIGHTBOX MODAL */
@@ -598,11 +628,11 @@
       }
 
       .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        grid-template-columns: 1fr;
       }
 
-      .gallery-item img {
-        height: 150px;
+      .gallery-item .gallery-thumbs {
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
       }
 
       .lightbox img {
@@ -648,7 +678,6 @@
       </div>
     </div>
     <div class="hero-image">
-      <!-- Using superxin.jpg from your GitHub repo -->
       <img src="superxin.jpg" alt="Xinia Campang" />
     </div>
   </section>
@@ -717,7 +746,6 @@
     <h2 class="section-title">Featured projects</h2>
     <p class="section-sub">Click "View Project" to see detailed pages with screenshots and documentation.</p>
     <div class="grid-3">
-      <!-- Web Creation -->
       <div class="card">
         <div class="icon">🌐</div>
         <h3>Web Creation</h3>
@@ -726,7 +754,6 @@
         <a href="projects/web-creation/" class="project-link">🔗 View Project →</a>
       </div>
 
-      <!-- Attendance Web App -->
       <div class="card">
         <div class="icon">📋</div>
         <h3>Attendance Web App</h3>
@@ -735,7 +762,6 @@
         <a href="projects/attendance-app/" class="project-link">🔗 View Project →</a>
       </div>
 
-      <!-- UAT Testing -->
       <div class="card">
         <div class="icon">🧪</div>
         <h3>UAT Web App Tester</h3>
@@ -744,7 +770,6 @@
         <a href="projects/uat-testing/" class="project-link">🔗 View Project →</a>
       </div>
 
-      <!-- Social Media Dashboard -->
       <div class="card">
         <div class="icon">📱</div>
         <h3>Social Media Dashboard</h3>
@@ -753,7 +778,6 @@
         <a href="projects/social-dashboard/" class="project-link">🔗 View Project →</a>
       </div>
 
-      <!-- Sales & Inventory Dashboard -->
       <div class="card">
         <div class="icon">📦</div>
         <h3>Sales &amp; Inventory Dashboard</h3>
@@ -762,7 +786,6 @@
         <a href="projects/sales-dashboard/" class="project-link">🔗 View Project →</a>
       </div>
 
-      <!-- Daily Transaction Monitoring -->
       <div class="card">
         <div class="icon">📊</div>
         <h3>Daily Transaction Monitoring</h3>
@@ -773,57 +796,106 @@
     </div>
   </section>
 
-  <!-- GALLERY -->
+  <!-- GALLERY - UPDATED with multiple images per project -->
   <section id="gallery" class="section reveal">
     <h2 class="section-title">Project Gallery</h2>
-    <p class="section-sub">Here are some of the projects I worked on — click any image to view it larger.</p>
+    <p class="section-sub">Click any thumbnail to view it larger. Each project has multiple screenshots.</p>
+
     <div class="gallery-grid">
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="projects/web-creation/screenshot1.jpg" alt="Web Creation" loading="lazy" />
-        <div class="gallery-info">
+      <!-- Web Creation - 5 screenshots -->
+      <div class="gallery-item">
+        <div class="gallery-header">
           <h4>🌐 Web Creation</h4>
           <p>Functional websites for internal &amp; public use</p>
         </div>
+        <div class="gallery-thumbs">
+          <img src="projects/web-creation/1.jpg" alt="Web Creation 1" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/web-creation/2.jpg" alt="Web Creation 2" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/web-creation/3.jpg" alt="Web Creation 3" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/web-creation/4.jpg" alt="Web Creation 4" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/web-creation/5.jpg" alt="Web Creation 5" onclick="openLightboxFromSrc(this)" />
+        </div>
+        <a href="projects/web-creation/" class="view-all-btn">📂 View Full Project →</a>
       </div>
 
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="projects/attendance-app/screenshot1.jpg" alt="Attendance Web App" loading="lazy" />
-        <div class="gallery-info">
+      <!-- Attendance App - 5 screenshots -->
+      <div class="gallery-item">
+        <div class="gallery-header">
           <h4>📋 Attendance Web App</h4>
           <p>Real-time time-tracking &amp; reporting system</p>
         </div>
+        <div class="gallery-thumbs">
+          <img src="projects/attendance-app/1.jpg" alt="Attendance App 1" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/attendance-app/2.jpg" alt="Attendance App 2" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/attendance-app/3.jpg" alt="Attendance App 3" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/attendance-app/4.jpg" alt="Attendance App 4" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/attendance-app/5.jpg" alt="Attendance App 5" onclick="openLightboxFromSrc(this)" />
+        </div>
+        <a href="projects/attendance-app/" class="view-all-btn">📂 View Full Project →</a>
       </div>
 
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="projects/uat-testing/screenshot1.jpg" alt="UAT Testing" loading="lazy" />
-        <div class="gallery-info">
+      <!-- UAT Testing - 5 screenshots -->
+      <div class="gallery-item">
+        <div class="gallery-header">
           <h4>🧪 UAT Web App Tester</h4>
           <p>QA testing in live &amp; UAT environments</p>
         </div>
+        <div class="gallery-thumbs">
+          <img src="projects/uat-testing/1.jpg" alt="UAT Testing 1" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/uat-testing/2.jpg" alt="UAT Testing 2" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/uat-testing/3.jpg" alt="UAT Testing 3" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/uat-testing/4.jpg" alt="UAT Testing 4" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/uat-testing/5.jpg" alt="UAT Testing 5" onclick="openLightboxFromSrc(this)" />
+        </div>
+        <a href="projects/uat-testing/" class="view-all-btn">📂 View Full Project →</a>
       </div>
 
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="projects/social-dashboard/screenshot1.jpg" alt="Social Media Dashboard" loading="lazy" />
-        <div class="gallery-info">
+      <!-- Social Dashboard - 5 screenshots -->
+      <div class="gallery-item">
+        <div class="gallery-header">
           <h4>📱 Social Media Dashboard</h4>
           <p>Cross-platform analytics &amp; sentiment tracking</p>
         </div>
+        <div class="gallery-thumbs">
+          <img src="projects/social-dashboard/1.jpg" alt="Social Dashboard 1" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/social-dashboard/2.jpg" alt="Social Dashboard 2" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/social-dashboard/3.jpg" alt="Social Dashboard 3" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/social-dashboard/4.jpg" alt="Social Dashboard 4" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/social-dashboard/5.jpg" alt="Social Dashboard 5" onclick="openLightboxFromSrc(this)" />
+        </div>
+        <a href="projects/social-dashboard/" class="view-all-btn">📂 View Full Project →</a>
       </div>
 
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="projects/sales-dashboard/screenshot1.jpg" alt="Sales Dashboard" loading="lazy" />
-        <div class="gallery-info">
+      <!-- Sales Dashboard - 5 screenshots -->
+      <div class="gallery-item">
+        <div class="gallery-header">
           <h4>📦 Sales &amp; Inventory Dashboard</h4>
           <p>Predictive restocking &amp; sales analytics</p>
         </div>
+        <div class="gallery-thumbs">
+          <img src="projects/sales-dashboard/1.jpg" alt="Sales Dashboard 1" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/sales-dashboard/2.jpg" alt="Sales Dashboard 2" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/sales-dashboard/3.jpg" alt="Sales Dashboard 3" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/sales-dashboard/4.jpg" alt="Sales Dashboard 4" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/sales-dashboard/5.jpg" alt="Sales Dashboard 5" onclick="openLightboxFromSrc(this)" />
+        </div>
+        <a href="projects/sales-dashboard/" class="view-all-btn">📂 View Full Project →</a>
       </div>
 
-      <div class="gallery-item" onclick="openLightbox(this)">
-        <img src="projects/transaction-monitoring/screenshot1.jpg" alt="Transaction Monitoring" loading="lazy" />
-        <div class="gallery-info">
+      <!-- Transaction Monitoring - 5 screenshots -->
+      <div class="gallery-item">
+        <div class="gallery-header">
           <h4>📊 Daily Transaction Monitoring</h4>
           <p>Tracking daily transactions for accuracy</p>
         </div>
+        <div class="gallery-thumbs">
+          <img src="projects/transaction-monitoring/1.jpg" alt="Transaction Monitoring 1" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/transaction-monitoring/2.jpg" alt="Transaction Monitoring 2" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/transaction-monitoring/3.jpg" alt="Transaction Monitoring 3" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/transaction-monitoring/4.jpg" alt="Transaction Monitoring 4" onclick="openLightboxFromSrc(this)" />
+          <img src="projects/transaction-monitoring/5.jpg" alt="Transaction Monitoring 5" onclick="openLightboxFromSrc(this)" />
+        </div>
+        <a href="projects/transaction-monitoring/" class="view-all-btn">📂 View Full Project →</a>
       </div>
     </div>
   </section>
@@ -902,17 +974,20 @@
     reveals.forEach(el => observer.observe(el));
   })();
 
-  // LIGHTBOX
-  function openLightbox(element) {
-    const img = element.querySelector('img');
-    const caption = element.querySelector('.gallery-info h4')?.textContent || '';
+  // LIGHTBOX - handles both click methods
+  function openLightboxFromSrc(imgElement) {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightboxImg');
     const lightboxCaption = document.getElementById('lightboxCaption');
 
-    lightboxImg.src = img.src;
-    lightboxImg.alt = img.alt;
-    lightboxCaption.textContent = caption;
+    lightboxImg.src = imgElement.src;
+    lightboxImg.alt = imgElement.alt;
+
+    // Try to get caption from parent project
+    const parentItem = imgElement.closest('.gallery-item');
+    const header = parentItem?.querySelector('.gallery-header h4');
+    lightboxCaption.textContent = header ? header.textContent : '';
+
     lightbox.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -924,6 +999,11 @@
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeLightbox();
+  });
+
+  // Close lightbox when clicking outside the image
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
   });
 </script>
 
