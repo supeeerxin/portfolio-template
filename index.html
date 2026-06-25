@@ -297,11 +297,16 @@
       background: var(--bg);
       border: 1px solid var(--border);
       cursor: pointer;
+      min-height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .slider-container .slider-track {
       display: flex;
       transition: transform 0.4s ease;
+      width: 100%;
     }
 
     .slider-container .slider-track img {
@@ -311,6 +316,13 @@
       object-fit: cover;
       display: block;
       pointer-events: none;
+    }
+
+    .slider-container .no-image {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      padding: 2rem;
+      text-align: center;
     }
 
     .slider-btn {
@@ -717,7 +729,7 @@
         <h3>Web Creation</h3>
         <p>Simple functional websites built for information sharing, internal use, or public updates.</p>
         <span class="tag">Web Dev</span>
-        <div class="slider-container" data-images='["PROJECTS/webcreation/WEBSITE DIRECTORY.png"]'>
+        <div class="slider-container" data-images='["WEBSITE DIRECTORY.png"]'>
           <div class="slider-track"></div>
           <button class="slider-btn prev">‹</button>
           <button class="slider-btn next">›</button>
@@ -733,15 +745,15 @@
         <p>Time-tracking and attendance system with real-time reporting and export features for employees.</p>
         <span class="tag">Web App</span>
         <div class="slider-container" data-images='[
-          "PROJECTS/attendanceapp/ADMIN NAVBAR.png",
-          "PROJECTS/attendanceapp/ATTENDANCE LOG.png",
-          "PROJECTS/attendanceapp/ENCODERS TASK MONITORING.png",
-          "PROJECTS/attendanceapp/LEAVE REQUEST.png",
-          "PROJECTS/attendanceapp/NAVBAR.png",
-          "PROJECTS/attendanceapp/OVERTIME REQUEST.png",
-          "PROJECTS/attendanceapp/SCHED REQUEST.png",
-          "PROJECTS/attendanceapp/TARDINESS REQUEST.png",
-          "PROJECTS/attendanceapp/TASK MONITORING.png"
+          "ADMIN NAVBAR.png",
+          "ATTENDANCE LOG.png",
+          "ENCODERS TASK MONITORING.png",
+          "LEAVE REQUEST.png",
+          "NAVBAR.png",
+          "OVERTIME REQUEST.png",
+          "SCHED REQUEST.png",
+          "TARDINESS REQUEST.png",
+          "TASK MONITORING.png"
         ]'>
           <div class="slider-track"></div>
           <button class="slider-btn prev">‹</button>
@@ -758,11 +770,11 @@
         <p>Testing systems in live and UAT environments to ensure functionality and quality before deployment.</p>
         <span class="tag">QA</span>
         <div class="slider-container" data-images='[
-          "PROJECTS/uatwebapptester/ADMIN DASHBOARD.png",
-          "PROJECTS/uatwebapptester/ADMIN SETTINGS.png",
-          "PROJECTS/uatwebapptester/EMPLOYEE DASHBOARD.png",
-          "PROJECTS/uatwebapptester/HRIS SIDEBAR.png",
-          "PROJECTS/uatwebapptester/STORE MGMT SIDEBAR.png"
+          "ADMIN DASHBOARD.png",
+          "ADMIN SETTINGS.png",
+          "EMPLOYEE DASHBOARD.png",
+          "HRIS SIDEBAR.png",
+          "STORE MGMT SIDEBAR.png"
         ]'>
           <div class="slider-track"></div>
           <button class="slider-btn prev">‹</button>
@@ -778,7 +790,7 @@
         <h3>Social Media Dashboard</h3>
         <p>Unified analytics dashboard for cross-platform campaign performance and sentiment tracking.</p>
         <span class="tag">Data Viz</span>
-        <div class="slider-container" data-images='["PROJECTS/socialmediadashboard/SOCMED DASHBOARD SUMMARY.png"]'>
+        <div class="slider-container" data-images='["SOCMED DASHBOARD SUMMARY.png"]'>
           <div class="slider-track"></div>
           <button class="slider-btn prev">‹</button>
           <button class="slider-btn next">›</button>
@@ -793,7 +805,7 @@
         <h3>Sales &amp; Inventory Dashboard</h3>
         <p>Interactive inventory management dashboard with predictive restocking alerts and sales tracking.</p>
         <span class="tag">Analytics</span>
-        <div class="slider-container" data-images='["PROJECTS/salesandinventory/SALES MONITORING SAMPLE PER WEEK PER MONTH.png"]'>
+        <div class="slider-container" data-images='["SALES MONITORING SAMPLE PER WEEK PER MONTH.png"]'>
           <div class="slider-track"></div>
           <button class="slider-btn prev">‹</button>
           <button class="slider-btn next">›</button>
@@ -808,7 +820,7 @@
         <h3>Daily Transaction Monitoring</h3>
         <p>Tracking and recording daily transactions to ensure accuracy and smooth operations.</p>
         <span class="tag">Monitoring</span>
-        <div class="slider-container" data-images='["PROJECTS/dailytransactionmonitoring/DAILY TRANSACTION MONITORING.png"]'>
+        <div class="slider-container" data-images='["DAILY TRANSACTION MONITORING.png"]'>
           <div class="slider-track"></div>
           <button class="slider-btn prev">‹</button>
           <button class="slider-btn next">›</button>
@@ -895,24 +907,56 @@
 
   // ===== SLIDER =====
   document.querySelectorAll('.slider-container').forEach(container => {
-    const images = JSON.parse(container.dataset.images);
+    const imageNames = JSON.parse(container.dataset.images);
     const track = container.querySelector('.slider-track');
     const dots = container.querySelector('.slider-dots');
     const prevBtn = container.querySelector('.prev');
     const nextBtn = container.querySelector('.next');
 
     let currentIndex = 0;
+    let loadedImages = [];
 
-    // Build images
-    images.forEach(src => {
+    // Get the folder path from the container's parent project card
+    const projectCard = container.closest('.project-card');
+    let folderPath = '';
+
+    // Determine folder based on project title
+    const title = projectCard?.querySelector('h3')?.textContent || '';
+    if (title.includes('Web Creation')) folderPath = 'PROJECTS/webcreation/';
+    else if (title.includes('Attendance')) folderPath = 'PROJECTS/attendanceapp/';
+    else if (title.includes('UAT')) folderPath = 'PROJECTS/uatwebapptester/';
+    else if (title.includes('Social Media')) folderPath = 'PROJECTS/socialmediadashboard/';
+    else if (title.includes('Sales')) folderPath = 'PROJECTS/salesandinventory/';
+    else if (title.includes('Transaction')) folderPath = 'PROJECTS/dailytransactionmonitoring/';
+
+    // Build images with full paths
+    imageNames.forEach(name => {
       const img = document.createElement('img');
-      img.src = src;
+      const fullPath = folderPath + name;
+      img.src = fullPath;
       img.loading = 'lazy';
+      img.alt = name;
+      img.onerror = function() {
+        // If image fails, try without folder path (root directory)
+        this.src = name;
+        this.onerror = function() {
+          // If still fails, show placeholder
+          this.style.display = 'none';
+          const parent = this.parentElement;
+          if (parent && !parent.querySelector('.no-image')) {
+            const msg = document.createElement('div');
+            msg.className = 'no-image';
+            msg.textContent = '📷 Image not found';
+            parent.appendChild(msg);
+          }
+        };
+      };
       track.appendChild(img);
+      loadedImages.push(fullPath);
     });
 
     // Build dots
-    images.forEach((_, i) => {
+    imageNames.forEach((_, i) => {
       const dot = document.createElement('span');
       dot.classList.toggle('active', i === 0);
       dot.addEventListener('click', (e) => { e.stopPropagation(); goTo(i); });
@@ -920,8 +964,8 @@
     });
 
     function goTo(index) {
-      if (index < 0) index = images.length - 1;
-      if (index >= images.length) index = 0;
+      if (index < 0) index = imageNames.length - 1;
+      if (index >= imageNames.length) index = 0;
       currentIndex = index;
       track.style.transform = `translateX(-${currentIndex * 100}%)`;
       dots.querySelectorAll('span').forEach((dot, i) => {
@@ -932,13 +976,18 @@
     prevBtn.addEventListener('click', (e) => { e.stopPropagation(); goTo(currentIndex - 1); });
     nextBtn.addEventListener('click', (e) => { e.stopPropagation(); goTo(currentIndex + 1); });
 
-    if (images.length <= 1) {
+    if (imageNames.length <= 1) {
       prevBtn.style.display = 'none';
       nextBtn.style.display = 'none';
     }
 
     // CLICK TO OPEN MODAL
-    container.addEventListener('click', () => openModal(images, container));
+    container.addEventListener('click', () => {
+      // Get all image srcs from the track
+      const imgs = track.querySelectorAll('img');
+      const srcs = Array.from(imgs).map(img => img.src);
+      openModal(srcs, container);
+    });
   });
 
   // ===== MODAL =====
