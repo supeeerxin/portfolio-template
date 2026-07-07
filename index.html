@@ -45,7 +45,6 @@
       line-height: 1.6;
       transition: background 0.3s, color 0.3s;
     }
-    body.modal-open { overflow: hidden; }
 
     .container {
       max-width: 1100px;
@@ -241,122 +240,97 @@
       border-color: var(--accent);
     }
 
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
+    /* PROJECT SLIDER */
+    .project-slider-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: var(--shadow);
     }
 
-    .project-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.8rem;
-      transition: 0.25s;
-      box-shadow: var(--shadow);
+    .project-slider-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .project-slide {
+      min-width: 100%;
+      padding: 2rem;
       display: flex;
       flex-direction: column;
     }
-    .project-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--accent);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
-    }
 
-    .project-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
-    .project-card h3 { font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text); }
-    .project-card p {
-      font-size: 0.95rem;
+    .project-slide .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .project-slide h3 { font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text); }
+    .project-slide p {
+      font-size: 1rem;
       color: var(--text-secondary);
       flex: 1;
+      margin-bottom: 0.5rem;
     }
-    .project-card .tag {
+    .project-slide .tag {
       display: inline-block;
       background: var(--border);
-      padding: 0.15rem 0.8rem;
+      padding: 0.2rem 1rem;
       border-radius: 30px;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       font-weight: 600;
       color: var(--muted);
-      margin-top: 0.6rem;
       letter-spacing: 0.3px;
       align-self: flex-start;
+      margin-bottom: 0.5rem;
     }
-
-    .slider-container {
-      margin-top: 1rem;
-      position: relative;
-      border-radius: 10px;
-      overflow: hidden;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      cursor: pointer;
-      min-height: 160px;
-      display: flex;
+    .project-slide .project-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
+      gap: 4px;
+      margin-top: 0.5rem;
+    }
+    .project-slide .project-link:hover {
+      text-decoration: underline;
     }
 
-    .slider-container .slider-track {
+    .slider-nav {
       display: flex;
-      transition: transform 0.4s ease;
-      width: 100%;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1rem 0 0.5rem;
     }
 
-    .slider-container .slider-track img {
-      width: 100%;
-      flex-shrink: 0;
-      aspect-ratio: 16/10;
-      object-fit: cover;
-      display: block;
-      pointer-events: none;
-    }
-
-    .slider-container .no-image {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      padding: 2rem;
-      text-align: center;
-    }
-
-    .slider-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
+    .slider-nav button {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 50%;
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 1.2rem;
       color: var(--text);
-      box-shadow: var(--shadow);
       transition: 0.2s;
-      z-index: 5;
-      opacity: 0.85;
-      pointer-events: auto;
+      box-shadow: var(--shadow);
     }
-    .slider-btn:hover {
-      opacity: 1;
+    .slider-nav button:hover {
       border-color: var(--accent);
       color: var(--accent);
+      transform: scale(1.05);
     }
-    .slider-btn.prev { left: 8px; }
-    .slider-btn.next { right: 8px; }
 
     .slider-dots {
       display: flex;
-      justify-content: center;
-      gap: 6px;
-      padding: 8px 0 4px;
+      gap: 8px;
     }
     .slider-dots span {
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       background: var(--border);
       cursor: pointer;
@@ -364,147 +338,14 @@
     }
     .slider-dots span.active {
       background: var(--accent);
-      width: 20px;
-      border-radius: 4px;
-    }
-
-    .slider-click-hint {
-      position: absolute;
-      bottom: 12px;
-      right: 12px;
-      background: rgba(0,0,0,0.6);
-      color: #fff;
-      font-size: 0.7rem;
-      padding: 3px 10px;
-      border-radius: 20px;
-      z-index: 2;
-      pointer-events: none;
-      backdrop-filter: blur(4px);
-    }
-
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--overlay);
-      z-index: 9999;
-      justify-content: center;
-      align-items: center;
-      padding: 1.5rem;
-      backdrop-filter: blur(8px);
-    }
-    .modal-overlay.active { display: flex; }
-
-    .modal-content {
-      position: relative;
-      max-width: 900px;
-      width: 100%;
-      max-height: 90vh;
-    }
-
-    .modal-content .modal-track {
-      display: flex;
-      transition: transform 0.4s ease;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #000;
-      min-height: 300px;
-    }
-
-    .modal-content .modal-track .modal-slide {
-      min-width: 100%;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 300px;
-      background: #000;
-    }
-
-    .modal-content .modal-track .modal-slide img {
-      width: 100%;
-      max-height: 80vh;
-      object-fit: contain;
-      display: block;
-    }
-
-    .modal-content .modal-track .modal-slide .loading-text {
-      color: rgba(255,255,255,0.5);
-      font-size: 1rem;
-    }
-
-    .modal-close {
-      position: absolute;
-      top: -50px;
-      right: 0;
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 2.2rem;
-      cursor: pointer;
-      transition: 0.2s;
-      opacity: 0.7;
-      z-index: 10;
-    }
-    .modal-close:hover {
-      opacity: 1;
-      transform: rotate(90deg);
-    }
-
-    .modal-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 1.8rem;
-      color: #fff;
-      transition: 0.2s;
-      z-index: 10;
-      backdrop-filter: blur(4px);
-    }
-    .modal-btn:hover {
-      background: rgba(255,255,255,0.3);
-    }
-    .modal-btn.prev { left: 10px; }
-    .modal-btn.next { right: 10px; }
-
-    .modal-dots {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 1rem;
-    }
-    .modal-dots span {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.3);
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .modal-dots span.active {
-      background: #fff;
       width: 28px;
       border-radius: 5px;
     }
 
-    .modal-counter {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      color: rgba(255,255,255,0.7);
+    .slider-counter {
+      color: var(--muted);
       font-size: 0.85rem;
+      font-weight: 500;
     }
 
     .contact-block {
@@ -616,16 +457,8 @@
         align-items: flex-start;
       }
       .social-links { width: 100%; }
-      .modal-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 1.2rem;
-      }
-      .modal-btn.prev { left: 4px; }
-      .modal-btn.next { right: 4px; }
-      .modal-close { top: -44px; font-size: 1.8rem; }
-      .modal-counter { top: -36px; font-size: 0.75rem; }
-      .slider-click-hint { display: none; }
+      .project-slide { padding: 1.5rem; }
+      .slider-nav { flex-wrap: wrap; gap: 1rem; }
     }
   </style>
 </head>
@@ -677,173 +510,115 @@
   <section id="skills" class="section reveal">
     <h2 class="section-title">Core competencies</h2>
     <p class="section-sub">Every project benefits from a blend of technical depth and operational clarity.</p>
-    <div class="project-grid">
-      <div class="project-card">
-        <div class="icon">📊</div>
-        <h3>Data Management &amp; Analytics</h3>
-        <p>From raw data to dashboards that drive decisions — I turn numbers into narratives.</p>
-        <span class="tag">Data</span>
+    <div class="project-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+      <div class="project-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; transition: 0.25s; box-shadow: var(--shadow);">
+        <div class="icon" style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
+        <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text);">Data Management &amp; Analytics</h3>
+        <p style="font-size: 0.95rem; color: var(--text-secondary);">From raw data to dashboards that drive decisions — I turn numbers into narratives.</p>
+        <span class="tag" style="display: inline-block; background: var(--border); padding: 0.15rem 0.8rem; border-radius: 30px; font-size: 0.7rem; font-weight: 600; color: var(--muted); margin-top: 0.6rem; letter-spacing: 0.3px; align-self: flex-start;">Data</span>
       </div>
-      <div class="project-card">
-        <div class="icon">🖥️</div>
-        <h3>IT Operations &amp; Support</h3>
-        <p>Reliable infrastructure, troubleshooting, and process optimization for smooth daily operations.</p>
-        <span class="tag">IT</span>
+      <div class="project-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; transition: 0.25s; box-shadow: var(--shadow);">
+        <div class="icon" style="font-size: 2rem; margin-bottom: 0.5rem;">🖥️</div>
+        <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text);">IT Operations &amp; Support</h3>
+        <p style="font-size: 0.95rem; color: var(--text-secondary);">Reliable infrastructure, troubleshooting, and process optimization for smooth daily operations.</p>
+        <span class="tag" style="display: inline-block; background: var(--border); padding: 0.15rem 0.8rem; border-radius: 30px; font-size: 0.7rem; font-weight: 600; color: var(--muted); margin-top: 0.6rem; letter-spacing: 0.3px; align-self: flex-start;">IT</span>
       </div>
-      <div class="project-card">
-        <div class="icon">🔐</div>
-        <h3>Privacy &amp; Compliance</h3>
-        <p>Data protection frameworks, GDPR/DPA alignment, and privacy-by-design implementation.</p>
-        <span class="tag">Privacy</span>
+      <div class="project-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; transition: 0.25s; box-shadow: var(--shadow);">
+        <div class="icon" style="font-size: 2rem; margin-bottom: 0.5rem;">🔐</div>
+        <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text);">Privacy &amp; Compliance</h3>
+        <p style="font-size: 0.95rem; color: var(--text-secondary);">Data protection frameworks, GDPR/DPA alignment, and privacy-by-design implementation.</p>
+        <span class="tag" style="display: inline-block; background: var(--border); padding: 0.15rem 0.8rem; border-radius: 30px; font-size: 0.7rem; font-weight: 600; color: var(--muted); margin-top: 0.6rem; letter-spacing: 0.3px; align-self: flex-start;">Privacy</span>
       </div>
-      <div class="project-card">
-        <div class="icon">📄</div>
-        <h3>SOP &amp; Documentation</h3>
-        <p>Clear, actionable standard operating procedures that teams actually use and follow.</p>
-        <span class="tag">Process</span>
+      <div class="project-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; transition: 0.25s; box-shadow: var(--shadow);">
+        <div class="icon" style="font-size: 2rem; margin-bottom: 0.5rem;">📄</div>
+        <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text);">SOP &amp; Documentation</h3>
+        <p style="font-size: 0.95rem; color: var(--text-secondary);">Clear, actionable standard operating procedures that teams actually use and follow.</p>
+        <span class="tag" style="display: inline-block; background: var(--border); padding: 0.15rem 0.8rem; border-radius: 30px; font-size: 0.7rem; font-weight: 600; color: var(--muted); margin-top: 0.6rem; letter-spacing: 0.3px; align-self: flex-start;">Process</span>
       </div>
-      <div class="project-card">
-        <div class="icon">⌨️</div>
-        <h3>Administrative &amp; Encoding</h3>
-        <p>Meticulous data entry, system administration, and back-office efficiency.</p>
-        <span class="tag">Admin</span>
+      <div class="project-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; transition: 0.25s; box-shadow: var(--shadow);">
+        <div class="icon" style="font-size: 2rem; margin-bottom: 0.5rem;">⌨️</div>
+        <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text);">Administrative &amp; Encoding</h3>
+        <p style="font-size: 0.95rem; color: var(--text-secondary);">Meticulous data entry, system administration, and back-office efficiency.</p>
+        <span class="tag" style="display: inline-block; background: var(--border); padding: 0.15rem 0.8rem; border-radius: 30px; font-size: 0.7rem; font-weight: 600; color: var(--muted); margin-top: 0.6rem; letter-spacing: 0.3px; align-self: flex-start;">Admin</span>
       </div>
-      <div class="project-card">
-        <div class="icon">📢</div>
-        <h3>Digital Communication</h3>
-        <p>Internal and external communication strategies that align with technical goals.</p>
-        <span class="tag">Comm</span>
+      <div class="project-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; transition: 0.25s; box-shadow: var(--shadow);">
+        <div class="icon" style="font-size: 2rem; margin-bottom: 0.5rem;">📢</div>
+        <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text);">Digital Communication</h3>
+        <p style="font-size: 0.95rem; color: var(--text-secondary);">Internal and external communication strategies that align with technical goals.</p>
+        <span class="tag" style="display: inline-block; background: var(--border); padding: 0.15rem 0.8rem; border-radius: 30px; font-size: 0.7rem; font-weight: 600; color: var(--muted); margin-top: 0.6rem; letter-spacing: 0.3px; align-self: flex-start;">Comm</span>
       </div>
     </div>
   </section>
 
   <section id="projects" class="section reveal">
     <h2 class="section-title">Featured Projects</h2>
-    <p class="section-sub">Click any image to view it full-screen. Use arrows to browse through screenshots.</p>
+    <p class="section-sub">Browse through my featured projects below. Use the arrows to navigate.</p>
 
-    <div class="project-grid">
-      <!-- Web Creation -->
-      <div class="project-card">
-        <div class="icon">🌐</div>
-        <h3>Web Creation</h3>
-        <p>Simple functional websites built for information sharing, internal use, or public updates.</p>
-        <span class="tag">Web Dev</span>
-        <div class="slider-container" data-images='["PROJECTS/webcreation/WEBSITE DIRECTORY.png"]'>
-          <div class="slider-track"></div>
-          <button class="slider-btn prev">‹</button>
-          <button class="slider-btn next">›</button>
-          <div class="slider-dots"></div>
-          <span class="slider-click-hint">🔍 Click to enlarge</span>
+    <div class="project-slider-wrapper">
+      <div class="project-slider-track" id="projectTrack">
+        <!-- Web Creation -->
+        <div class="project-slide">
+          <div class="icon">🌐</div>
+          <h3>Web Creation</h3>
+          <span class="tag">Web Dev</span>
+          <p>Simple functional websites built for information sharing, internal use, or public updates.</p>
+        </div>
+
+        <!-- Attendance App -->
+        <div class="project-slide">
+          <div class="icon">📋</div>
+          <h3>Attendance Web App</h3>
+          <span class="tag">Web App</span>
+          <p>Time-tracking and attendance system with real-time reporting and export features for employees.</p>
+        </div>
+
+        <!-- UAT Testing -->
+        <div class="project-slide">
+          <div class="icon">🧪</div>
+          <h3>UAT Web App Tester</h3>
+          <span class="tag">QA</span>
+          <p>Testing systems in live and UAT environments to ensure functionality and quality before deployment.</p>
+        </div>
+
+        <!-- Social Media Dashboard -->
+        <div class="project-slide">
+          <div class="icon">📱</div>
+          <h3>Social Media Dashboard</h3>
+          <span class="tag">Data Viz</span>
+          <p>Unified analytics dashboard for cross-platform campaign performance and sentiment tracking.</p>
+        </div>
+
+        <!-- Sales & Inventory Dashboard -->
+        <div class="project-slide">
+          <div class="icon">📦</div>
+          <h3>Sales &amp; Inventory Dashboard</h3>
+          <span class="tag">Analytics</span>
+          <p>Interactive inventory management dashboard with predictive restocking alerts and sales tracking.</p>
+        </div>
+
+        <!-- Daily Transaction Monitoring -->
+        <div class="project-slide">
+          <div class="icon">📊</div>
+          <h3>Daily Transaction Monitoring</h3>
+          <span class="tag">Monitoring</span>
+          <p>Tracking and recording daily transactions to ensure accuracy and smooth operations.</p>
+        </div>
+
+        <!-- Young Achievers School Page -->
+        <div class="project-slide">
+          <div class="icon">🏫</div>
+          <h3>Young Achievers School Page</h3>
+          <span class="tag">Web Design</span>
+          <p>A complete school website showcasing academic programs, campus life, and parent testimonials — built with a clean, responsive design.</p>
+          <a href="https://yassp-theta.vercel.app/" target="_blank" rel="noopener" class="project-link">View Live Site →</a>
         </div>
       </div>
 
-      <!-- Attendance App -->
-      <div class="project-card">
-        <div class="icon">📋</div>
-        <h3>Attendance Web App</h3>
-        <p>Time-tracking and attendance system with real-time reporting and export features for employees.</p>
-        <span class="tag">Web App</span>
-        <div class="slider-container" data-images='[
-          "PROJECTS/attendanceapp/ADMIN NAVBAR.png",
-          "PROJECTS/attendanceapp/ATTENDANCE LOG.png",
-          "PROJECTS/attendanceapp/ENCODERS TASK MONITORING.png",
-          "PROJECTS/attendanceapp/LEAVE REQUEST.png",
-          "PROJECTS/attendanceapp/NAVBAR.png",
-          "PROJECTS/attendanceapp/OVERTIME REQUEST.png",
-          "PROJECTS/attendanceapp/SCHED REQUEST.png",
-          "PROJECTS/attendanceapp/TARDINESS REQUEST.png",
-          "PROJECTS/attendanceapp/TASK MONITORING.png"
-        ]'>
-          <div class="slider-track"></div>
-          <button class="slider-btn prev">‹</button>
-          <button class="slider-btn next">›</button>
-          <div class="slider-dots"></div>
-          <span class="slider-click-hint">🔍 Click to enlarge</span>
-        </div>
-      </div>
-
-      <!-- UAT Testing -->
-      <div class="project-card">
-        <div class="icon">🧪</div>
-        <h3>UAT Web App Tester</h3>
-        <p>Testing systems in live and UAT environments to ensure functionality and quality before deployment.</p>
-        <span class="tag">QA</span>
-        <div class="slider-container" data-images='[
-          "PROJECTS/uatwebapptester/ADMIN DASHBOARD.png",
-          "PROJECTS/uatwebapptester/ADMIN SETTINGS.png",
-          "PROJECTS/uatwebapptester/EMPLOYEE DASHBOARD.png",
-          "PROJECTS/uatwebapptester/HRIS SIDEBAR.png",
-          "PROJECTS/uatwebapptester/STORE MGMT SIDEBAR.png"
-        ]'>
-          <div class="slider-track"></div>
-          <button class="slider-btn prev">‹</button>
-          <button class="slider-btn next">›</button>
-          <div class="slider-dots"></div>
-          <span class="slider-click-hint">🔍 Click to enlarge</span>
-        </div>
-      </div>
-
-      <!-- Social Media Dashboard -->
-      <div class="project-card">
-        <div class="icon">📱</div>
-        <h3>Social Media Dashboard</h3>
-        <p>Unified analytics dashboard for cross-platform campaign performance and sentiment tracking.</p>
-        <span class="tag">Data Viz</span>
-        <div class="slider-container" data-images='["PROJECTS/socialmediadashboard/SOCMED DASHBOARD SUMMARY.png"]'>
-          <div class="slider-track"></div>
-          <button class="slider-btn prev">‹</button>
-          <button class="slider-btn next">›</button>
-          <div class="slider-dots"></div>
-          <span class="slider-click-hint">🔍 Click to enlarge</span>
-        </div>
-      </div>
-
-      <!-- Sales & Inventory Dashboard -->
-      <div class="project-card">
-        <div class="icon">📦</div>
-        <h3>Sales &amp; Inventory Dashboard</h3>
-        <p>Interactive inventory management dashboard with predictive restocking alerts and sales tracking.</p>
-        <span class="tag">Analytics</span>
-        <div class="slider-container" data-images='["PROJECTS/salesandinventory/SALES MONITORING SAMPLE PER WEEK PER MONTH.png"]'>
-          <div class="slider-track"></div>
-          <button class="slider-btn prev">‹</button>
-          <button class="slider-btn next">›</button>
-          <div class="slider-dots"></div>
-          <span class="slider-click-hint">🔍 Click to enlarge</span>
-        </div>
-      </div>
-
-      <!-- Daily Transaction Monitoring -->
-      <div class="project-card">
-        <div class="icon">📊</div>
-        <h3>Daily Transaction Monitoring</h3>
-        <p>Tracking and recording daily transactions to ensure accuracy and smooth operations.</p>
-        <span class="tag">Monitoring</span>
-        <div class="slider-container" data-images='["PROJECTS/dailytransactionmonitoring/DAILY TRANSACTION MONITORING.png"]'>
-          <div class="slider-track"></div>
-          <button class="slider-btn prev">‹</button>
-          <button class="slider-btn next">›</button>
-          <div class="slider-dots"></div>
-          <span class="slider-click-hint">🔍 Click to enlarge</span>
-        </div>
-      </div>
-
-      <!-- Young Achievers School Page -->
-      <div class="project-card">
-        <div class="icon">🏫</div>
-        <h3>Young Achievers School Page</h3>
-        <p>A complete school website showcasing academic programs, campus life, and parent testimonials — built with a clean, responsive design.</p>
-        <span class="tag">Web Design</span>
-        <a href="https://yassp-theta.vercel.app/" target="_blank" rel="noopener" style="margin-top: 0.75rem; color: var(--accent); text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
-          View Live Site →
-        </a>
-        <div class="slider-container" data-images='["PROJECTS/schoolpage/school-page-preview.png"]'>
-          <div class="slider-track"></div>
-          <button class="slider-btn prev">‹</button>
-          <button class="slider-btn next">›</button>
-          <div class="slider-dots"></div>
-          <span class="slider-click-hint">🔍 Click to enlarge</span>
-        </div>
+      <div class="slider-nav">
+        <button id="prevProject" aria-label="Previous project">‹</button>
+        <div class="slider-dots" id="projectDots"></div>
+        <span class="slider-counter" id="projectCounter">1 / 7</span>
+        <button id="nextProject" aria-label="Next project">›</button>
       </div>
     </div>
   </section>
@@ -882,18 +657,6 @@
 
 </div>
 
-<!-- MODAL SLIDER -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal-content">
-    <button class="modal-close" id="modalClose">✕</button>
-    <span class="modal-counter" id="modalCounter">1 / 1</span>
-    <div class="modal-track" id="modalTrack"></div>
-    <button class="modal-btn prev" id="modalPrev">‹</button>
-    <button class="modal-btn next" id="modalNext">›</button>
-    <div class="modal-dots" id="modalDots"></div>
-  </div>
-</div>
-
 <script>
   (function() {
     // Dark mode
@@ -920,256 +683,105 @@
     reveals.forEach(el => observer.observe(el));
   })();
 
-  // ===== SLIDER WITH FULL PATHS =====
-  document.querySelectorAll('.slider-container').forEach(container => {
-    let imagePaths = [];
-    try {
-      imagePaths = JSON.parse(container.dataset.images);
-    } catch(e) {
-      console.warn('Invalid images data:', container.dataset.images);
-      return;
-    }
-    
-    const track = container.querySelector('.slider-track');
-    const dots = container.querySelector('.slider-dots');
-    const prevBtn = container.querySelector('.prev');
-    const nextBtn = container.querySelector('.next');
-
-    let currentIndex = 0;
-    let loadedImages = [];
-
-    // Try to load each image
-    function loadImage(path, index) {
-      return new Promise((resolve) => {
-        const img = document.createElement('img');
-        img.loading = 'lazy';
-        img.alt = path.split('/').pop() || 'Project image';
-        
-        img.onload = function() {
-          loadedImages[index] = path;
-          resolve(path);
-        };
-        
-        img.onerror = function() {
-          // Try URL encoded version (spaces in filenames)
-          const encodedPath = path.replace(/ /g, '%20');
-          const encodedImg = document.createElement('img');
-          encodedImg.loading = 'lazy';
-          encodedImg.alt = path.split('/').pop() || 'Project image';
-          
-          encodedImg.onload = function() {
-            loadedImages[index] = encodedPath;
-            resolve(encodedPath);
-          };
-          
-          encodedImg.onerror = function() {
-            loadedImages[index] = null;
-            resolve(null);
-          };
-          
-          encodedImg.src = encodedPath;
-        };
-        
-        img.src = path;
-      });
-    }
-
-    // Load all images
-    async function loadAllImages() {
-      for (let i = 0; i < imagePaths.length; i++) {
-        await loadImage(imagePaths[i], i);
-      }
-      renderSlider();
-    }
-
-    function renderSlider() {
-      // Clear track
-      track.innerHTML = '';
-      
-      // Filter out nulls (failed loads)
-      const validImages = loadedImages.filter(src => src !== null);
-      
-      if (validImages.length === 0) {
-        const msg = document.createElement('div');
-        msg.className = 'no-image';
-        msg.textContent = '📷 No images available for this project';
-        track.appendChild(msg);
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'none';
-        dots.innerHTML = '';
-        return;
-      }
-
-      // Add images to track
-      validImages.forEach(src => {
-        const img = document.createElement('img');
-        img.src = src;
-        img.loading = 'lazy';
-        img.alt = src.split('/').pop() || 'Project image';
-        track.appendChild(img);
-      });
-
-      // Update imagePaths to only valid ones
-      imagePaths = validImages;
-
-      // Build dots
-      dots.innerHTML = '';
-      validImages.forEach((_, i) => {
-        const dot = document.createElement('span');
-        dot.classList.toggle('active', i === 0);
-        dot.addEventListener('click', (e) => { e.stopPropagation(); goTo(i); });
-        dots.appendChild(dot);
-      });
-
-      // Show/hide navigation
-      if (validImages.length <= 1) {
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'none';
-      } else {
-        prevBtn.style.display = 'flex';
-        nextBtn.style.display = 'flex';
-      }
-
-      currentIndex = 0;
-      updateSlider();
-    }
-
-    function updateSlider() {
-      if (imagePaths.length === 0) return;
-      track.style.transform = `translateX(-${currentIndex * 100}%)`;
-      dots.querySelectorAll('span').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentIndex);
-      });
-    }
-
-    function goTo(index) {
-      if (imagePaths.length === 0) return;
-      if (index < 0) index = imagePaths.length - 1;
-      if (index >= imagePaths.length) index = 0;
-      currentIndex = index;
-      updateSlider();
-    }
-
-    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); goTo(currentIndex - 1); });
-    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); goTo(currentIndex + 1); });
-
-    // Click to open modal
-    container.addEventListener('click', () => {
-      const imgs = track.querySelectorAll('img');
-      const srcs = Array.from(imgs)
-        .filter(img => img.src && img.style.display !== 'none')
-        .map(img => img.src);
-      
-      if (srcs.length > 0) {
-        openModal(srcs);
-      }
-    });
-
-    // Start loading
-    loadAllImages();
-  });
-
-  // ===== MODAL =====
-  const modalOverlay = document.getElementById('modalOverlay');
-  const modalTrack = document.getElementById('modalTrack');
-  const modalDots = document.getElementById('modalDots');
-  const modalPrev = document.getElementById('modalPrev');
-  const modalNext = document.getElementById('modalNext');
-  const modalClose = document.getElementById('modalClose');
-  const modalCounter = document.getElementById('modalCounter');
-
-  let modalImages = [];
-  let modalIndex = 0;
-
-  function openModal(images) {
-    if (!images || images.length === 0) return;
-    
-    modalImages = images;
-    modalIndex = 0;
-
-    modalTrack.innerHTML = '';
-
-    images.forEach((src, index) => {
-      const slide = document.createElement('div');
-      slide.className = 'modal-slide';
-      
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = `Screenshot ${index + 1}`;
-      img.loading = 'lazy';
-      
-      img.onerror = function() {
-        this.alt = 'Image not found';
-        this.style.display = 'none';
-        const fallbackText = document.createElement('span');
-        fallbackText.className = 'loading-text';
-        fallbackText.textContent = '📷 Image not available';
-        slide.appendChild(fallbackText);
-      };
-      
-      slide.appendChild(img);
-      modalTrack.appendChild(slide);
-    });
-
-    modalDots.innerHTML = '';
-    images.forEach((_, i) => {
-      const dot = document.createElement('span');
-      dot.classList.toggle('active', i === 0);
-      dot.addEventListener('click', () => goToModal(i));
-      modalDots.appendChild(dot);
-    });
-
-    modalOverlay.classList.add('active');
-    document.body.classList.add('modal-open');
-    updateModal();
-
-    modalPrev.style.display = images.length <= 1 ? 'none' : 'flex';
-    modalNext.style.display = images.length <= 1 ? 'none' : 'flex';
-  }
-
-  function goToModal(index) {
-    if (index < 0) index = modalImages.length - 1;
-    if (index >= modalImages.length) index = 0;
-    modalIndex = index;
-    updateModal();
-  }
-
-  function updateModal() {
-    modalTrack.style.transform = `translateX(-${modalIndex * 100}%)`;
-    
-    modalDots.querySelectorAll('span').forEach((dot, i) => {
-      dot.classList.toggle('active', i === modalIndex);
-    });
-    modalCounter.textContent = `${modalIndex + 1} / ${modalImages.length}`;
-  }
-
-  function closeModal() {
-    modalOverlay.classList.remove('active');
-    document.body.classList.remove('modal-open');
-  }
-
-  modalPrev.addEventListener('click', (e) => {
-    e.stopPropagation();
-    goToModal(modalIndex - 1);
-  });
+  // ===== PROJECT SLIDER =====
+  const track = document.getElementById('projectTrack');
+  const dots = document.getElementById('projectDots');
+  const counter = document.getElementById('projectCounter');
+  const prevBtn = document.getElementById('prevProject');
+  const nextBtn = document.getElementById('nextProject');
   
-  modalNext.addEventListener('click', (e) => {
-    e.stopPropagation();
-    goToModal(modalIndex + 1);
-  });
-  
-  modalClose.addEventListener('click', closeModal);
-  
-  modalOverlay.addEventListener('click', (e) => {
-    if (e.target === modalOverlay) closeModal();
+  const slides = track.querySelectorAll('.project-slide');
+  const totalSlides = slides.length;
+  let currentIndex = 0;
+  let autoPlayInterval;
+
+  // Build dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.classList.toggle('active', i === 0);
+    dot.addEventListener('click', () => goToSlide(i));
+    dots.appendChild(dot);
   });
 
+  function goToSlide(index) {
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
+    currentIndex = index;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    
+    // Update dots
+    dots.querySelectorAll('span').forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+    
+    // Update counter
+    counter.textContent = `${currentIndex + 1} / ${totalSlides}`;
+  }
+
+  function nextSlide() {
+    goToSlide(currentIndex + 1);
+  }
+
+  function prevSlide() {
+    goToSlide(currentIndex - 1);
+  }
+
+  // Event listeners
+  prevBtn.addEventListener('click', prevSlide);
+  nextBtn.addEventListener('click', nextSlide);
+
+  // Keyboard navigation
   document.addEventListener('keydown', (e) => {
-    if (!modalOverlay.classList.contains('active')) return;
-    if (e.key === 'Escape') closeModal();
-    if (e.key === 'ArrowLeft') goToModal(modalIndex - 1);
-    if (e.key === 'ArrowRight') goToModal(modalIndex + 1);
+    const projectsSection = document.getElementById('projects');
+    const rect = projectsSection.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+    
+    if (isVisible) {
+      if (e.key === 'ArrowLeft') prevSlide();
+      if (e.key === 'ArrowRight') nextSlide();
+    }
   });
+
+  // Auto-play
+  function startAutoPlay() {
+    stopAutoPlay();
+    autoPlayInterval = setInterval(nextSlide, 5000);
+  }
+
+  function stopAutoPlay() {
+    if (autoPlayInterval) {
+      clearInterval(autoPlayInterval);
+      autoPlayInterval = null;
+    }
+  }
+
+  // Pause on hover
+  const sliderWrapper = document.querySelector('.project-slider-wrapper');
+  sliderWrapper.addEventListener('mouseenter', stopAutoPlay);
+  sliderWrapper.addEventListener('mouseleave', startAutoPlay);
+
+  // Touch/swipe support
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  sliderWrapper.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  sliderWrapper.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
+    }
+  });
+
+  // Start auto-play
+  startAutoPlay();
+
+  // Go to first slide
+  goToSlide(0);
 </script>
 
 </body>
