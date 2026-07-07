@@ -920,92 +920,168 @@
     reveals.forEach(el => observer.observe(el));
   })();
 
-  // ===== SLIDER =====
+  // ===== FIXED SLIDER WITH BETTER IMAGE HANDLING =====
   document.querySelectorAll('.slider-container').forEach(container => {
     const folder = container.dataset.folder || '';
-    const imageNames = JSON.parse(container.dataset.images);
+    let imageNames = [];
+    try {
+      imageNames = JSON.parse(container.dataset.images);
+    } catch(e) {
+      console.warn('Invalid images data:', container.dataset.images);
+      return;
+    }
+    
     const track = container.querySelector('.slider-track');
     const dots = container.querySelector('.slider-dots');
     const prevBtn = container.querySelector('.prev');
     const nextBtn = container.querySelector('.next');
 
     let currentIndex = 0;
-    let fullPaths = [];
+    let loadedImages = [];
 
-    // Build full paths
-    imageNames.forEach(name => {
-      let fullPath = folder + name;
-      fullPaths.push(fullPath);
-    });
-
-    // Build images
-    fullPaths.forEach(path => {
-      const img = document.createElement('img');
-      img.src = path;
-      img.loading = 'lazy';
-      img.alt = path.split('/').pop();
-      img.onerror = function() {
-        // Try without folder if it fails
-        const fallbackPath = path.split('/').pop();
-        this.src = fallbackPath;
-        this.onerror = function() {
-          this.style.display = 'none';
-          const parent = this.parentElement;
-          if (parent && !parent.querySelector('.no-image')) {
-            const msg = document.createElement('div');
-            msg.className = 'no-image';
-            msg.textContent = '📷 Image not found';
-            parent.appendChild(msg);
+    // Function to try loading an image with multiple path attempts
+    function loadImageWithFallback(path, index) {
+      return new Promise((resolve) => {
+        // Try with folder path first
+        const fullPath = folder + path;
+        const img = document.createElement('img');
+        img.loading = 'lazy';
+        img.alt = path;
+        
+        let attempted = false;
+        
+        img.onload = function() {
+          loadedImages[index] = fullPath;
+          resolve(fullPath);
+        };
+        
+        img.onerror = function() {
+          // If folder path fails, try just the filename
+          if (!attempted) {
+            attempted = true;
+            const fallbackPath = path;
+            const fallbackImg = document.createElement('img');
+            fallbackImg.loading = 'lazy';
+            fallbackImg.alt = path;
+            fallbackImg.onload = function() {
+              loadedImages[index] = fallbackPath;
+              resolve(fallbackPath);
+            };
+            fallbackImg.onerror = function() {
+              // Both attempts failed
+              loadedImages[index] = null;
+              resolve(null);
+            };
+            fallbackImg.src = fallbackPath;
+          } else {
+            loadedImages[index] = null;
+            resolve(null);
           }
         };
-      };
-      track.appendChild(img);
-    });
+        
+        img.src = fullPath;
+      });
+    }
 
-    // Build dots
-    imageNames.forEach((_, i) => {
-      const dot = document.createElement('span');
-      dot.classList.toggle('active', i === 0);
-      dot.addEventListener('click', (e) => { e.stopPropagation(); goTo(i); });
-      dots.appendChild(dot);
-    });
+    // Load all images with fallback
+    async function loadAllImages() {
+      for (let i = 0; i < imageNames.length; i++) {
+        await loadImageWithFallback(imageNames[i], i);
+      }
+      renderSlider();
+    }
 
-    function goTo(index) {
-      if (index < 0) index = imageNames.length - 1;
-      if (index >= imageNames.length) index = 0;
-      currentIndex = index;
+    function renderSlider() {
+      // Clear track
+      track.innerHTML = '';
+      
+      // Count how many images loaded successfully
+      const validImages = loadedImages.filter(src => src !== null);
+      
+      if (validImages.length === 0) {
+        // No images loaded - show message
+        const msg = document.createElement('div');
+        msg.className = 'no-image';
+        msg.textContent = '📷 No images available for this project';
+        track.appendChild(msg);
+        // Hide navigation
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+        dots.innerHTML = '';
+        return;
+      }
+
+      // Add images to track
+      validImages.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.loading = 'lazy';
+        img.alt = src.split('/').pop() || 'Project image';
+        track.appendChild(img);
+      });
+
+      // Update imageNames to only valid ones
+      imageNames = validImages;
+
+      // Build dots
+      dots.innerHTML = '';
+      validImages.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.classList.toggle('active', i === 0);
+        dot.addEventListener('click', (e) => { e.stopPropagation(); goTo(i); });
+        dots.appendChild(dot);
+      });
+
+      // Show/hide navigation buttons
+      if (validImages.length <= 1) {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+      } else {
+        prevBtn.style.display = 'flex';
+        nextBtn.style.display = 'flex';
+      }
+
+      currentIndex = 0;
+      updateSlider();
+    }
+
+    function updateSlider() {
+      if (imageNames.length === 0) return;
       track.style.transform = `translateX(-${currentIndex * 100}%)`;
       dots.querySelectorAll('span').forEach((dot, i) => {
         dot.classList.toggle('active', i === currentIndex);
       });
     }
 
+    function goTo(index) {
+      if (imageNames.length === 0) return;
+      if (index < 0) index = imageNames.length - 1;
+      if (index >= imageNames.length) index = 0;
+      currentIndex = index;
+      updateSlider();
+    }
+
     prevBtn.addEventListener('click', (e) => { e.stopPropagation(); goTo(currentIndex - 1); });
     nextBtn.addEventListener('click', (e) => { e.stopPropagation(); goTo(currentIndex + 1); });
-
-    if (imageNames.length <= 1) {
-      prevBtn.style.display = 'none';
-      nextBtn.style.display = 'none';
-    }
 
     // CLICK TO OPEN MODAL
     container.addEventListener('click', () => {
       // Get all working image srcs from the track
       const imgs = track.querySelectorAll('img');
       const srcs = Array.from(imgs)
-        .filter(img => img.style.display !== 'none' && img.src)
+        .filter(img => img.src && img.style.display !== 'none')
         .map(img => img.src);
       
-      // If no images loaded, use the original paths
-      if (srcs.length === 0) {
-        openModal(fullPaths);
-      } else {
+      if (srcs.length > 0) {
         openModal(srcs);
       }
     });
+
+    // Start loading images
+    loadAllImages();
   });
 
-  // ===== MODAL - COMPLETELY REWRITTEN =====
+  // ===== MODAL =====
   const modalOverlay = document.getElementById('modalOverlay');
   const modalTrack = document.getElementById('modalTrack');
   const modalDots = document.getElementById('modalDots');
@@ -1018,6 +1094,8 @@
   let modalIndex = 0;
 
   function openModal(images) {
+    if (!images || images.length === 0) return;
+    
     modalImages = images;
     modalIndex = 0;
 
@@ -1075,8 +1153,7 @@
   }
 
   function updateModal() {
-    const slideWidth = 100;
-    modalTrack.style.transform = `translateX(-${modalIndex * slideWidth}%)`;
+    modalTrack.style.transform = `translateX(-${modalIndex * 100}%)`;
     
     modalDots.querySelectorAll('span').forEach((dot, i) => {
       dot.classList.toggle('active', i === modalIndex);
