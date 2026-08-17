@@ -3,39 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Xinia Campang · IT & Data Portfolio</title>
+  <title>Xinia Campang | IT & Data Specialist</title>
+  <meta name="description" content="Xinia Campang is an IT & Data Specialist with experience in IT operations, data management, software testing, privacy compliance, automation, and process improvement." />
+  <meta property="og:title" content="Xinia Campang | IT & Data Specialist" />
+  <meta property="og:description" content="IT & Data Specialist with experience in IT operations, data management, software testing, privacy compliance, automation, and process improvement." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="canonical" href="https://xiniaportfolio.vercel.app/" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* ===== RESET & VARIABLES ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --bg: #f8fafc;
       --surface: #ffffff;
       --text: #0f172a;
-      --text-secondary: #334155;
-      --muted: #64748b;
+      --text-secondary: #1e293b;
+      --muted: #475569;
       --accent: #4f46e5;
       --accent-light: #818cf8;
-      --border: #e5e7eb;
+      --border: #e2e8f0;
       --shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
       --radius: 16px;
-      --overlay: rgba(15, 23, 42, 0.92);
+      --radius-sm: 10px;
+      --transition: 0.25s ease;
     }
 
     body.dark {
       --bg: #0b1020;
       --surface: #131b33;
       --text: #e5e7eb;
-      --text-secondary: #b0c4de;
+      --text-secondary: #cbd5e1;
       --muted: #94a3b8;
       --accent: #818cf8;
+      --accent-light: #a5b4fc;
       --border: #1e293b;
-      --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
-      --overlay: rgba(0, 0, 0, 0.92);
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
     }
 
     body {
@@ -44,6 +48,7 @@
       color: var(--text);
       line-height: 1.6;
       transition: background 0.3s, color 0.3s;
+      scroll-behavior: smooth;
     }
 
     .container {
@@ -52,11 +57,12 @@
       padding: 1.5rem 1.5rem 2rem;
     }
 
+    /* ===== HEADER / NAV ===== */
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 0 1.2rem;
+      padding: 0.8rem 0 1.2rem;
       border-bottom: 1px solid var(--border);
       flex-wrap: wrap;
       gap: 1rem;
@@ -66,23 +72,21 @@
       font-weight: 800;
       font-size: 1.4rem;
       letter-spacing: -0.02em;
-      background: linear-gradient(135deg, var(--accent), var(--accent-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--accent);
     }
 
     .nav-links {
       display: flex;
       align-items: center;
       gap: 2rem;
+      flex-wrap: wrap;
     }
 
     .nav-links a {
       text-decoration: none;
       color: var(--text-secondary);
       font-weight: 500;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--accent); }
@@ -103,55 +107,7 @@
     }
     .theme-toggle:hover { border-color: var(--accent); }
 
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      padding: 4rem 0 3rem;
-      align-items: center;
-    }
-
-    .hero-content .badge {
-      display: inline-block;
-      background: var(--surface);
-      padding: 0.2rem 1rem;
-      border-radius: 30px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--accent);
-      border: 1px solid var(--border);
-      margin-bottom: 1rem;
-      letter-spacing: 0.3px;
-    }
-
-    .hero-content h1 {
-      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.8rem;
-    }
-
-    .hero-content h1 span {
-      background: linear-gradient(135deg, var(--accent), #7c3aed);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-content p {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      max-width: 500px;
-      margin-bottom: 1.8rem;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
+    /* ===== BUTTONS ===== */
     .btn {
       background: var(--accent);
       color: #fff;
@@ -172,7 +128,6 @@
       box-shadow: 0 10px 28px rgba(79, 70, 229, 0.25);
       background: var(--accent-light);
     }
-
     .btn-outline {
       background: transparent;
       border: 1px solid var(--border);
@@ -186,14 +141,67 @@
       box-shadow: var(--shadow);
     }
 
+    /* ===== HERO ===== */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      padding: 3rem 0 2.5rem;
+      align-items: center;
+    }
+
+    .hero-content .badge {
+      display: inline-block;
+      background: var(--surface);
+      padding: 0.2rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      border: 1px solid var(--border);
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.3px;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.3rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
+    }
+    .hero-content h1 span {
+      background: linear-gradient(135deg, var(--accent), #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-content p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 500px;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+    }
     .hero-image img {
       width: 100%;
-      max-width: 340px;
+      max-width: 300px;
       border-radius: 50%;
       aspect-ratio: 1/1;
       object-fit: cover;
       border: 4px solid var(--border);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
       transition: 0.3s;
     }
     .hero-image img:hover {
@@ -201,47 +209,129 @@
       border-color: var(--accent);
     }
 
-    .section { padding: 3.5rem 0; }
+    /* ===== SECTIONS ===== */
+    .section { padding: 3rem 0; }
     .section-title {
       font-size: 2rem;
       font-weight: 700;
       letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.3rem;
+      color: var(--text);
     }
     .section-sub {
       color: var(--text-secondary);
       max-width: 600px;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
+      font-size: 1rem;
     }
 
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 1.5rem;
+    /* ===== CORE EXPERTISE (skills grid) ===== */
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
     }
-    .skills li {
-      list-style: none;
+    .expertise-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      padding: 0.4rem 1.2rem;
-      border-radius: 999px;
-      font-size: 0.85rem;
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+    .expertise-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+    .expertise-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .expertise-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .expertise-card p {
+      font-size: 0.95rem;
       color: var(--text-secondary);
-      transition: 0.2s;
+      line-height: 1.5;
     }
-    .skills li:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-    .skills li.highlight {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
+    .expertise-card .tag {
+      display: inline-block;
+      background: var(--border);
+      padding: 0.15rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 0.6rem;
+      letter-spacing: 0.3px;
     }
 
-    /* PROJECT SLIDER */
-    .project-slider-wrapper {
+    /* ===== EXPERIENCE TIMELINE ===== */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .timeline-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem 2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    .timeline-item:hover { border-color: var(--accent); }
+    .timeline-item .org {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--text);
+    }
+    .timeline-item .role {
+      font-weight: 600;
+      color: var(--accent);
+      margin: 0.1rem 0 0.2rem;
+    }
+    .timeline-item .date {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .timeline-item ul {
+      list-style: none;
+      margin-top: 0.4rem;
+    }
+    .timeline-item ul li {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      padding: 0.15rem 0 0.15rem 1.2rem;
+      position: relative;
+    }
+    .timeline-item ul li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .timeline-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+    }
+    .timeline-tags span {
+      background: var(--border);
+      padding: 0.1rem 0.9rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.2px;
+    }
+
+    /* ===== PROJECT SLIDER ===== */
+    .slider-wrapper {
       position: relative;
       overflow: hidden;
       border-radius: var(--radius);
@@ -249,60 +339,53 @@
       background: var(--surface);
       box-shadow: var(--shadow);
     }
-
-    .project-slider-track {
+    .slider-track {
       display: flex;
       transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-
-    .project-slide {
+    .slide {
       min-width: 100%;
-      padding: 2rem;
+      padding: 2rem 2.5rem;
       display: flex;
       flex-direction: column;
     }
-
-    .project-slide .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
-    .project-slide h3 { font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text); }
-    .project-slide p {
+    .slide .icon { font-size: 2.2rem; margin-bottom: 0.3rem; }
+    .slide h3 { font-size: 1.3rem; margin-bottom: 0.2rem; color: var(--text); }
+    .slide .tag {
+      display: inline-block;
+      background: var(--border);
+      padding: 0.15rem 1rem;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      align-self: flex-start;
+      margin: 0.2rem 0 0.5rem;
+    }
+    .slide p {
       font-size: 1rem;
       color: var(--text-secondary);
       flex: 1;
       margin-bottom: 0.5rem;
     }
-    .project-slide .tag {
-      display: inline-block;
-      background: var(--border);
-      padding: 0.2rem 1rem;
-      border-radius: 30px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--muted);
-      letter-spacing: 0.3px;
-      align-self: flex-start;
-      margin-bottom: 0.5rem;
-    }
-    .project-slide .project-link {
+    .slide .project-link {
       color: var(--accent);
       text-decoration: none;
       font-weight: 500;
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      margin-top: 0.5rem;
+      margin-top: 0.3rem;
     }
-    .project-slide .project-link:hover {
-      text-decoration: underline;
-    }
+    .slide .project-link:hover { text-decoration: underline; }
 
     .slider-nav {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 1.5rem;
-      padding: 1rem 0 0.5rem;
+      padding: 0.8rem 0 1rem;
     }
-
     .slider-nav button {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -323,7 +406,6 @@
       color: var(--accent);
       transform: scale(1.05);
     }
-
     .slider-dots {
       display: flex;
       gap: 8px;
@@ -341,13 +423,63 @@
       width: 28px;
       border-radius: 5px;
     }
-
     .slider-counter {
       color: var(--muted);
       font-size: 0.85rem;
       font-weight: 500;
     }
 
+    /* ===== EDUCATION & TRAINING ===== */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .edu-card, .training-list {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.8rem 2rem;
+      box-shadow: var(--shadow);
+    }
+    .edu-card h3 { font-size: 1.2rem; margin-bottom: 0.2rem; }
+    .edu-card .sub { color: var(--muted); font-weight: 500; margin-bottom: 0.2rem; }
+    .edu-card .date { color: var(--muted); font-size: 0.9rem; }
+
+    .training-list ul {
+      list-style: none;
+      columns: 1;
+    }
+    .training-list ul li {
+      padding: 0.25rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .training-list ul li:last-child { border-bottom: none; }
+    .training-list .year { color: var(--muted); font-weight: 500; }
+
+    /* ===== SERVICES ===== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.2rem 1.5rem;
+      transition: var(--transition);
+    }
+    .service-card:hover { border-color: var(--accent); }
+    .service-card h4 { font-size: 1rem; margin-bottom: 0.2rem; color: var(--text); }
+    .service-card p { font-size: 0.9rem; color: var(--text-secondary); }
+
+    /* ===== CONTACT ===== */
     .contact-block {
       background: var(--surface);
       border-radius: var(--radius);
@@ -360,7 +492,6 @@
       align-items: center;
       gap: 2rem;
     }
-
     .contact-info {
       display: flex;
       flex-direction: column;
@@ -382,7 +513,7 @@
 
     .social-links {
       display: flex;
-      gap: 1rem;
+      gap: 0.8rem;
       flex-wrap: wrap;
     }
     .social-links a {
@@ -393,7 +524,7 @@
       text-decoration: none;
       font-weight: 500;
       font-size: 0.9rem;
-      padding: 0.4rem 1.2rem;
+      padding: 0.3rem 1.2rem;
       border-radius: 40px;
       border: 1px solid var(--border);
       transition: 0.2s;
@@ -406,9 +537,10 @@
       box-shadow: var(--shadow);
     }
 
+    /* ===== FOOTER ===== */
     .footer {
       border-top: 1px solid var(--border);
-      padding: 2rem 0;
+      padding: 2rem 0 0.5rem;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
@@ -424,6 +556,7 @@
     }
     .footer a:hover { color: var(--accent); }
 
+    /* ===== REVEAL ===== */
     .reveal {
       opacity: 0;
       transform: translateY(28px);
@@ -434,6 +567,7 @@
       transform: translateY(0);
     }
 
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
       .hero {
         grid-template-columns: 1fr;
@@ -443,22 +577,43 @@
       }
       .hero-content p { max-width: 100%; }
       .hero-actions { justify-content: center; }
-      .hero-image img { max-width: 220px; }
+      .hero-image img { max-width: 200px; }
+
       .header {
         flex-direction: column;
         align-items: flex-start;
       }
       .nav-links {
-        flex-wrap: wrap;
-        gap: 1rem;
+        width: 100%;
+        justify-content: space-between;
+        gap: 0.6rem;
+      }
+
+      .edu-grid {
+        grid-template-columns: 1fr;
       }
       .contact-block {
         flex-direction: column;
         align-items: flex-start;
       }
       .social-links { width: 100%; }
-      .project-slide { padding: 1.5rem; }
-      .slider-nav { flex-wrap: wrap; gap: 1rem; }
+      .slide { padding: 1.5rem; }
+      .slider-nav { flex-wrap: wrap; gap: 0.8rem; }
+
+      .timeline-item { padding: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 1rem; }
+      .section { padding: 2rem 0; }
+      .hero-content h1 { font-size: 2rem; }
+      .expertise-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition-duration: 0.01ms !important; }
+      .reveal { opacity: 1; transform: none; }
     }
   </style>
 </head>
@@ -466,178 +621,253 @@
 
 <div class="container">
 
+  <!-- ===== HEADER ===== -->
   <header class="header">
     <div class="logo">Xinia C.</div>
     <div class="nav-links">
+      <a href="#expertise">Expertise</a>
+      <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
       <a href="#contact">Contact</a>
-      <button class="theme-toggle" id="themeToggle">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
         <span id="themeIcon">🌙</span> <span id="themeLabel">Dark</span>
       </button>
     </div>
   </header>
 
+  <!-- ===== HERO ===== -->
   <section class="hero reveal">
     <div class="hero-content">
       <div class="badge">✦ IT &amp; Data Specialist</div>
-      <h1>Hello, I'm <span>Xinia Campang</span></h1>
-      <p>IT operations · data analysis · privacy &amp; compliance — I build systems that are secure, insightful, and human-centered.</p>
+      <h1>IT, Data &amp; Operations — <span>Built to Work Smarter.</span></h1>
+      <p>IT &amp; Data Specialist with experience in IT operations, data management, software testing, privacy compliance, automation, and process improvement.</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn">📬 Let's talk</a>
-        <a href="#projects" class="btn btn-outline">View projects</a>
+        <a href="#experience" class="btn">View My Experience</a>
+        <a href="#contact" class="btn btn-outline">Let's Connect</a>
       </div>
     </div>
     <div class="hero-image">
-      <img src="superxin.jpg" alt="Xinia Campang" />
+      <img src="superxin.jpg" alt="Xinia Campang – IT & Data Specialist" />
     </div>
   </section>
 
+  <!-- ===== PROFESSIONAL SUMMARY ===== -->
   <section class="section reveal">
-    <h2 class="section-title">About me</h2>
-    <p class="section-sub">I bring a clean, efficient, and multi-disciplinary approach to technology, data, and digital communication. With a background in IT support, data analytics, and privacy compliance, I help teams work smarter and stay safe.</p>
-    <ul class="skills">
-      <li class="highlight">📊 Excel Dashboards</li>
-      <li>🔐 Data Privacy</li>
-      <li>🖥️ IT Support</li>
-      <li>📄 SOP &amp; Documentation</li>
-      <li>⚡ Automation</li>
-      <li>📈 Data Analysis</li>
-      <li>🧑‍💻 Admin Systems</li>
-    </ul>
+    <h2 class="section-title">Professional Summary</h2>
+    <p class="section-sub" style="max-width: 700px;">
+      Xinia Campang is an IT and data professional with experience across government, NGO, and private-sector environments, supporting IT operations, data management, software testing, privacy compliance, automation, reporting, and process improvement. She combines technical depth with operational clarity to help organizations work smarter and more securely.
+    </p>
   </section>
 
-  <section id="skills" class="section reveal">
-    <h2 class="section-title">Core competencies</h2>
-    <p class="section-sub">Every project benefits from a blend of technical depth and operational clarity.</p>
-    <div class="project-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-      <div class="project-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; transition: 0.25s; box-shadow: var(--shadow);">
-        <div class="icon" style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
-        <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text);">Data Management &amp; Analytics</h3>
-        <p style="font-size: 0.95rem; color: var(--text-secondary);">From raw data to dashboards that drive decisions — I turn numbers into narratives.</p>
-        <span class="tag" style="display: inline-block; background: var(--border); padding: 0.15rem 0.8rem; border-radius: 30px; font-size: 0.7rem; font-weight: 600; color: var(--muted); margin-top: 0.6rem; letter-spacing: 0.3px; align-self: flex-start;">Data</span>
+  <!-- ===== CORE EXPERTISE ===== -->
+  <section id="expertise" class="section reveal">
+    <h2 class="section-title">Core Expertise</h2>
+    <p class="section-sub">Areas of focus that drive value across teams and systems.</p>
+    <div class="expertise-grid">
+      <div class="expertise-card">
+        <div class="icon">📊</div>
+        <h3>Data &amp; Analytics</h3>
+        <p>Data management, reporting, dashboards, Excel, data accuracy.</p>
+        <span class="tag">Data</span>
       </div>
-      <div class="project-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; transition: 0.25s; box-shadow: var(--shadow);">
-        <div class="icon" style="font-size: 2rem; margin-bottom: 0.5rem;">🖥️</div>
-        <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text);">IT Operations &amp; Support</h3>
-        <p style="font-size: 0.95rem; color: var(--text-secondary);">Reliable infrastructure, troubleshooting, and process optimization for smooth daily operations.</p>
-        <span class="tag" style="display: inline-block; background: var(--border); padding: 0.15rem 0.8rem; border-radius: 30px; font-size: 0.7rem; font-weight: 600; color: var(--muted); margin-top: 0.6rem; letter-spacing: 0.3px; align-self: flex-start;">IT</span>
+      <div class="expertise-card">
+        <div class="icon">🖥️</div>
+        <h3>IT Operations</h3>
+        <p>IT support, systems administration, troubleshooting, operational support.</p>
+        <span class="tag">IT</span>
       </div>
-      <div class="project-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; transition: 0.25s; box-shadow: var(--shadow);">
-        <div class="icon" style="font-size: 2rem; margin-bottom: 0.5rem;">🔐</div>
-        <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text);">Privacy &amp; Compliance</h3>
-        <p style="font-size: 0.95rem; color: var(--text-secondary);">Data protection frameworks, GDPR/DPA alignment, and privacy-by-design implementation.</p>
-        <span class="tag" style="display: inline-block; background: var(--border); padding: 0.15rem 0.8rem; border-radius: 30px; font-size: 0.7rem; font-weight: 600; color: var(--muted); margin-top: 0.6rem; letter-spacing: 0.3px; align-self: flex-start;">Privacy</span>
+      <div class="expertise-card">
+        <div class="icon">🧪</div>
+        <h3>Software Testing</h3>
+        <p>Functional testing, UAT, defect identification, bug documentation, validation.</p>
+        <span class="tag">QA</span>
       </div>
-      <div class="project-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; transition: 0.25s; box-shadow: var(--shadow);">
-        <div class="icon" style="font-size: 2rem; margin-bottom: 0.5rem;">📄</div>
-        <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text);">SOP &amp; Documentation</h3>
-        <p style="font-size: 0.95rem; color: var(--text-secondary);">Clear, actionable standard operating procedures that teams actually use and follow.</p>
-        <span class="tag" style="display: inline-block; background: var(--border); padding: 0.15rem 0.8rem; border-radius: 30px; font-size: 0.7rem; font-weight: 600; color: var(--muted); margin-top: 0.6rem; letter-spacing: 0.3px; align-self: flex-start;">Process</span>
+      <div class="expertise-card">
+        <div class="icon">🔐</div>
+        <h3>Privacy &amp; Security</h3>
+        <p>Data privacy, secure data handling, compliance awareness, cybersecurity awareness.</p>
+        <span class="tag">Privacy</span>
       </div>
-      <div class="project-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; transition: 0.25s; box-shadow: var(--shadow);">
-        <div class="icon" style="font-size: 2rem; margin-bottom: 0.5rem;">⌨️</div>
-        <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text);">Administrative &amp; Encoding</h3>
-        <p style="font-size: 0.95rem; color: var(--text-secondary);">Meticulous data entry, system administration, and back-office efficiency.</p>
-        <span class="tag" style="display: inline-block; background: var(--border); padding: 0.15rem 0.8rem; border-radius: 30px; font-size: 0.7rem; font-weight: 600; color: var(--muted); margin-top: 0.6rem; letter-spacing: 0.3px; align-self: flex-start;">Admin</span>
+      <div class="expertise-card">
+        <div class="icon">⚡</div>
+        <h3>Process Improvement</h3>
+        <p>Automation, workflow optimization, paperless systems, Lean Six Sigma.</p>
+        <span class="tag">Process</span>
       </div>
-      <div class="project-card" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; transition: 0.25s; box-shadow: var(--shadow);">
-        <div class="icon" style="font-size: 2rem; margin-bottom: 0.5rem;">📢</div>
-        <h3 style="font-size: 1.1rem; margin-bottom: 0.3rem; color: var(--text);">Digital Communication</h3>
-        <p style="font-size: 0.95rem; color: var(--text-secondary);">Internal and external communication strategies that align with technical goals.</p>
-        <span class="tag" style="display: inline-block; background: var(--border); padding: 0.15rem 0.8rem; border-radius: 30px; font-size: 0.7rem; font-weight: 600; color: var(--muted); margin-top: 0.6rem; letter-spacing: 0.3px; align-self: flex-start;">Comm</span>
+      <div class="expertise-card">
+        <div class="icon">📄</div>
+        <h3>Documentation &amp; Systems</h3>
+        <p>SOPs, reporting, documentation, administrative systems.</p>
+        <span class="tag">Admin</span>
       </div>
     </div>
   </section>
 
+  <!-- ===== PROFESSIONAL EXPERIENCE ===== -->
+  <section id="experience" class="section reveal">
+    <h2 class="section-title">Professional Experience</h2>
+    <p class="section-sub">A track record of delivering IT, data, and operational value.</p>
+    <div class="timeline">
+
+      <!-- City Government of Muntinlupa -->
+      <div class="timeline-item">
+        <div class="org">City Government of Muntinlupa</div>
+        <div class="role">Administrative Assistant II (IT Focus)</div>
+        <div class="date">2022 – Present</div>
+        <ul>
+          <li>Manage data and databases to ensure accuracy, security, and reliability.</li>
+          <li>Develop dashboards, reports, workflows, SOPs, and internal systems.</li>
+          <li>Maintain, update, and secure databases and information systems; perform backups and recovery.</li>
+          <li>Monitor SQL-based reports and support IT operations; serve in a Data Privacy Officer capacity.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span>IT</span><span>Data</span><span>Privacy</span><span>Operations</span>
+        </div>
+      </div>
+
+      <!-- Freelance Software Tester -->
+      <div class="timeline-item">
+        <div class="org">Freelance Software Tester</div>
+        <div class="role">Software Tester</div>
+        <div class="date">2025 – Present</div>
+        <ul>
+          <li>Test newly developed system features and verify functionality.</li>
+          <li>Identify defects before release; document and track bugs.</li>
+          <li>Validate fixes and provide system support to users.</li>
+          <li>Assist with system usage and troubleshooting.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span>QA</span><span>UAT</span><span>Testing</span>
+        </div>
+      </div>
+
+      <!-- Lingkod Muntinlupa Foundation -->
+      <div class="timeline-item">
+        <div class="org">Lingkod Muntinlupa Foundation</div>
+        <div class="role">IT Specialist</div>
+        <div class="date">2019 – 2022</div>
+        <ul>
+          <li>Manage, maintain, and improve organizational technology systems.</li>
+          <li>Provide IT support and support secure data handling.</li>
+          <li>Contribute to automation and process improvement; conduct digital transformation initiatives.</li>
+          <li>Administer cloud-based Paperless HRIS, streamline HR processes, and reduce paper-based workflows.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span>IT</span><span>Operations</span><span>Automation</span>
+        </div>
+      </div>
+
+      <!-- BEST Security Agency -->
+      <div class="timeline-item">
+        <div class="org">BEST Security Agency Inc.</div>
+        <div class="role">Data Encoder / Administrative IT</div>
+        <div class="date">2019</div>
+        <ul>
+          <li>Input, update, and manage company data; maintain accurate records and transactions.</li>
+          <li>Ensure data completeness and support daily operations.</li>
+          <li>Maintain organized and reliable data.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span>Data</span><span>Admin</span>
+        </div>
+      </div>
+
+      <!-- Yngen Datacom -->
+      <div class="timeline-item">
+        <div class="org">Yngen Datacom, Inc. — San Pedro, Laguna</div>
+        <div class="role">Data Specialist</div>
+        <div class="date">2018 – 2019</div>
+        <ul>
+          <li>Process, manage, organize, analyze, and protect company data.</li>
+          <li>Ensure data accuracy and support business decision-making.</li>
+          <li>Build reliable systems for reporting and automation.</li>
+        </ul>
+        <div class="timeline-tags">
+          <span>Data</span><span>Analytics</span><span>Reporting</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== SELECTED PROJECTS ===== -->
   <section id="projects" class="section reveal">
-    <h2 class="section-title">Featured Projects</h2>
-    <p class="section-sub">Browse through my featured projects below. Use the arrows to navigate.</p>
+    <h2 class="section-title">Selected Projects</h2>
+    <p class="section-sub">A selection of work that demonstrates capability and impact.</p>
 
-    <div class="project-slider-wrapper">
-      <div class="project-slider-track" id="projectTrack">
-        <!-- Web Creation -->
-        <div class="project-slide">
-          <div class="icon">🌐</div>
-          <h3>Web Creation</h3>
-          <span class="tag">Web Dev</span>
-          <p>Simple functional websites built for information sharing, internal use, or public updates.</p>
-        </div>
-
-        <!-- Attendance App -->
-        <div class="project-slide">
-          <div class="icon">📋</div>
-          <h3>Attendance Web App</h3>
-          <span class="tag">Web App</span>
-          <p>Time-tracking and attendance system with real-time reporting and export features for employees.</p>
-        </div>
-
-        <!-- UAT Testing -->
-        <div class="project-slide">
-          <div class="icon">🧪</div>
-          <h3>UAT Web App Tester</h3>
-          <span class="tag">QA</span>
-          <p>Testing systems in live and UAT environments to ensure functionality and quality before deployment.</p>
-        </div>
-
-        <!-- Social Media Dashboard -->
-        <div class="project-slide">
-          <div class="icon">📱</div>
-          <h3>Social Media Dashboard</h3>
-          <span class="tag">Data Viz</span>
-          <p>Unified analytics dashboard for cross-platform campaign performance and sentiment tracking.</p>
-        </div>
-
-        <!-- Sales & Inventory Dashboard -->
-        <div class="project-slide">
-          <div class="icon">📦</div>
-          <h3>Sales &amp; Inventory Dashboard</h3>
-          <span class="tag">Analytics</span>
-          <p>Interactive inventory management dashboard with predictive restocking alerts and sales tracking.</p>
-        </div>
-
-        <!-- Daily Transaction Monitoring -->
-        <div class="project-slide">
-          <div class="icon">📊</div>
-          <h3>Daily Transaction Monitoring</h3>
-          <span class="tag">Monitoring</span>
-          <p>Tracking and recording daily transactions to ensure accuracy and smooth operations.</p>
-        </div>
-
-        <!-- Young Achievers School Page -->
-        <div class="project-slide">
-          <div class="icon">🏫</div>
-          <h3>Young Achievers School Page</h3>
-          <span class="tag">Web Design</span>
-          <p>A complete school website showcasing academic programs, campus life, and parent testimonials — built with a clean, responsive design.</p>
-          <a href="https://yassp-theta.vercel.app/" target="_blank" rel="noopener" class="project-link">View Live Site →</a>
-        </div>
+    <div class="slider-wrapper" role="region" aria-label="Project slider">
+      <div class="slider-track" id="projectTrack">
+        <div class="slide"><div class="icon">🌐</div><h3>Web Creation</h3><span class="tag">Web Dev</span><p>Simple functional websites built for information sharing, internal use, or public updates.</p></div>
+        <div class="slide"><div class="icon">📋</div><h3>Attendance Web App</h3><span class="tag">Web App</span><p>Time-tracking and attendance system with real-time reporting and export features for employees.</p></div>
+        <div class="slide"><div class="icon">🧪</div><h3>UAT Web App Tester</h3><span class="tag">QA</span><p>Testing systems in live and UAT environments to ensure functionality and quality before deployment.</p></div>
+        <div class="slide"><div class="icon">📱</div><h3>Social Media Dashboard</h3><span class="tag">Data Viz</span><p>Unified analytics dashboard for cross-platform campaign performance and sentiment tracking.</p></div>
+        <div class="slide"><div class="icon">📦</div><h3>Sales &amp; Inventory Dashboard</h3><span class="tag">Analytics</span><p>Interactive inventory management dashboard with predictive restocking alerts and sales tracking.</p></div>
+        <div class="slide"><div class="icon">📊</div><h3>Daily Transaction Monitoring</h3><span class="tag">Monitoring</span><p>Tracking and recording daily transactions to ensure accuracy and smooth operations.</p></div>
+        <div class="slide"><div class="icon">🏫</div><h3>Young Achievers School Page</h3><span class="tag">Web Design</span><p>A complete school website showcasing academic programs, campus life, and parent testimonials — built with a clean, responsive design.</p><a href="https://yassp-theta.vercel.app/" target="_blank" rel="noopener" class="project-link">View Live Site →</a></div>
       </div>
 
       <div class="slider-nav">
         <button id="prevProject" aria-label="Previous project">‹</button>
-        <div class="slider-dots" id="projectDots"></div>
-        <span class="slider-counter" id="projectCounter">1 / 7</span>
+        <div class="slider-dots" id="projectDots" role="tablist"></div>
+        <span class="slider-counter" id="projectCounter" aria-live="polite">1 / 7</span>
         <button id="nextProject" aria-label="Next project">›</button>
       </div>
     </div>
   </section>
 
+  <!-- ===== EDUCATION & TRAINING ===== -->
+  <section id="education" class="section reveal">
+    <h2 class="section-title">Education &amp; Training</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <h3>Bachelor of Science in Computer Science</h3>
+        <div class="sub">Our Lady of Assumption College</div>
+        <div class="date">2014 – 2018</div>
+      </div>
+      <div class="training-list">
+        <h4 style="margin-bottom: 0.5rem; font-weight: 600;">Continuous Learning</h4>
+        <ul>
+          <li><span>Yellow Belt Lean Six Sigma</span> <span class="year">2026</span></li>
+          <li><span>Data Analytics Essentials</span> <span class="year">2025</span></li>
+          <li><span>Navigating the Latest NPC Circulars</span> <span class="year">2025</span></li>
+          <li><span>Proactive Solutions for Workplace Behavioral Issues</span> <span class="year">2025</span></li>
+          <li><span>Cybercrime, Cyber Libel and Online Harassment</span> <span class="year">2025</span></li>
+          <li><span>Advanced Monitoring and Evaluation Seminar</span> <span class="year">2024</span></li>
+          <li><span>Project Monitoring and Evaluation Seminar</span> <span class="year">2024</span></li>
+          <li><span>Data Privacy Act (DPA) Orientation &amp; Compliance Workshop</span> <span class="year">2022</span></li>
+          <li><span>Ethical Hacking (Cybersecurity) – Nexus IT Training</span> <span class="year">2022</span></li>
+          <li><span>Data Analysis and Macro Development</span> <span class="year">2019</span></li>
+          <li><span>Basic Excel Training</span> <span class="year">2019</span></li>
+          <li><span>Data Privacy Act of 2012</span> <span class="year">2019</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVICES / HOW I CAN HELP ===== -->
+  <section class="section reveal">
+    <h2 class="section-title">How I Can Help</h2>
+    <p class="section-sub">Practical support for organizations that value clarity, security, and efficiency.</p>
+    <div class="services-grid">
+      <div class="service-card"><h4>Data &amp; Reporting</h4><p>Dashboards, reporting, data organization, and analysis.</p></div>
+      <div class="service-card"><h4>IT Support &amp; Operations</h4><p>Technical support, systems, troubleshooting, and operational assistance.</p></div>
+      <div class="service-card"><h4>Software Testing</h4><p>Functional testing, UAT, defect tracking, and validation.</p></div>
+      <div class="service-card"><h4>Privacy &amp; Compliance</h4><p>Data protection, privacy-conscious processes, and compliance support.</p></div>
+      <div class="service-card"><h4>Process Improvement</h4><p>Automation, workflow improvement, and operational efficiency.</p></div>
+      <div class="service-card"><h4>Documentation &amp; SOPs</h4><p>Clear documentation, procedures, reports, and workflows.</p></div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
   <section id="contact" class="section reveal">
-    <h2 class="section-title">Get in touch</h2>
-    <p class="section-sub">I'm always open to new projects, collaborations, or a conversation about data and tech.</p>
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="section-sub">Open to new projects, collaborations, or a conversation about IT and data.</p>
     <div class="contact-block">
       <div class="contact-info">
-        <div class="contact-item">
-          <span>📞</span>
-          <strong>Phone:</strong>
-          <a href="tel:+639974655518">+63 997 465 5518</a>
-        </div>
-        <div class="contact-item">
-          <span>✉️</span>
-          <strong>Email:</strong>
-          <a href="mailto:xincampang@gmail.com">xincampang@gmail.com</a>
-        </div>
+        <div class="contact-item"><span>📞</span> <strong>Phone:</strong> <a href="tel:+639974655518">+63 997 465 5518</a></div>
+        <div class="contact-item"><span>✉️</span> <strong>Email:</strong> <a href="mailto:xincampang@gmail.com">xincampang@gmail.com</a></div>
+        <div class="contact-item"><span>🔗</span> <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/xiniacampang/" target="_blank" rel="noopener">linkedin.com/in/xiniacampang</a></div>
       </div>
       <div class="social-links">
         <a href="https://www.instagram.com/supeeerxin/" target="_blank" rel="noopener">📸 Instagram</a>
@@ -647,19 +877,37 @@
     </div>
   </section>
 
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <span>© 2026 Xinia Campang · all rights reserved</span>
     <span>
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
     </span>
   </footer>
 
 </div>
 
+<!-- ===== VIRTUAL ASSISTANT FLOATING BUTTON ===== -->
+<div style="position: fixed; bottom: 2rem; right: 2rem; z-index: 999; display: flex; flex-direction: column; align-items: flex-end; gap: 0.8rem;">
+  <div id="chatWindow" style="display: none; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); width: 360px; max-width: 90vw; max-height: 520px; height: 480px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); flex-direction: column; overflow: hidden; transition: 0.2s;">
+    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 1.2rem; background: var(--accent); color: #fff; border-radius: var(--radius) var(--radius) 0 0;">
+      <div><strong style="font-size: 0.95rem;">Xinia's Virtual Assistant</strong><br><span style="font-size: 0.7rem; opacity: 0.85;">Ask about Xinia's experience, skills, projects, or background.</span></div>
+      <button id="closeChat" style="background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; line-height: 1;">&times;</button>
+    </div>
+    <div id="chatMessages" style="flex: 1; overflow-y: auto; padding: 1rem; background: var(--bg); display: flex; flex-direction: column; gap: 0.6rem; min-height: 200px;"></div>
+    <div style="display: flex; border-top: 1px solid var(--border); background: var(--surface); padding: 0.4rem 0.6rem;">
+      <input id="chatInput" type="text" placeholder="Ask about Xinia..." style="flex: 1; border: none; padding: 0.6rem; font-size: 0.9rem; background: transparent; color: var(--text); outline: none;" />
+      <button id="sendChat" style="background: var(--accent); color: #fff; border: none; padding: 0.4rem 1.2rem; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.2s;">Send</button>
+    </div>
+  </div>
+  <button id="chatToggle" style="background: var(--accent); color: #fff; border: none; padding: 0.8rem 1.6rem; border-radius: 60px; font-weight: 600; box-shadow: 0 8px 24px rgba(79,70,229,0.3); cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; gap: 6px; transition: 0.2s;">💬 Ask Xinia's Assistant</button>
+</div>
+
 <script>
   (function() {
-    // Dark mode
+    // ===== DARK MODE =====
     const toggle = document.getElementById('themeToggle');
     const icon = document.getElementById('themeIcon');
     const label = document.getElementById('themeLabel');
@@ -673,7 +921,7 @@
     setDark(localStorage.getItem('darkMode') === 'true');
     toggle.addEventListener('click', () => setDark(!document.body.classList.contains('dark')));
 
-    // Scroll reveal
+    // ===== SCROLL REVEAL =====
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -681,107 +929,157 @@
       });
     }, { threshold: 0.15 });
     reveals.forEach(el => observer.observe(el));
-  })();
 
-  // ===== PROJECT SLIDER =====
-  const track = document.getElementById('projectTrack');
-  const dots = document.getElementById('projectDots');
-  const counter = document.getElementById('projectCounter');
-  const prevBtn = document.getElementById('prevProject');
-  const nextBtn = document.getElementById('nextProject');
-  
-  const slides = track.querySelectorAll('.project-slide');
-  const totalSlides = slides.length;
-  let currentIndex = 0;
-  let autoPlayInterval;
+    // ===== PROJECT SLIDER =====
+    const track = document.getElementById('projectTrack');
+    const dots = document.getElementById('projectDots');
+    const counter = document.getElementById('projectCounter');
+    const prevBtn = document.getElementById('prevProject');
+    const nextBtn = document.getElementById('nextProject');
+    const slides = track.querySelectorAll('.slide');
+    const total = slides.length;
+    let current = 0;
+    let autoPlay;
 
-  // Build dots
-  slides.forEach((_, i) => {
-    const dot = document.createElement('span');
-    dot.classList.toggle('active', i === 0);
-    dot.addEventListener('click', () => goToSlide(i));
-    dots.appendChild(dot);
-  });
-
-  function goToSlide(index) {
-    if (index < 0) index = totalSlides - 1;
-    if (index >= totalSlides) index = 0;
-    currentIndex = index;
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-    
-    // Update dots
-    dots.querySelectorAll('span').forEach((dot, i) => {
-      dot.classList.toggle('active', i === currentIndex);
+    slides.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.classList.toggle('active', i === 0);
+      dot.setAttribute('role', 'tab');
+      dot.addEventListener('click', () => goTo(i));
+      dots.appendChild(dot);
     });
-    
-    // Update counter
-    counter.textContent = `${currentIndex + 1} / ${totalSlides}`;
-  }
 
-  function nextSlide() {
-    goToSlide(currentIndex + 1);
-  }
-
-  function prevSlide() {
-    goToSlide(currentIndex - 1);
-  }
-
-  // Event listeners
-  prevBtn.addEventListener('click', prevSlide);
-  nextBtn.addEventListener('click', nextSlide);
-
-  // Keyboard navigation
-  document.addEventListener('keydown', (e) => {
-    const projectsSection = document.getElementById('projects');
-    const rect = projectsSection.getBoundingClientRect();
-    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-    
-    if (isVisible) {
-      if (e.key === 'ArrowLeft') prevSlide();
-      if (e.key === 'ArrowRight') nextSlide();
+    function goTo(index) {
+      current = (index + total) % total;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dots.querySelectorAll('span').forEach((d, i) => d.classList.toggle('active', i === current));
+      counter.textContent = `${current + 1} / ${total}`;
     }
-  });
 
-  // Auto-play
-  function startAutoPlay() {
-    stopAutoPlay();
-    autoPlayInterval = setInterval(nextSlide, 5000);
-  }
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
 
-  function stopAutoPlay() {
-    if (autoPlayInterval) {
-      clearInterval(autoPlayInterval);
-      autoPlayInterval = null;
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+
+    document.addEventListener('keydown', (e) => {
+      const rect = document.getElementById('projects').getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
+      }
+    });
+
+    const wrapper = document.querySelector('.slider-wrapper');
+    wrapper.addEventListener('mouseenter', () => clearInterval(autoPlay));
+    wrapper.addEventListener('mouseleave', () => { autoPlay = setInterval(next, 5000); });
+
+    let startX = 0;
+    wrapper.addEventListener('touchstart', (e) => startX = e.changedTouches[0].screenX);
+    wrapper.addEventListener('touchend', (e) => {
+      const diff = startX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
+    });
+
+    goTo(0);
+    autoPlay = setInterval(next, 5000);
+
+    // ===== VIRTUAL ASSISTANT =====
+    const chatToggle = document.getElementById('chatToggle');
+    const chatWindow = document.getElementById('chatWindow');
+    const closeChat = document.getElementById('closeChat');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendChat');
+    const messages = document.getElementById('chatMessages');
+
+    // Knowledge base (strictly from prompt)
+    const kb = {
+      "specialize": "Xinia specializes in IT operations, data management, software testing, privacy compliance, automation, and process improvement.",
+      "current position": "Xinia is currently an Administrative Assistant II (IT Focus) at the City Government of Muntinlupa (2022–present).",
+      "work experience": "Xinia has worked at City Government of Muntinlupa, Lingkod Muntinlupa Foundation, BEST Security Agency Inc., and Yngen Datacom, Inc. She also works as a freelance software tester.",
+      "it experience": "Xinia has IT experience as an IT Specialist, IT-focused Administrative Assistant, and in software testing, systems administration, and IT support.",
+      "data analytics": "Yes, Xinia has data analytics experience including data management, dashboards, reporting, and analysis from her roles as Data Specialist and in her current position.",
+      "software testing": "Yes, Xinia has software testing experience as a Freelance Software Tester, performing functional testing, UAT, defect identification, and validation.",
+      "privacy": "Xinia has privacy experience as a Data Privacy Officer capacity at the City Government of Muntinlupa and has completed DPA and cybersecurity training.",
+      "education": "Xinia holds a Bachelor of Science in Computer Science from Our Lady of Assumption College (2014–2018).",
+      "training": "Xinia has completed Lean Six Sigma Yellow Belt, Data Analytics Essentials, DPA workshops, cybersecurity, monitoring and evaluation, and Excel training.",
+      "projects": "Xinia has worked on Web Creation, Attendance Web App, UAT Web App Tester, Social Media Dashboard, Sales & Inventory Dashboard, Daily Transaction Monitoring, and Young Achievers School Page.",
+      "help with": "Xinia can help with data & reporting, IT support & operations, software testing, privacy & compliance, process improvement, and documentation & SOPs.",
+      "contact": "You can contact Xinia via email at xincampang@gmail.com or phone +63 997 465 5518. Her LinkedIn is linked in the contact section."
+    };
+
+    function getAnswer(text) {
+      const q = text.toLowerCase();
+      for (const [key, val] of Object.entries(kb)) {
+        if (q.includes(key)) return val;
+      }
+      // Navigation intents
+      if (q.includes('experience') || q.includes('work')) { setTimeout(() => document.getElementById('experience').scrollIntoView({ behavior: 'smooth' }), 300); return "I've scrolled to her experience section. Here's a quick summary: Xinia has worked in government, NGO, and private sectors in IT, data, and testing roles."; }
+      if (q.includes('project')) { setTimeout(() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' }), 300); return "I've scrolled to the projects section. Xinia has built dashboards, web apps, and a school page."; }
+      if (q.includes('contact') || q.includes('reach')) { setTimeout(() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }), 300); return "You can find her contact details in the contact section. Email: xincampang@gmail.com, Phone: +63 997 465 5518."; }
+      if (q.includes('skill') || q.includes('expertise')) { setTimeout(() => document.getElementById('expertise').scrollIntoView({ behavior: 'smooth' }), 300); return "I've scrolled to the expertise section. Xinia's core areas: Data & Analytics, IT Operations, Software Testing, Privacy & Security, Process Improvement, and Documentation."; }
+      return "That information isn't currently listed in Xinia's portfolio. Please ask about her experience, skills, projects, education, training, or contact details.";
     }
-  }
 
-  // Pause on hover
-  const sliderWrapper = document.querySelector('.project-slider-wrapper');
-  sliderWrapper.addEventListener('mouseenter', stopAutoPlay);
-  sliderWrapper.addEventListener('mouseleave', startAutoPlay);
-
-  // Touch/swipe support
-  let touchStartX = 0;
-  let touchEndX = 0;
-
-  sliderWrapper.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  });
-
-  sliderWrapper.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    const diff = touchStartX - touchEndX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) nextSlide();
-      else prevSlide();
+    function addMessage(text, sender) {
+      const div = document.createElement('div');
+      div.style.cssText = `max-width: 85%; padding: 0.5rem 1rem; border-radius: 18px; font-size: 0.9rem; background: ${sender === 'user' ? 'var(--accent)' : 'var(--surface)'}; color: ${sender === 'user' ? '#fff' : 'var(--text)'}; border: 1px solid var(--border); align-self: ${sender === 'user' ? 'flex-end' : 'flex-start'}; word-break: break-word;`;
+      div.textContent = text;
+      messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
     }
-  });
 
-  // Start auto-play
-  startAutoPlay();
+    function handleSend() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      addMessage(text, 'user');
+      chatInput.value = '';
+      const reply = getAnswer(text);
+      setTimeout(() => addMessage(reply, 'bot'), 300);
+    }
 
-  // Go to first slide
-  goToSlide(0);
+    sendBtn.addEventListener('click', handleSend);
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
+    });
+
+    chatToggle.addEventListener('click', () => {
+      const isOpen = chatWindow.style.display === 'flex';
+      chatWindow.style.display = isOpen ? 'none' : 'flex';
+      if (!isOpen && messages.children.length === 0) {
+        addMessage("Hi! I'm Xinia's virtual assistant. I can help you explore Xinia's professional experience, skills, projects, education, and training.", 'bot');
+        // Quick actions
+        const quick = ["About Xinia", "Experience", "Skills", "Projects", "Education", "Training", "Contact"];
+        const container = document.createElement('div');
+        container.style.cssText = 'display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; align-self: flex-start;';
+        quick.forEach(label => {
+          const btn = document.createElement('button');
+          btn.textContent = label;
+          btn.style.cssText = 'background: var(--border); border: none; padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.75rem; cursor: pointer; color: var(--text);';
+          btn.addEventListener('click', () => {
+            addMessage(label, 'user');
+            const reply = getAnswer(label);
+            setTimeout(() => addMessage(reply, 'bot'), 300);
+          });
+          container.appendChild(btn);
+        });
+        messages.appendChild(container);
+        messages.scrollTop = messages.scrollHeight;
+      }
+    });
+
+    closeChat.addEventListener('click', () => { chatWindow.style.display = 'none'; });
+
+    // Escape to close
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && chatWindow.style.display === 'flex') chatWindow.style.display = 'none';
+    });
+
+    // Reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.slider-track, .reveal').forEach(el => el.style.transition = 'none');
+    }
+  })();
 </script>
 
 </body>
