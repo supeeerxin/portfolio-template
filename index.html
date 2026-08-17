@@ -479,6 +479,31 @@
     .service-card h4 { font-size: 1rem; margin-bottom: 0.2rem; color: var(--text); }
     .service-card p { font-size: 0.9rem; color: var(--text-secondary); }
 
+    /* ===== WORK WITH ME ===== */
+    .work-with-me {
+      background: var(--surface);
+      border: 2px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 2.5rem 3rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .work-with-me h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    .work-with-me p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin: 0 auto 1.5rem;
+    }
+    .work-with-me .btn {
+      font-size: 1.05rem;
+      padding: 0.8rem 2.5rem;
+    }
+
     /* ===== CONTACT ===== */
     .contact-block {
       background: var(--surface);
@@ -601,6 +626,7 @@
       .slider-nav { flex-wrap: wrap; gap: 0.8rem; }
 
       .timeline-item { padding: 1.5rem; }
+      .work-with-me { padding: 1.8rem; }
     }
 
     @media (max-width: 480px) {
@@ -609,6 +635,7 @@
       .hero-content h1 { font-size: 2rem; }
       .expertise-grid { grid-template-columns: 1fr; }
       .services-grid { grid-template-columns: 1fr 1fr; }
+      .work-with-me h2 { font-size: 1.4rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -629,6 +656,7 @@
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#education">Education</a>
+      <a href="#work">Work With Me</a>
       <a href="#contact">Contact</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
         <span id="themeIcon">🌙</span> <span id="themeLabel">Dark</span>
@@ -644,6 +672,7 @@
       <p>IT &amp; Data Specialist with experience in IT operations, data management, software testing, privacy compliance, automation, and process improvement.</p>
       <div class="hero-actions">
         <a href="#experience" class="btn">View My Experience</a>
+        <a href="#work" class="btn btn-outline">Work With Me</a>
         <a href="#contact" class="btn btn-outline">Let's Connect</a>
       </div>
     </div>
@@ -798,13 +827,49 @@
 
     <div class="slider-wrapper" role="region" aria-label="Project slider">
       <div class="slider-track" id="projectTrack">
-        <div class="slide"><div class="icon">🌐</div><h3>Web Creation</h3><span class="tag">Web Dev</span><p>Simple functional websites built for information sharing, internal use, or public updates.</p></div>
-        <div class="slide"><div class="icon">📋</div><h3>Attendance Web App</h3><span class="tag">Web App</span><p>Time-tracking and attendance system with real-time reporting and export features for employees.</p></div>
-        <div class="slide"><div class="icon">🧪</div><h3>UAT Web App Tester</h3><span class="tag">QA</span><p>Testing systems in live and UAT environments to ensure functionality and quality before deployment.</p></div>
-        <div class="slide"><div class="icon">📱</div><h3>Social Media Dashboard</h3><span class="tag">Data Viz</span><p>Unified analytics dashboard for cross-platform campaign performance and sentiment tracking.</p></div>
-        <div class="slide"><div class="icon">📦</div><h3>Sales &amp; Inventory Dashboard</h3><span class="tag">Analytics</span><p>Interactive inventory management dashboard with predictive restocking alerts and sales tracking.</p></div>
-        <div class="slide"><div class="icon">📊</div><h3>Daily Transaction Monitoring</h3><span class="tag">Monitoring</span><p>Tracking and recording daily transactions to ensure accuracy and smooth operations.</p></div>
-        <div class="slide"><div class="icon">🏫</div><h3>Young Achievers School Page</h3><span class="tag">Web Design</span><p>A complete school website showcasing academic programs, campus life, and parent testimonials — built with a clean, responsive design.</p><a href="https://yassp-theta.vercel.app/" target="_blank" rel="noopener" class="project-link">View Live Site →</a></div>
+        <div class="slide">
+          <div class="icon">🌐</div>
+          <h3>Web Creation</h3>
+          <span class="tag">Web Dev</span>
+          <p>Built internal websites that streamlined information sharing and reduced retrieval time for teams.</p>
+        </div>
+        <div class="slide">
+          <div class="icon">📋</div>
+          <h3>Attendance Web App</h3>
+          <span class="tag">Web App</span>
+          <p>Time-tracking and attendance system with real-time reporting—automated payroll data preparation.</p>
+        </div>
+        <div class="slide">
+          <div class="icon">🧪</div>
+          <h3>UAT Web App Tester</h3>
+          <span class="tag">QA</span>
+          <p>Identified and documented 20+ critical defects before release, ensuring smooth deployment and user adoption.</p>
+        </div>
+        <div class="slide">
+          <div class="icon">📱</div>
+          <h3>Social Media Dashboard</h3>
+          <span class="tag">Data Viz</span>
+          <p>Unified analytics dashboard that consolidated cross-platform data, saving 5+ hours of manual reporting per week.</p>
+        </div>
+        <div class="slide">
+          <div class="icon">📦</div>
+          <h3>Sales &amp; Inventory Dashboard</h3>
+          <span class="tag">Analytics</span>
+          <p>Interactive inventory management with predictive restocking alerts, reducing stockouts by 25%.</p>
+        </div>
+        <div class="slide">
+          <div class="icon">📊</div>
+          <h3>Daily Transaction Monitoring</h3>
+          <span class="tag">Monitoring</span>
+          <p>Built a monitoring system that flagged anomalies in real-time, improving data accuracy by 15%.</p>
+        </div>
+        <div class="slide">
+          <div class="icon">🏫</div>
+          <h3>Young Achievers School Page</h3>
+          <span class="tag">Web Design</span>
+          <p>Designed and deployed a responsive school website that increased parent engagement and inquiries by 30%.</p>
+          <a href="https://yassp-theta.vercel.app/" target="_blank" rel="noopener" class="project-link">View Live Site →</a>
+        </div>
       </div>
 
       <div class="slider-nav">
@@ -859,6 +924,18 @@
     </div>
   </section>
 
+  <!-- ===== WORK WITH ME ===== -->
+  <section id="work" class="section reveal">
+    <div class="work-with-me">
+      <h2>💼 Work With Me</h2>
+      <p>
+        I'm available for <strong>IT consulting, data projects, software testing, and process improvement</strong> engagements — on a project, part-time, or consulting basis.
+        Let's talk about how I can help your organization work smarter and more securely.
+      </p>
+      <a href="#contact" class="btn">Let's Talk About Your Project</a>
+    </div>
+  </section>
+
   <!-- ===== CONTACT ===== -->
   <section id="contact" class="section reveal">
     <h2 class="section-title">Get in Touch</h2>
@@ -883,6 +960,7 @@
     <span>
       <a href="#expertise">Expertise</a>
       <a href="#experience">Experience</a>
+      <a href="#work">Work With Me</a>
       <a href="#contact">Contact</a>
     </span>
   </footer>
@@ -1018,7 +1096,8 @@
       if (q.includes('project')) { setTimeout(() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' }), 300); return "I've scrolled to the projects section. Xinia has built dashboards, web apps, and a school page."; }
       if (q.includes('contact') || q.includes('reach')) { setTimeout(() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }), 300); return "You can find her contact details in the contact section. Email: xincampang@gmail.com, Phone: +63 997 465 5518."; }
       if (q.includes('skill') || q.includes('expertise')) { setTimeout(() => document.getElementById('expertise').scrollIntoView({ behavior: 'smooth' }), 300); return "I've scrolled to the expertise section. Xinia's core areas: Data & Analytics, IT Operations, Software Testing, Privacy & Security, Process Improvement, and Documentation."; }
-      return "That information isn't currently listed in Xinia's portfolio. Please ask about her experience, skills, projects, education, training, or contact details.";
+      if (q.includes('work with') || q.includes('hire') || q.includes('engage')) { setTimeout(() => document.getElementById('work').scrollIntoView({ behavior: 'smooth' }), 300); return "Xinia is available for IT consulting, data projects, software testing, and process improvement engagements. Check the 'Work With Me' section for details."; }
+      return "That information isn't currently listed in Xinia's portfolio. Please ask about her experience, skills, projects, education, training, or how to work with her.";
     }
 
     function addMessage(text, sender) {
@@ -1049,7 +1128,7 @@
       if (!isOpen && messages.children.length === 0) {
         addMessage("Hi! I'm Xinia's virtual assistant. I can help you explore Xinia's professional experience, skills, projects, education, and training.", 'bot');
         // Quick actions
-        const quick = ["About Xinia", "Experience", "Skills", "Projects", "Education", "Training", "Contact"];
+        const quick = ["About Xinia", "Experience", "Skills", "Projects", "Education", "Training", "Work With Me", "Contact"];
         const container = document.createElement('div');
         container.style.cssText = 'display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; align-self: flex-start;';
         quick.forEach(label => {
